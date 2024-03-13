@@ -4,7 +4,7 @@ import Home from './pages/home'
  
 
 const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: 'https://demoblog-h71e.onrender.com/graphql',
   cache: new InMemoryCache()
 });
 function App() {

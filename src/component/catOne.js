@@ -54,7 +54,7 @@ function CatOne() {
             <div className='catOneCard' key={project.id}>
              
                  {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`http://localhost:1337${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`https://demoblog-h71e.onrender.com${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
                <p>{project.attributes.title}</p>
             </div>

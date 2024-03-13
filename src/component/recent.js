@@ -54,7 +54,7 @@ function Recent() {
           {blogs.map((recent) => (
             <div key={recent.id} className='recentCard'>
                 {recent.attributes.cover && recent.attributes.cover.data && (
-                <img src={`http://localhost:1337${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`https://demoblog-h71e.onrender.com${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
               <div className='content'>
                 <h2 className='title'>{recent.attributes.title}</h2>     
