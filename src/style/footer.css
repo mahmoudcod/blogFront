@@ -1,0 +1,107 @@
+/* Default styles */
+footer {
+    padding: 20px;
+    margin: 0;
+    background-color: #0280CD;
+    background: #0280CD;
+    max-width: 100%;
+    height: 100%;
+}
+
+.sectionOne {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.sectionOne div ul li {
+    padding-bottom: 15px;
+    color: white;
+    white-space: pre-wrap;
+}
+
+@media only screen and (max-width: 768px) {
+.sectionOne{
+flex-direction: column;
+}
+}
+.sectionOne h2 {
+    font-size: 36px;
+    font-weight: 400;
+    white-space: pre-wrap;
+    display: flex;
+    align-items: center;
+        padding-bottom: 15px;
+}
+
+.sectionOne div {
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.sectionOne div ul li {
+    /* padding-bottom: 15px; */
+        color: white;
+    white-space: pre-wrap;
+}
+
+.sectionOne .first {
+    font-size: 30px;
+    font-weight: 400;
+}
+.sectionOne .first ul li {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.sectionTwo ul {
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.sectionTwo ul li {
+    padding-left: 1.4rem;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.sectionThree {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    color: white;
+    margin-top: 1.3rem;
+    font-size: 20px;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+    .sectionOne {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .sectionOne div {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .sectionTwo ul {
+        flex-direction: row;
+        text-align: center;
+    }
+
+    .sectionTwo ul li {
+        padding: 0 1rem ;
+    }
+
+    .sectionThree {
+        flex-direction: row;
+        text-align: center;
+    }
+}

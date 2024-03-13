@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,900");
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 8rem;
+    padding-bottom: 2rem;
+
+}
+
+.container .CatTitle h3 {
+    color: rgb(22, 135, 206);
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.CatTitle p {
+    color: rgb(22, 135, 206);
+}
+
+.CatTitle {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+}
+
+.catThreeCards {
+    padding-top: 40px;
+    width: calc(100% - 2em);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+        "d d a a"
+        "d d b b"
+        "d d c c";
+   max-width: 100%;
+    height: 100%;
+}
+
+
+.catThreeCardLeft:nth-child(1) {
+    grid-area: a;
+}
+
+.catThreeCardLeft:nth-child(2) {
+    grid-area: b;
+}
+
+.catThreeCardLeft:nth-child(3) {
+    grid-area: c;
+}
+.catThreeCardLeft:nth-child(4) {
+    grid-area: d;
+    flex-direction: column;
+}
+
+.catThreeCardLeft:nth-child(4) img {
+min-width: 100%;
+    object-fit: cover;
+}
+.catThreeCardLeft{
+    display: flex;
+}
+
+.catThreeCardLeft img {
+    width: 250px;
+    height: 100%;
+    padding-left: 12px;
+    border-radius: 10px;
+}
+
+.catThreeCardRight img {
+    max-width: 100%;
+    height: 100%;
+    padding-bottom: 12px;
+    border-radius: 10px;
+}
+/* Keep existing styles for larger screens */
+
+@media only screen and (max-width: 768px) {
+    .container {
+        margin: 0 1rem;
+    }
+
+    .catThreeCards {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+                "d"
+                "a"
+                "b"
+                'c';
+   
+    }
+
+    .catThreeCardRight {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .catThreeCardLeft img {
+        width: 100%;
+        height: auto;
+    }
+         .catThreeCardLeft  {
+           flex-wrap: wrap;
+         }
+
+    .catThreeCardRight img {
+        width: 100%;
+        height: auto;
+        padding-bottom: 12px;
+    }
+
+}

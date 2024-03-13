@@ -1,0 +1,83 @@
+/* Additions and modifications */
+
+/* Styling for category titles */
+.CatTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.CatTitle h3 {
+    color: rgb(22, 135, 206);
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.CatTitle p {
+    color: rgb(22, 135, 206);
+}
+
+/* Styling for category cards */
+.catFourCards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+    width: 100%;
+    padding-top: 40px;
+}
+
+/* Common title style */
+.title {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Styling for individual category cards */
+.catFourCard {
+    margin-bottom: 3rem;
+}
+
+.catFourCard .content {
+    padding-bottom: 2rem;
+}
+
+.catFourCard img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 800px) {
+    .container {
+        margin: 0 1rem;
+    }
+
+    .catFourCards {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+    }
+
+    .catFourCard img {
+        padding-bottom: 10px;
+    }
+
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        margin: 0 1rem;
+    }
+
+    .catFourCards {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+
+    }
+
+    .catFourCard img {
+        padding-bottom: 10px;
+    }
+
+}

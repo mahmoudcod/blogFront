@@ -1,0 +1,107 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Almarai;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 8rem ;
+    padding-bottom: 2rem;
+
+}
+.container .CatTitle h3{
+    color: rgb(22, 135, 206);
+    font-weight: bold;
+    font-size: 1.6em;
+}
+.CatTitle p{
+color: rgb(22, 135, 206);
+}
+.CatTitle {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+}
+
+.catOneCards {
+    padding-top: 40px;
+    width: calc(100% - 2em);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows:  1fr;
+    grid-gap: 1em;
+    grid-template-areas:
+        "a a b b"
+        "c d e f";
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.catOneCard:nth-child(1) {
+    grid-area: a;
+}
+
+.catOneCard:nth-child(2) {
+
+    grid-area: b;
+}
+
+.catOneCard:nth-child(3) {
+  grid-area: c;
+}
+
+.catOneCard:nth-child(4) {
+ grid-area: d;
+}
+.catOneCard:nth-child(5) {
+ grid-area: e;
+}
+.catOneCard:nth-child(6) {
+    grid-area: f;
+}
+.catOneCard{
+    margin-bottom:3rem;
+}
+.catOneCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        margin: 0 1rem;
+    }
+
+    .catOneCards {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "a"
+            "b"
+            "c"
+            "d"
+            'e'
+            'f';
+    }
+
+    
+    .catOneCard {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .catOneCard img {
+        width: 100%;
+        height: auto;
+    }
+
+}

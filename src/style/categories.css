@@ -1,0 +1,35 @@
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px;
+    text-align: center;
+    align-items: center;
+    margin: 0 7rem;
+}
+
+.category {
+    width: calc(16.666% - 10px);
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+.category img{
+    width: 40px;
+    border-radius: 50%;
+   padding: 8px;
+    box-sizing: border-box;
+    background-color: #C6C6C6;
+}
+
+.category h4 {
+    margin-top: 10px;
+    text-align: center;
+}
+/* Media query for smaller screens (e.g., phones) */
+@media only screen and (max-width: 767px) {
+    .categories {
+   display: none;
+    }
+
+
+}
