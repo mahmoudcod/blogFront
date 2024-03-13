@@ -37,7 +37,7 @@ function CatOne() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
 
-  const projects = data.category.data.attributes.blogs.data;
+  const projects = data.category.data.attributes.blogs.data.slice(0,6);
 
   return (
     <>
