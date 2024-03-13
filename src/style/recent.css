@@ -1,14 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    margin: 0 8rem;
-    padding-bottom: 2rem;
 
-}
-
-.container .CatTitle h3 {
+ .CatTitle h3 {
     color: rgb(22, 135, 206);
     font-weight: bold;
     font-size: 1.6em;
@@ -86,7 +78,7 @@ padding: 10px 0;
 
 @media only screen and (max-width: 768px) {
     .container {
-        margin: 0 1rem;
+        margin: 1rem;
     }
 
     .recentCards {

@@ -64,21 +64,25 @@ function CatTwo() {
         </div>
         {isSmallScreen ? (
           <Slider {...settings}>
+                      <div className='catTwoCards'>
+
             {projects.map((project) => (
               <div className='catTwoCard' key={project.id}>
                  {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`https://demoblog-h71e.onrender.com${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`http://localhost:1337${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
                <p>{project.attributes.title}</p>
               </div>
             ))}
+                      </div >
+
           </Slider>
         ) : (
           <div className='catTwoCards'>
             {projects.map((project) => (
               <div className='catTwoCard' key={project.id}>
                 {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`https://demoblog-h71e.onrender.com${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`http://localhost:1337${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
                <p>{project.attributes.title}</p>
               </div>

@@ -3,9 +3,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-items: center;
-    margin: 0 8rem;
-    padding-bottom: 2rem;
+    margin: 2rem;
+    max-width: 100%;
 
 }
 .cards {
@@ -138,7 +137,7 @@
             padding: 1rem;
     }
     .container{
-        padding: 3rem;
+        padding: 1rem;
     }
 
     .card {

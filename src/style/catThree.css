@@ -1,15 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,900");
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    margin: 0 8rem;
-    padding-bottom: 2rem;
 
-}
 
-.container .CatTitle h3 {
+ .CatTitle h3 {
     color: rgb(22, 135, 206);
     font-weight: bold;
     font-size: 1.6em;
@@ -75,48 +68,26 @@ min-width: 100%;
     border-radius: 10px;
 }
 
-.catThreeCardRight img {
-    max-width: 100%;
-    height: 100%;
-    padding-bottom: 12px;
-    border-radius: 10px;
-}
+
 /* Keep existing styles for larger screens */
 
 @media only screen and (max-width: 768px) {
     .container {
-        margin: 0 1rem;
+        margin: 1rem;
     }
 
-    .catThreeCards {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        grid-template-areas:
-                "d"
-                "a"
-                "b"
-                'c';
-   
-    }
-
-    .catThreeCardRight {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
+  
+.catThreeCards {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 10px;
+}
 
     .catThreeCardLeft img {
-        width: 100%;
         height: auto;
     }
-         .catThreeCardLeft  {
-           flex-wrap: wrap;
-         }
+     
 
-    .catThreeCardRight img {
-        width: 100%;
-        height: auto;
-        padding-bottom: 12px;
-    }
+ 
 
 }
