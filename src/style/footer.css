@@ -58,6 +58,7 @@ flex-direction: column;
 .sectionTwo ul {
     color: white;
     display: flex;
+
     justify-content: flex-start;
     align-items: center;
     text-align: center;
@@ -94,6 +95,7 @@ flex-direction: column;
     .sectionTwo ul {
         flex-direction: row;
         text-align: center;
+        flex-direction: column;
     }
 
     .sectionTwo ul li {
