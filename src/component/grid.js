@@ -52,7 +52,7 @@ function Grid() {
               <div className="card-content">
                 <div className="card-img">
    {blog.attributes.cover && blog.attributes.cover.data && (
-                <img src={`https://demoblog-h71e.onrender.com${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                   </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>
@@ -66,7 +66,7 @@ function Grid() {
               <div className="card-content">
                 <div className="card-img">
       {blog.attributes.cover && blog.attributes.cover.data && (
-                <img src={`https://demoblog-h71e.onrender.com${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>

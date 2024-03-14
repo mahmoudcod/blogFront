@@ -31,7 +31,7 @@ function Logo() {
 
   return (
     <div className="logo">
-      <img  src={`https://demoblog-h71e.onrender.com${logo}`} alt="logo" />
+      <img  src={`${logo}`} alt="logo" />
     </div>
   );
 }

@@ -37,7 +37,7 @@ function Categories() {
       {categories.map((category) => (
         <div key={category.id} className='category'>
              {category.attributes.icon && category.attributes.icon.data && (
-                <img src={`https://demoblog-h71e.onrender.com${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
+                <img src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
                 )}
           <h4>{category.attributes.name}</h4>
         </div>
@@ -45,7 +45,7 @@ function Categories() {
           {categories.map((category) => (
         <div key={category.id} className='category'>
     {category.attributes.icon && category.attributes.icon.data && (
-                <img src={`https://demoblog-h71e.onrender.com${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
+                <img src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
                 )}          <h4>{category.attributes.name}</h4>
         </div>
       ))}
