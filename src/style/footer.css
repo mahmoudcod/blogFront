@@ -17,12 +17,10 @@
 .sectionThree {
     display: flex;
     justify-content: space-between;
-    margin: 0 10px;
 }
 .sectionTwo ul{
     display: flex;
     justify-content: space-between;
-     margin: 10 0;
 
 }
 .sectionTwo ul li{
@@ -61,7 +59,7 @@
 
     .sectionOne,
     .sectionThree {
-        margin: 10px 0;
+
     }
 
     .sectionTwo ul{
