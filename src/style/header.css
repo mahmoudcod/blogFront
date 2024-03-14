@@ -72,7 +72,7 @@ ul {
     .header {
         width: auto;
         padding: 20px ;
-        margin: 0;
+        margin: 1rem;
     }
 
     .menu-icon {
