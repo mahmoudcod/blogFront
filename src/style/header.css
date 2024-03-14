@@ -13,12 +13,9 @@
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
     padding: 30px 10px;
     margin: 0 1.8rem;
-    position: sticky;
     top: 0;
     background-color: #fff;
-    /* Add this if necessary */
-    z-index: 1000;
-    /* Adjust z-index as necessary */
+ 
 }
 .logo img{
     width: 100px;
@@ -45,18 +42,17 @@ ul {
     display: flex;
     flex-direction: column;
     position: fixed;
+    /* Make the menu fixed to the viewport */
     top: 0;
-    left: -100%;
-    /* Initially off-screen */
+    left: 0;
+    /* Set the left position to 0 to start from the left edge */
     background-color: #fff;
     height: 100vh;
-    width: 80%;
-    /* Adjust the width as needed */
+    width: 100vw;
+    /* Set width to 100vw to cover the entire viewport width */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    /* Set a high z-index value */
     transition: left 0.3s ease;
-    /* Add smooth transition effect */
 }
 
 .menu-icon {
@@ -86,22 +82,19 @@ ul {
     .nav.show-menu {
         display: flex;
         flex-direction: column;
-        position: fixed;
         top: 0;
         left: 0;
         background-color: #fff;
-        height: auto;
-        width: 80%;
-        /* Adjust the width as needed */
+        height: 100%;
+        width: 100%;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
-        /* Set a high z-index value */
         transition: left 0.3s ease;
-        /* Add smooth transition effect */
     }
 
     .nav.show-menu li {
-        padding: 10px 0;
+padding: 1.9rem;
+    margin: 0;
         border-bottom: 1px solid #ccc;
     }
         .nav.show-menu li:hover {
@@ -110,6 +103,5 @@ ul {
 
     .nav.show-menu .menu-icon {
         left: 80%;
-        /* Adjust the position based on the width of the menu */
     }
 }
