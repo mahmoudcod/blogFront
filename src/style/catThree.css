@@ -78,6 +78,7 @@ min-width: 100%;
 
   
 .catThreeCards {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     grid-gap: 10px;

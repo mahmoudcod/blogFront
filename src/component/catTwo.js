@@ -64,7 +64,6 @@ function CatTwo() {
         </div>
         {isSmallScreen ? (
           <Slider {...settings}>
-                      <div className='catTwoCards'>
 
             {projects.map((project) => (
               <div className='catTwoCard' key={project.id}>
@@ -74,7 +73,6 @@ function CatTwo() {
                <p>{project.attributes.title}</p>
               </div>
             ))}
-                      </div >
 
           </Slider>
         ) : (
