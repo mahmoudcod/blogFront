@@ -45,14 +45,14 @@ function Header() {
 
    const { loading, error, data } = useQuery(CatQurey);
 
-  if (loading) return <p>loading...</p>;
+  if (loading) return null;
   if (error) return <p>Error....</p>;
 
   const category = data.categories.data;
 
   return (
-    <>
-      <nav className="header">
+    <div className='container'>
+      <header className="header">
         <Logo />
         <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
           {category.map(cat => (
@@ -67,8 +67,8 @@ function Header() {
             {showMenu ? <IoMdClose /> : <TiThMenu />}
           </div>
         )}
-      </nav>
-    </>
+      </header>
+    </div>
   );
 }
 

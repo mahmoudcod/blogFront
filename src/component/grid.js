@@ -38,7 +38,7 @@ function Grid() {
 
   const { loading, error, data } = useQuery(gridQuery);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return null;
   if (error) return <p>Error: {error.message}</p>;
 
   const blogs = data.blogs.data.slice(0,4);

@@ -57,11 +57,7 @@
         flex-direction: column;
     }
 
-    .sectionOne,
-    .sectionThree {
-
-    }
-
+   
     .sectionTwo ul{
         display: flex;
         justify-content: space-between;

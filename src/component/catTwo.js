@@ -36,7 +36,7 @@ query GetCat {
 function CatTwo() {
   const { loading, error, data } = useQuery(getCatTwo);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return null;
   if (error) return <p>Error: {error.message}</p>;
 
   const projects = data.category.data.attributes.blogs.data.slice(0,8);

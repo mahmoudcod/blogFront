@@ -35,7 +35,7 @@ query GetCat {
 function CatFour() {
   const { loading, error, data } = useQuery(getCatFour);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return  null
   if (error) return <p>Error....</p>;
 
   const cat = data.category.data.attributes.blogs.data.slice(0,8);

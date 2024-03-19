@@ -34,8 +34,8 @@ import {useQuery,gql} from '@apollo/client'
 function CatOne() {
   const { loading, error, data } = useQuery(getCatOne);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
+ if(loading) return <p>loading...</p>
+ if(error) return <p>error...</p>
 
   const projects = data.category.data.attributes.blogs.data.slice(0,6);
 

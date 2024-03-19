@@ -22,10 +22,8 @@ const logoQuery = gql`
 function Logo() {
   const { loading, error, data } = useQuery(logoQuery);
 
-  if (loading) return <p>Loading ....</p>;
+  if (loading) return null;
   if (error) return <p>Error ....</p>;
-
-  console.log(data);
 
   const logo = data.logo.data.attributes.logo.data.attributes.url;
 

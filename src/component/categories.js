@@ -27,7 +27,7 @@ const CatQurey = gql`
 function Categories() {
   const { loading, error, data } = useQuery(CatQurey);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return null;
   if (error) return <p>Error....</p>;
 
   const categories = data.categories.data;

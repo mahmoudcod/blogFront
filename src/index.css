@@ -10,11 +10,8 @@ body {
 }
 * {
   padding: 0px;
-  margin: 0px 8rem;
+  margin: 0px 2.8rem;
   box-sizing: border-box;
-}
-img{
-  border-radius: 3px ;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
