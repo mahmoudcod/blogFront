@@ -133,7 +133,7 @@ const DetailsPage = () => {
                                 </div>
                             </div>
                             <div className='holder'>
-                             <div className='social'>
+                                  <div className='social'>
                                 <div className='socialI'>
                                     <SlSocialTwitter />
                                 </div>
@@ -143,7 +143,6 @@ const DetailsPage = () => {
                                 <div className='socialI'>
                                     <SlSocialInstagram />
                                 </div>
-            
                                 </div>
                                 <div className='blog-holder'>
                                   <div className='article'>
