@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import Header from '../component/header';
 import CommentSection from '../component/comments';
 import { useQuery, gql } from '@apollo/client';
@@ -112,7 +111,6 @@ const DetailsPage = () => {
                     <small>{categories.data[0].attributes.name}</small>
                 )}
                 <div className="row">
-                    
                     <div className="rightColumn">
                         <div className="dCard">
                             <h2>{title}</h2>

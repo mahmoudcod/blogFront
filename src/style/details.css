@@ -71,11 +71,11 @@ padding:  10px 30px;
     line-height: 1.5;
 }
 .blog p  img{
-    width: 100%;
+    width: 90%;
     height: 400px;
     padding: 10px 0 0 0;
     margin: 0;
-object-fit: cover;
+object-fit: contain;
 }
 .toggle{
     display: flex;
@@ -288,6 +288,9 @@ margin-left: 0;
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
+    .social {
+        display: none;
+        }
     .row{
         display: grid;
         grid-template-columns: 4fr;
