@@ -96,11 +96,11 @@ const CatDetails = () => {
                     {data.category.data.attributes.blogs.data.slice(0, 1).map(blog => (
                         <div key={blog.id} className='first-blog'>
                             <div className='blog-img'>
-                                <img src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
                             </div>
                             <div className='blog-content'>
                                 <h3>{blog.attributes.title}</h3>
-                                <p>{blog.attributes.blog}</p>
+                                <p>{blog.attributes.blog.slice(0, 100)}</p>
                                 <p>{blog.attributes.createdAt}</p>
                             </div>
                         </div>
@@ -110,12 +110,12 @@ const CatDetails = () => {
                     {data.category.data.attributes.blogs.data.slice(1).map(blog => (
                         <div key={blog.id} className='other-blog-card'>
                             <div className='blog-img'>
-                                <img src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
                             </div>
                             <div className='blog-content'>
                                 <p>{blog.attributes.createdAt}</p>
                                 <h3>{blog.attributes.title}</h3>
-                                <p>{blog.attributes.blog}</p>
+                                <p>{blog.attributes.blog.slice(0, 100)}</p>
                             </div>
                         </div>
 

@@ -8,7 +8,7 @@ import Footer from '../component/footer';
 import { CgProfile } from "react-icons/cg";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { format } from 'date-fns';
-import { ar } from 'date-fns/locale'; 
+import { ar } from 'date-fns/locale';
 import Loader from '../component/loading'
 import ReactMarkdown from 'react-markdown'
 import '../style/details.css'
@@ -92,7 +92,7 @@ const DetailsPage = () => {
 
     const [showSources, setShowSources] = useState(false);
 
-    if (loading) return  <Loader />
+    if (loading) return <Loader />
     if (error) return <p>Error....</p>;
     const blog = data.blog.data;
     const { title, categories, publishedAt } = blog.attributes;
@@ -115,7 +115,7 @@ const DetailsPage = () => {
                         <div className="dCard">
                             <h2>{title}</h2>
                             <div className='imgCard'>
-                                <img src={blog.attributes.cover.data.attributes.url} alt={title} />
+                                <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
                                 <div className='imgText'>
                                     <p>{blog.attributes.description}</p>
                                 </div>
@@ -131,27 +131,27 @@ const DetailsPage = () => {
                                 </div>
                             </div>
                             <div className='holder'>
-                                  <div className='social'>
-                                <div className='socialI'>
-                                    <SlSocialTwitter />
-                                </div>
-                                <div className='socialI'>
-                                    <SlSocialFacebook />
-                                </div>
-                                <div className='socialI'>
-                                    <SlSocialInstagram />
-                                </div>
+                                <div className='social'>
+                                    <div className='socialI'>
+                                        <SlSocialTwitter />
+                                    </div>
+                                    <div className='socialI'>
+                                        <SlSocialFacebook />
+                                    </div>
+                                    <div className='socialI'>
+                                        <SlSocialInstagram />
+                                    </div>
                                 </div>
                                 <div className='blog-holder'>
-                                  <div className='article'>
-                                <h3>محتويات المقالة</h3>
-                                <ReactMarkdown>{blog.attributes.contnetArticle}</ReactMarkdown>
-                            </div>
-                            <div className='blog'>
-                                <ReactMarkdown>{blog.attributes.blog}</ReactMarkdown>
-                                
-                            </div>
-                            </div>
+                                    <div className='article'>
+                                        <h3>محتويات المقالة</h3>
+                                        <ReactMarkdown>{blog.attributes.contnetArticle}</ReactMarkdown>
+                                    </div>
+                                    <div className='blog'>
+                                        <ReactMarkdown>{blog.attributes.blog}</ReactMarkdown>
+
+                                    </div>
+                                </div>
 
                             </div>
                             <div className='source'>
@@ -166,26 +166,26 @@ const DetailsPage = () => {
                                 )}
                             </div>
                             <div className='author'>
-                            <div className='authorInfo'>
-                                <div className='profileInfo'>
-                                < img src={blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url} alt={blog.attributes.users_permissions_user.data.attributes.username} />
-                                <p key={blog.attributes.users_permissions_user.data.id}>{blog.attributes.users_permissions_user.data.attributes.username}</p>
-                                </div>
-                                <div className='profileSocial'>
-                                     <div className='socialI'>
-                                    <SlSocialTwitter />
-                                </div>
-                                <div className='socialI'>
-                                    <SlSocialFacebook />
-                                </div>
-                                <div className='socialI'>
-                                    <SlSocialInstagram />
-                                </div>
+                                <div className='authorInfo'>
+                                    <div className='profileInfo'>
+                                        < img loading='lazy' src={blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url} alt={blog.attributes.users_permissions_user.data.attributes.username} />
+                                        <p key={blog.attributes.users_permissions_user.data.id}>{blog.attributes.users_permissions_user.data.attributes.username}</p>
                                     </div>
-                            </div>
-                            <div className='authorDesc'>
-                                <p>{blog.attributes.users_permissions_user.data.attributes.description}</p>
-                            </div>
+                                    <div className='profileSocial'>
+                                        <div className='socialI'>
+                                            <SlSocialTwitter />
+                                        </div>
+                                        <div className='socialI'>
+                                            <SlSocialFacebook />
+                                        </div>
+                                        <div className='socialI'>
+                                            <SlSocialInstagram />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='authorDesc'>
+                                    <p>{blog.attributes.users_permissions_user.data.attributes.description}</p>
+                                </div>
                             </div>
                             <div className='comments'>
                                 <CommentSection postId={id} />
@@ -212,18 +212,18 @@ const DetailsPage = () => {
                         </div>
                     </div>
                 </div>
-                 <div className='suggestion'>
-                                <h3 className='suggestion-comment-title'> قد يعجبك ايضا</h3>
-                                <div className='suggestion-flex'>
-                                {categoryBlogs.slice(0,4).map((blog) => (
-                                    <div className='mostPopular' key={blog.id}>
-                                        <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                        <strong className='padd '>{blog.attributes.title}</strong>
-                                        <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>
-                                    </div>
-                                ))}
-                                </div>
+                <div className='suggestion'>
+                    <h3 className='suggestion-comment-title'> قد يعجبك ايضا</h3>
+                    <div className='suggestion-flex'>
+                        {categoryBlogs.slice(0, 4).map((blog) => (
+                            <div className='mostPopular' key={blog.id}>
+                                <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
+                                <strong className='padd '>{blog.attributes.title}</strong>
+                                <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>
                             </div>
+                        ))}
+                    </div>
+                </div>
             </div>
             <Footer />
 
