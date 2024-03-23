@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import Header from '../component/header';
 import CommentSection from '../component/comments';
@@ -94,8 +96,8 @@ const DetailsPage = () => {
 
     if (loading) return <Loader />
     if (error) return <p>Error....</p>;
-    const blog = data.blog.data;
-    const { title, categories, publishedAt } = blog.attributes;
+    const blog = data?.blog?.data;
+    const { title, categories, publishedAt } = blog?.attributes || {};
     const formattedPublishedAt = format(new Date(publishedAt), "HH:mm-dd MMMM yyyy 'م'", { locale: ar });
     const categoryBlogs = categories.data[0].attributes.blogs.data.slice(0, 5);
 
@@ -123,7 +125,8 @@ const DetailsPage = () => {
                             <div className='cal-profile'>
                                 <div className='profile'>
                                     <CgProfile />
-                                    <p key={blog.attributes.users_permissions_user.data.id}>{blog.attributes.users_permissions_user.data.attributes.username}</p>
+                                    <p key={blog?.attributes?.users_permissions_user?.data?.id ?? ''}>   {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                    </p>
                                 </div>
                                 <div className='cal'>
                                     <FaRegCalendarAlt />
@@ -168,8 +171,14 @@ const DetailsPage = () => {
                             <div className='author'>
                                 <div className='authorInfo'>
                                     <div className='profileInfo'>
-                                        < img loading='lazy' src={blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url} alt={blog.attributes.users_permissions_user.data.attributes.username} />
-                                        <p key={blog.attributes.users_permissions_user.data.id}>{blog.attributes.users_permissions_user.data.attributes.username}</p>
+                                        <img
+                                            loading='lazy'
+                                            src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
+                                            alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                        />
+                                        <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
+                                            {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                        </p>
                                     </div>
                                     <div className='profileSocial'>
                                         <div className='socialI'>
@@ -184,13 +193,19 @@ const DetailsPage = () => {
                                     </div>
                                 </div>
                                 <div className='authorDesc'>
-                                    <p>{blog.attributes.users_permissions_user.data.attributes.description}</p>
+                                    <p>
+                                        {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.description}
+                                    </p>
                                 </div>
                             </div>
                             <div className='comments'>
                                 <CommentSection postId={id} />
                             </div>
-                        </div>
+                        </div><p>
+                            {
+                                blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.description
+                            }
+                        </p>
                     </div>
                     <div className="leftColumn">
                         <div className="dCard">
