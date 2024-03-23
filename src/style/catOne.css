@@ -50,11 +50,11 @@
     grid-area: b;
 }
 
-.catOneCard img:nth-child(1) {
+.catOneCard:nth-child(1) img {
     height: 400px;
 }
 
-.catOneCard img:nth-child(2) {
+.catOneCard:nth-child(2) img {
 
     height: 400px;
 }

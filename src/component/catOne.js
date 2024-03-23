@@ -35,7 +35,7 @@ const getCatOne = gql`
 function CatOne() {
   const { loading, error, data } = useQuery(getCatOne);
 
-  if (loading) return <p>loading...</p>
+  if (loading) return null
   if (error) return <p>error...</p>
 
   const projects = data.category.data.attributes.blogs.data.slice(0, 6);
@@ -55,7 +55,7 @@ function CatOne() {
             <div className='catOneCard' key={project.id}>
 
               {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
               )}
               <Link to={`/details/${project.id}`}>  <p>{project.attributes.title}</p></Link>
             </div>

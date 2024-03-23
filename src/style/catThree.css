@@ -62,6 +62,7 @@
 
 .catThreeCardLeft {
     display: flex;
+    margin-bottom: 1rem;
 }
 
 .catThreeCardLeft img {

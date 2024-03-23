@@ -57,7 +57,7 @@ function Recent() {
         {blogs.map((recent) => (
           <div key={recent.id} className='recentCard'>
             {recent.attributes.cover && recent.attributes.cover.data && (
-              <img src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
+              <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
             )}
             <div className='content'>
               <Link to={`/details/${recent.id}`}>

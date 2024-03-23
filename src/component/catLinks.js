@@ -25,7 +25,7 @@ const CatLinks = () => {
     });
     const location = useLocation();
 
-    if (loading) return 'Loading...';
+    if (loading) return null
     if (error) return `Error! ${error.message}`;
 
     return (

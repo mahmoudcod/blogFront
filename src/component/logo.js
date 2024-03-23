@@ -30,7 +30,7 @@ function Logo() {
 
   return (
     <div className="logo">
-      <Link to='/'><img src={`${logo}`} alt="logo" /> </Link>
+      <Link to='/'><img loading='lazy' src={`${logo}`} alt="logo" /> </Link>
     </div>
   );
 }

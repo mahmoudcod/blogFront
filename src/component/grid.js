@@ -41,7 +41,7 @@ function Grid() {
   if (loading) return null;
   if (error) return <p>Error: {error.message}</p>;
 
-  const blogs = data.blogs.data.slice(0,4);
+  const blogs = data.blogs.data.slice(0, 4);
 
   return (
     <div className='container'>
@@ -51,9 +51,9 @@ function Grid() {
             <div key={blog.id} className="card content">
               <div className="card-content">
                 <div className="card-img">
-   {blog.attributes.cover && blog.attributes.cover.data && (
-                <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                )}                   </div>
+                  {blog.attributes.cover && blog.attributes.cover.data && (
+                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  )}                   </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>
             </div>
@@ -65,9 +65,9 @@ function Grid() {
             <div key={blog.id} className="card content">
               <div className="card-content">
                 <div className="card-img">
-      {blog.attributes.cover && blog.attributes.cover.data && (
-                <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                )}                </div>
+                  {blog.attributes.cover && blog.attributes.cover.data && (
+                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  )}                </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>
             </div>

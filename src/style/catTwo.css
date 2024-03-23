@@ -36,12 +36,12 @@
 
 /* Styling for individual category cards */
 .catTwoCard {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     height: auto;
 }
 
 .catTwoCard .content {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 
 .catTwoCard img {

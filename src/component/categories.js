@@ -36,17 +36,17 @@ function Categories() {
     <div className='categories'>
       {categories.map((category) => (
         <div key={category.id} className='category'>
-             {category.attributes.icon && category.attributes.icon.data && (
-                <img src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
-                )}
+          {category.attributes.icon && category.attributes.icon.data && (
+            <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
+          )}
           <h4>{category.attributes.name}</h4>
         </div>
       ))}
-          {categories.map((category) => (
+      {categories.map((category) => (
         <div key={category.id} className='category'>
-    {category.attributes.icon && category.attributes.icon.data && (
-                <img src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
-                )}          <h4>{category.attributes.name}</h4>
+          {category.attributes.icon && category.attributes.icon.data && (
+            <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
+          )}          <h4>{category.attributes.name}</h4>
         </div>
       ))}
     </div>

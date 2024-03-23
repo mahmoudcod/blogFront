@@ -62,7 +62,7 @@ function CatThree() {
             return (
               <div key={blog.id} className='catThreeCardLeft'>
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                <div className='content'>
                   <small className='date'>{publishedDate}</small>
                   <Link to={`/details/${blog.id}`} ><p className='title'>{blog.attributes.title}</p></Link>

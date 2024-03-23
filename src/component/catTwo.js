@@ -58,7 +58,7 @@ function CatTwo() {
             <div className='catTwoCard' key={project.id}>
               <div className='cardTwo-img'>
                 {project.attributes.cover && project.attributes.cover.data && (
-                  <img src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
               </div>
               <div className='cardTwo-title'>

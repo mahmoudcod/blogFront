@@ -35,11 +35,11 @@
 
 /* Styling for individual category cards */
 .catFourCard {
-    width: 24%;
+    width: 24.3%;
 }
 
 .catFourCard .content {
-    padding-bottom: 2rem;
+    margin-bottom: 10px;
 }
 
 .catFourCard img {
