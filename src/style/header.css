@@ -2,8 +2,13 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
 
 .header {
     max-width: 100%;
@@ -11,12 +16,13 @@
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+    border-bottom: #eeeF solid 1px;
     top: 0;
     background-color: #fff;
- 
+
 }
-.logo img{
+
+.logo img {
     width: 100px;
     height: auto;
     object-fit: contain;
@@ -39,14 +45,11 @@ ul {
 }
 
 .show-menu {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    background-color: #fff;
     position: fixed;
-    /* Make the menu fixed to the viewport */
     top: 0;
     left: 0;
-    /* Set the left position to 0 to start from the left edge */
-    background-color: #fff;
     height: 100vh;
     width: 100vw;
     /* Set width to 100vw to cover the entire viewport width */
@@ -79,26 +82,25 @@ ul {
     }
 
     .nav.show-menu {
-        display: flex;
-        flex-direction: column;
-        top: 0;
-        left: 0;
+        display: block;
+
         background-color: #fff;
         height: 100%;
         width: 100%;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
-        transition: left 0.3s ease;
+        transition: left 0.8s ease;
     }
 
     .nav.show-menu li {
-padding: 1.9rem 0 ;
-    margin: 0;
+        padding: 1.9rem 0 10px;
+        margin: 1rem;
         border-bottom: 1px solid #ccc;
     }
-        .nav.show-menu li:hover {
-            padding-left: 20px ;
-        }
+
+    .nav.show-menu li:hover {
+        padding-left: 20px;
+    }
 
     .nav.show-menu .menu-icon {
         left: 80%;

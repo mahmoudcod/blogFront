@@ -1,10 +1,11 @@
 
-import Slider from 'react-slick';
+
 import { PiBankFill } from "react-icons/pi";
 import '../style/catTwo.css'
-import {useQuery,gql} from '@apollo/client'
+import { useQuery, gql } from '@apollo/client'
+import { Link } from 'react-router-dom';
 
- let iconStyles = { color: "#0280CD", fontSize: "1.8rem" , marginLeft:"20px"};
+let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
 
 const getCatTwo = gql`
 query GetCat {
@@ -39,18 +40,8 @@ function CatTwo() {
   if (loading) return null;
   if (error) return <p>Error: {error.message}</p>;
 
-  const projects = data.category.data.attributes.blogs.data.slice(0,8);
+  const projects = data.category.data.attributes.blogs.data.slice(0, 8);
 
-  const isSmallScreen = window.innerWidth <= 768;
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-  };
 
   return (
     <>
@@ -60,33 +51,22 @@ function CatTwo() {
             <PiBankFill style={iconStyles} />
             <h3>الاقتصاد</h3>
           </div>
-          <p>اقراء المزيد</p>
+          <Link to='category/6'>  <p>اقراء المزيد</p> </Link>
         </div>
-        {isSmallScreen ? (
-          <Slider {...settings}>
-       
-            {projects.map((project) => (
-              <div className='catTwoCard' key={project.id}>
-                 {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                )}
-               <p>{project.attributes.title}</p>
-              </div>
-            ))}
-
-          </Slider>
-        ) : (
-          <div className='catTwoCards'>
-            {projects.map((project) => (
-              <div className='catTwoCard' key={project.id}>
+        <div className='catTwoCards'>
+          {projects.map((project) => (
+            <div className='catTwoCard' key={project.id}>
+              <div className='cardTwo-img'>
                 {project.attributes.cover && project.attributes.cover.data && (
-                <img src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  <img src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}
-               <p>{project.attributes.title}</p>
               </div>
-            ))}
-          </div>
-        )}
+              <div className='cardTwo-title'>
+                <Link to={`details/${project.id}`}> <p>{project.attributes.title}</p> </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

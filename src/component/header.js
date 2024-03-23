@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TiThMenu } from 'react-icons/ti';
 import { IoMdClose, IoMdSearch } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import '../style/header.css';
 import Logo from './logo'
 import { useQuery, gql } from '@apollo/client';
@@ -43,7 +44,7 @@ function Header() {
   };
 
 
-   const { loading, error, data } = useQuery(CatQurey);
+  const { loading, error, data } = useQuery(CatQurey);
 
   if (loading) return null;
   if (error) return <p>Error....</p>;
@@ -56,7 +57,7 @@ function Header() {
         <Logo />
         <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
           {category.map(cat => (
-            <li key={cat.id}>{cat.attributes.name}</li>
+            <li key={cat.id}> <Link to={`/category/${cat.id}`}> {cat.attributes.name}  </Link></li>
           ))}
         </ul>
         <div className="search">

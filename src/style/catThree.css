@@ -2,7 +2,7 @@
 
 
 
- .CatTitle h3 {
+.CatTitle h3 {
     color: rgb(22, 135, 206);
     font-weight: bold;
     font-size: 1.2em;
@@ -17,13 +17,13 @@
     align-items: center;
     align-content: center;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 10px;
 
 }
 
 .catThreeCards {
-    padding-top: 40px;
-    width: calc(100% - 2em);
+    margin-top: 10px;
+    /* width: calc(100% - 2em); */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
@@ -32,7 +32,7 @@
         "d d a a"
         "d d b b"
         "d d c c";
-   max-width: 100%;
+    max-width: 100%;
     height: 100%;
 }
 
@@ -48,24 +48,27 @@
 .catThreeCardLeft:nth-child(3) {
     grid-area: c;
 }
+
 .catThreeCardLeft:nth-child(4) {
     grid-area: d;
     flex-direction: column;
 }
 
 .catThreeCardLeft:nth-child(4) img {
-min-width: 100%;
+    width: 100%;
     object-fit: cover;
+    margin-left: 0;
 }
-.catThreeCardLeft{
+
+.catThreeCardLeft {
     display: flex;
 }
 
 .catThreeCardLeft img {
     width: 250px;
     height: 100%;
-    padding-left: 12px;
-    border-radius: 10px;
+    margin-left: 12px;
+    border-radius: 4px;
 }
 
 
@@ -76,22 +79,29 @@ min-width: 100%;
         margin: 1rem;
     }
 
-  
-.catThreeCards {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: 10px;
-}
-   .catThreeCardLeft  {
-   flex-direction: column;
-   }
+
+    .catThreeCards {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "d"
+            "c"
+            "b"
+            "a";
+    }
+
+    .catThreeCardLeft {
+        flex-direction: row;
+    }
+
     .catThreeCardLeft img {
-        width: auto;
+        width: 200px;
         height: auto;
     }
-     
 
- 
+    .catThreeCardLeft:nth-child(4) img {
+        width: 100%;
+        object-fit: cover;
+    }
+
 
 }

@@ -2,7 +2,8 @@
 
 import '../style/catThree.css'
 import { IoCartOutline } from "react-icons/io5";
- import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 const getCatThree = gql`
 query GetCat {
@@ -33,7 +34,7 @@ query GetCat {
 }
 `;
 
- let iconStyles = { color: "#0280CD", fontSize: "1.8rem" , marginLeft:"20px"};
+let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
 
 function CatThree() {
   const { loading, error, data } = useQuery(getCatThree);
@@ -51,7 +52,8 @@ function CatThree() {
             <IoCartOutline style={iconStyles} />
             <h3>التجارة الاكترونية</h3>
           </div>
-          <p>اقراء المزيد</p>
+          <Link to="category/7"> <p>اقراء المزيد</p></Link>
+
         </div>
         <div className='catThreeCards'>
           {cat.map((blog) => {
@@ -59,11 +61,11 @@ function CatThree() {
 
             return (
               <div key={blog.id} className='catThreeCardLeft'>
- {blog.attributes.cover && blog.attributes.cover.data && (
-                <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                {blog.attributes.cover && blog.attributes.cover.data && (
+                  <img src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                <div className='content'>
                   <small className='date'>{publishedDate}</small>
-                  <p className='title'>{blog.attributes.title}</p>
+                  <Link to={`/details/${blog.id}`} ><p className='title'>{blog.attributes.title}</p></Link>
                   <p className='body'>{blog.attributes.blog}</p>
                 </div>
               </div>

@@ -1,0 +1,148 @@
+.catTitle-details {
+    display: flex;
+    color: #0280CD;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+.cat-disc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    width: 70%;
+}
+
+.catTitle-details img {
+    width: 30px;
+    color: #0280CD;
+}
+
+.cat-links {
+    margin: 2.8rem 0;
+}
+
+.cat-links a {
+    color: #0280CD;
+    font-size: 14px;
+    border: #0280CD 1px solid;
+    border-radius: 30px;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+.cat-links a:hover {
+    background-color: #0280CD;
+    color: white;
+}
+
+.cat-links a.active {
+    background-color: #0280CD;
+    color: white;
+}
+
+
+.first-blog {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.first-blog img {
+    width: 579px;
+    height: 353px;
+    object-fit: cover;
+    margin-left: 23px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.first-blog .blog-content p,
+h3 {
+    margin: 5px 0;
+}
+
+.first-blog .blog-content p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+
+.other-blogs {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin-top: 20px;
+}
+
+.other-blog-card {
+    display: flex;
+    margin-left: 15px;
+}
+
+.other-blog-card img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.other-blog-card .blog-content p,
+h3 {
+    margin: 5px 0;
+}
+
+.other-blog-card .blog-content p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@media only screen and (max-width: 768px) {
+
+
+    .cat-links {
+        display: none;
+    }
+
+    .first-blog {
+        display: block;
+        height: auto;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .first-blog img {
+        width: 100%;
+        padding: 0;
+        margin: 1rem 0;
+    }
+
+    .other-blog-card {
+        display: block;
+        height: auto;
+        width: 100%;
+        margin: 1rem 0;
+
+    }
+
+    .other-blog-card img {
+        height: auto;
+        width: 100%;
+    }
+
+
+    .other-blogs {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+
+    p.cat-disc {
+        width: 100%;
+    }
+}

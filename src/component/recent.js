@@ -34,12 +34,12 @@ const recentQuery = gql`
   }
 `;
 
-const iconStyles = { color: "#0280CD", fontSize: "1.8rem" , marginLeft:"20px"};
+const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
 
 function Recent() {
   const { loading, error, data } = useQuery(recentQuery);
 
- 
+
   if (loading) return null
   if (error) return <p>Error....</p>;
 
@@ -66,14 +66,15 @@ function Recent() {
 
               <p className='body'>{recent.attributes.blog.slice(0, 100)}...</p>
               {recent.attributes.categories && (
-                recent.attributes.categories.data.length > 0 && 
-                <h4>{recent.attributes.categories.data[0].attributes.name}</h4>
+                recent.attributes.categories.data.length > 0 &&
+                <h4 className='cat'>{recent.attributes.categories.data[0].attributes.name}</h4>
               )}
 
+
             </div>
-            </div>
-            ))}
-            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
