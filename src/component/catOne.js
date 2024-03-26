@@ -57,7 +57,7 @@ function CatOne() {
               {project.attributes.cover && project.attributes.cover.data && (
                 <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
               )}
-              <Link to={`/details/${project.id}`}>  <p>{project.attributes.title}</p></Link>
+              <Link to={`/details/${project.id}`}>  <h3>{project.attributes.title}</h3></Link>
             </div>
           ))}
         </div>

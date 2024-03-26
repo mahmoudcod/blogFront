@@ -34,7 +34,7 @@ function MostPopular() {
       {blogs.map((recent) => (
         <div key={recent.id} className='mostPopular'>
           <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
-          <strong className="padd bor"> <Link to={`details/${recent.id}`}> {recent.attributes.title}</Link> </strong>
+          <h3 className="padd bor"> <Link to={`details/${recent.id}`}> {recent.attributes.title}</Link> </h3>
 
         </div>
       ))}

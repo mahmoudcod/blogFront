@@ -57,15 +57,13 @@ function CatThree() {
         </div>
         <div className='catThreeCards'>
           {cat.map((blog) => {
-            const publishedDate = new Date(blog.attributes.publishedAt).toISOString().split('T')[0];
 
             return (
               <div key={blog.id} className='catThreeCardLeft'>
                 {blog.attributes.cover && blog.attributes.cover.data && (
                   <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                <div className='content'>
-                  <small className='date'>{publishedDate}</small>
-                  <Link to={`/details/${blog.id}`} ><p className='title'>{blog.attributes.title}</p></Link>
+                  <Link to={`/details/${blog.id}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
                   <p className='body'>{blog.attributes.blog}</p>
                 </div>
               </div>

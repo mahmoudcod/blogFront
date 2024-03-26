@@ -63,7 +63,7 @@ h3 {
     margin: 5px 0;
 }
 
-.first-blog .blog-content p {
+.blog-content p {
     font-size: 14px;
     font-weight: 300;
     line-height: 1.5;
@@ -96,11 +96,7 @@ h3 {
     margin: 5px 0;
 }
 
-.other-blog-card .blog-content p {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5;
-}
+
 
 @media only screen and (max-width: 768px) {
 

@@ -11,6 +11,9 @@ import { IoCartOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import '../style/catDetails.css';
 import Loader from '../component/loading';
+import { format } from 'date-fns';
+import { ar } from 'date-fns/locale';
+
 
 const GET_CAT_DETAILS = gql`
     query GetCatDetails($id: ID!) {
@@ -101,8 +104,7 @@ const CatDetails = () => {
                             <div className='blog-content'>
                                 <h3>{blog.attributes.title}</h3>
                                 <p>{blog.attributes.blog.slice(0, 100)}</p>
-                                <p>{blog.attributes.createdAt}</p>
-                            </div>
+                                <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
                         </div>
                     ))}
                 </div>
@@ -113,7 +115,7 @@ const CatDetails = () => {
                                 <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
                             </div>
                             <div className='blog-content'>
-                                <p>{blog.attributes.createdAt}</p>
+                                <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
                                 <h3>{blog.attributes.title}</h3>
                                 <p>{blog.attributes.blog.slice(0, 100)}</p>
                             </div>

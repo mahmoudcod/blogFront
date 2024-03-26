@@ -116,7 +116,7 @@ const DetailsPage = () => {
                 <div className="row">
                     <div className="rightColumn">
                         <div className="dCard">
-                            <h2>{title}</h2>
+                            <h3>{title}</h3>
                             <div className='imgCard'>
                                 <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
                                 <div className='imgText'>

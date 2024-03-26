@@ -61,7 +61,7 @@ function Recent() {
             )}
             <div className='content'>
               <Link to={`/details/${recent.id}`}>
-                <h2 className='title'>{recent.attributes.title}</h2>
+                <h3 className='title'>{recent.attributes.title}</h3>
               </Link>
 
               <p className='body'>{recent.attributes.blog.slice(0, 100)}...</p>
