@@ -32,7 +32,6 @@ const SEARCH_BLOGS = gql`
     }
 `;
 
-const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
 
 const Search = () => {
     const { searchQ } = useParams();
