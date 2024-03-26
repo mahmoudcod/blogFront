@@ -50,7 +50,7 @@ const Search = () => {
 
                 <h3 className='search-title'> نتيجة بحث "{searchQ}"</h3>
                 <div className='recentCards'>
-                    {loading && <p>Loading...</p>}
+                    {loading && null}
                     {error && <p>Error....</p>}
                     {data && data.blogs.data.length === 0 && (
                         <p>لا توجد نتائج عن "{searchQ}"</p>
