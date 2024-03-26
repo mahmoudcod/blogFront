@@ -1,8 +1,10 @@
-import React from 'react';
 import { useLazyQuery, gql } from "@apollo/client";
 import { Link, useParams } from 'react-router-dom';
 import Header from '../component/header';
 import Footer from '../component/footer';
+import '../style/search.css';
+import React from 'react';
+
 
 const SEARCH_BLOGS = gql`
     query SearchBlogs($searchQ: String!) {
@@ -11,6 +13,7 @@ const SEARCH_BLOGS = gql`
                 id
                 attributes {
                     title
+                    description
                     categories {
                         data {
                             attributes {
@@ -49,7 +52,8 @@ const Search = () => {
             <div className='container'>
 
                 <h3 className='search-title'> نتيجة بحث "{searchQ}"</h3>
-                <div className='recentCards'>
+
+                <div className='search-cards'>
                     {loading && null}
                     {error && <p>Error....</p>}
                     {data && data.blogs.data.length === 0 && (
@@ -63,11 +67,13 @@ const Search = () => {
                             <div className='content'>
                                 <Link to={`/details/${recent.id}`}>
                                     <h3 className='title'>{recent.attributes.title}</h3>
+                                    <p className='dis'>{`${recent?.attributes?.description?.slice(0, 100) ?? ""}`}</p>
                                 </Link>
-                                <small>{recent.attributes.categories.data[0].attributes.name}</small>
+                                <small className='cat-name'>{recent.attributes.categories.data[0].attributes.name}</small>
                             </div>
                         </div>
                     ))}
+
                 </div>
             </div>
             <Footer />

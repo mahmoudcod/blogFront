@@ -17,12 +17,12 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route path="/details/:id" element={<DetailsPage />} />
           <Route path="/*" element={<Home />} />
+          <Route path="/search/:searchQ" element={<Search />} />
+          <Route path="/details/:id" element={<DetailsPage />} />
           <Route path="/category/:id" element={<CatDetails />} />
           <Route path="/advertising" element={<Advertising />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/search/:searchQ" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>

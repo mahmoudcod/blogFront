@@ -2,6 +2,35 @@
     margin: 1rem 0 2rem;
 }
 
+.search-cards {
+    margin-top: 10px;
+    width: calc(100% - 2em);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 2fr));
+    grid-gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dis {
+    margin: 0.6rem 0;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+.cat-name {
+    border-bottom: 1px solid #000;
+    width: fit-content;
+    color: #000;
+}
+
+@media screen and (max-width: 868px) {
+    .search-cards {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+    }
+
+}
+
 .ll {
     width: 360px;
     height: 100px;
