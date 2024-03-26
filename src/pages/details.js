@@ -1,6 +1,7 @@
 
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../component/header';
 import CommentSection from '../component/comments';
 import { useQuery, gql } from '@apollo/client';
@@ -171,11 +172,13 @@ const DetailsPage = () => {
                             <div className='author'>
                                 <div className='authorInfo'>
                                     <div className='profileInfo'>
-                                        <img
-                                            loading='lazy'
-                                            src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
-                                            alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
-                                        />
+                                        <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}`}>
+                                            <img
+                                                loading='lazy'
+                                                src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
+                                                alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                            />
+                                        </Link>
                                         <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
                                             {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                         </p>
@@ -221,7 +224,7 @@ const DetailsPage = () => {
                             {categoryBlogs.map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
                                     <small className='padd'>{categories.data[0].attributes.name}</small>
-                                    <strong className='padd bor'>{blog.attributes.title}</strong>
+                                    <strong className='padd bor'><Link to={`details/${blog.id}`}>{blog.attributes.title} </Link></strong>
                                 </div>
                             ))}
                         </div>
@@ -233,7 +236,7 @@ const DetailsPage = () => {
                         {categoryBlogs.slice(0, 4).map((blog) => (
                             <div className='mostPopular' key={blog.id}>
                                 <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                <strong className='padd '>{blog.attributes.title}</strong>
+                                <strong className='padd '> <Link to={`details/${blog.id}`}>{blog.attributes.title} </Link> </strong>
                                 <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>
                             </div>
                         ))}

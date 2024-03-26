@@ -4,6 +4,7 @@ import Home from './pages/home';
 import CatDetails from './pages/catDetails';
 import DetailsPage from './pages/details';
 import Advertising from './pages/advertising';
+import Profile from './pages/profile';
 
 const client = new ApolloClient({
   uri: 'https://demoblog-h71e.onrender.com/graphql',
@@ -18,7 +19,8 @@ function App() {
           <Route path="/details/:id" element={<DetailsPage />} />
           <Route path="/*" element={<Home />} />
           <Route path="/category/:id" element={<CatDetails />} />
-          <Route path="/advertising/:id" element={<Advertising />} />
+          <Route path="/advertising" element={<Advertising />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>

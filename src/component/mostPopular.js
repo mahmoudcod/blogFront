@@ -1,7 +1,7 @@
 // Code for most popular blogs
 import { useQuery, gql } from "@apollo/client";
 
-
+import { Link } from 'react-router-dom';
 const mostPopularQuery = gql`
   query mostPopular {
     blogs{
@@ -24,22 +24,22 @@ const mostPopularQuery = gql`
 
 
 function MostPopular() {
-    const { loading, error, data } = useQuery(mostPopularQuery);
-    if (loading) return null
-    if (error) return <p>Error....</p>;
-    const blogs = data.blogs.data.slice(0, 10);
-    return (
-      <>
-            <h3>الاكثر قراءة</h3>
-            {blogs.map((recent) => (
-            <div key={recent.id} className='mostPopular'>
-                <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
-                <strong className="padd bor">{recent.attributes.title}</strong>
+  const { loading, error, data } = useQuery(mostPopularQuery);
+  if (loading) return null
+  if (error) return <p>Error....</p>;
+  const blogs = data.blogs.data.slice(0, 10);
+  return (
+    <>
+      <h3>الاكثر قراءة</h3>
+      {blogs.map((recent) => (
+        <div key={recent.id} className='mostPopular'>
+          <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
+          <strong className="padd bor"> <Link to={`details/${recent.id}`}> {recent.attributes.title}</Link> </strong>
 
-            </div>
-            ))}
-        </>
-    );
+        </div>
+      ))}
+    </>
+  );
 
 }
 export default MostPopular;
