@@ -19,13 +19,11 @@ const CatQurey = gql`
   }
 `;
 
-
-
 function Header() {
-
-
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
   const [showMenu, setShowMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,8 +39,12 @@ function Header() {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+    setShowSearch(false);
   };
-
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+    setShowMenu(false);
+  }
 
   const { loading, error, data } = useQuery(CatQurey);
 
@@ -61,17 +63,29 @@ function Header() {
           ))}
         </ul>
         <div className="search">
-          <IoMdSearch />
+          <IoMdSearch onClick={toggleSearch} />
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className={showSearch ? 'show-search' : 'display-none'}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                window.location.href = `/search/${searchValue}`;
+              }
+            }}
+          />
+          {showSearch && <div className="overlay" onClick={() => setShowMenu(false)}></div>}
+          {isSmallScreen && (
+            <div className="menu-icon" onClick={toggleMenu}>
+              {showMenu ? <IoMdClose /> : <TiThMenu />}
+            </div>
+          )}
         </div>
-        {isSmallScreen && (
-          <div className="menu-icon" onClick={toggleMenu}>
-            {showMenu ? <IoMdClose /> : <TiThMenu />}
-          </div>
-        )}
       </header>
     </div>
   );
 }
 
 export default Header;
-
