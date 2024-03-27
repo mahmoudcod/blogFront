@@ -1,7 +1,3 @@
-// CommentSection.js
-// Add the missing 'id' field to the CommentEntityResponse type
-// CommentEntityResponse.js
-
 
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
@@ -45,26 +41,26 @@ const CommentSection = ({ id }) => {
         <div className='comments'>
             <div className='comment-inputs'>
                 <form className='comment-form' onSubmit={handleSubmit}>
-                    <h4 className='suggestion-comment-title'>أضف تعليقك</h4>
+                    <h3 className='suggestion-comment-title'>أضف تعليقك</h3>
                     <div className='comment-info'>
                         <div className='comment-info-flex'>
-                    <label>اسمك</label>
-                    <input
-                        type='text'
-                        value={commentData.name}
-                        onChange={(e) => setCommentData({ ...commentData, name: e.target.value })}
-                        required
-                    />
-                    </div>
-                    <div className='comment-info-flex'>
-                    <label>بريدك الإلكتروني</label>
-                    <input
-                        type='email'
-                        value={commentData.email}
-                        onChange={(e) => setCommentData({ ...commentData, email: e.target.value })}
-                        required
-                    />
-                    </div>
+                            <label>اسمك</label>
+                            <input
+                                type='text'
+                                value={commentData.name}
+                                onChange={(e) => setCommentData({ ...commentData, name: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className='comment-info-flex'>
+                            <label>بريدك الإلكتروني</label>
+                            <input
+                                type='email'
+                                value={commentData.email}
+                                onChange={(e) => setCommentData({ ...commentData, email: e.target.value })}
+                                required
+                            />
+                        </div>
                     </div>
                     <label>اكتب تعليقك</label>
                     <textarea
@@ -74,11 +70,11 @@ const CommentSection = ({ id }) => {
                     />
                     <div className='comment-button'>
                         <div className='comment-checkbox'>
-                        <input type='checkbox'  /> <label>أحفظ بياناتي للتعليق بسهولة في المرة القادمة</label>
+                            <input type='checkbox' /> <label>أحفظ بياناتي للتعليق بسهولة في المرة القادمة</label>
                         </div>
-                         <button type='submit'> ارسال</button>
+                        <button type='submit'> ارسال</button>
                     </div>
-                   
+
                 </form>
             </div>
             {/* Here you can display the list of comments */}

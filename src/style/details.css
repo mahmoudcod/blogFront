@@ -170,8 +170,12 @@ small {
 }
 
 .mostPopular .bor {
+    padding: 10px 0;
+    margin: 0;
+    line-height: 1.5;
     border-bottom: 1px solid #C2C2C2;
     width: fit-content;
+
 }
 
 
@@ -221,7 +225,7 @@ small {
 .authorInfo p {
     padding: 0 10px;
     color: #000;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .profileInfo {
@@ -362,5 +366,10 @@ small {
         grid-template-columns: 1fr;
         gap: 5px;
         border-radius: 3px;
+    }
+
+    .authorInfo {
+        margin: 1rem 0;
+        display: block;
     }
 }

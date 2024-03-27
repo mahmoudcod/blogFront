@@ -68,3 +68,11 @@ button {
     font-size: 32px;
     margin-top: 60px;
 }
+
+
+@media screen and (max-width: 600px) {
+    .suggestion-comment-title {
+        font-size: 22px;
+        margin-top: 60px;
+    }
+}

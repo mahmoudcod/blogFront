@@ -99,7 +99,7 @@ const DetailsPage = () => {
     if (error) return <p>Error....</p>;
     const blog = data?.blog?.data;
     const { title, categories, publishedAt } = blog?.attributes || {};
-    const formattedPublishedAt = format(new Date(publishedAt), "HH:mm-dd MMMM yyyy 'م'", { locale: ar });
+    const formattedPublishedAt = format(new Date(publishedAt), "dd MMMM yyyy 'م'", { locale: ar });
     const categoryBlogs = categories.data[0].attributes.blogs.data.slice(0, 5);
 
     const toggleSources = () => {
@@ -204,15 +204,12 @@ const DetailsPage = () => {
                             <div className='comments'>
                                 <CommentSection postId={id} />
                             </div>
-                        </div><p>
-                            {
-                                blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.description
-                            }
-                        </p>
+                        </div>
                     </div>
                     <div className="leftColumn">
                         <div className="dCard">
-                            <MostPopular />
+                            <MostPopular currentId={id} />
+
                         </div>
                         <div className="dCard">
                             <div className="fakeimg">
@@ -223,8 +220,9 @@ const DetailsPage = () => {
                             <h3>ذات صلة</h3>
                             {categoryBlogs.map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
-                                    <small className='padd'>{categories.data[0].attributes.name}</small>
-                                    <strong className='padd bor'><Link to={`details/${blog.id}`}>{blog.attributes.title} </Link></strong>
+                                    <h3 className='title bor'><Link to={id === blog.id ? "#" : `/details/${blog.id}`} key={blog.id}>
+                                        {blog.attributes.title}
+                                    </Link></h3>
                                 </div>
                             ))}
                         </div>
@@ -236,7 +234,9 @@ const DetailsPage = () => {
                         {categoryBlogs.slice(0, 4).map((blog) => (
                             <div className='mostPopular' key={blog.id}>
                                 <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                <strong className='padd '> <Link to={`details/${blog.id}`}>{blog.attributes.title} </Link> </strong>
+                                <h3 className='title'> <Link to={id === blog.id ? "#" : `/details/${blog.id}`} key={blog.id}>
+                                    {blog.attributes.title}
+                                </Link></h3>
                                 <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>
                             </div>
                         ))}

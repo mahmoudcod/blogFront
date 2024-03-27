@@ -4,13 +4,19 @@
 
 .search-cards {
     margin-top: 10px;
-    width: calc(100% - 2em);
+    width: calc(100% - 1em);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 2fr));
+    grid-template-columns: repeat(auto-fit, minmax(450px, 2fr));
     grid-gap: 10px;
     width: 100%;
     margin-bottom: 20px;
 }
+
+.search-cards img {
+    width: 350px;
+    height: 190px;
+}
+
 
 .dis {
     margin: 0.6rem 0;
