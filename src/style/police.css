@@ -1,0 +1,25 @@
+.police-details {
+    margin-bottom: 10px;
+}
+
+.police-dic {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    width: 80%;
+}
+
+.police-details h2 {
+    margin-bottom: 10px;
+}
+
+.police-details p {
+    margin-bottom: 20px;
+}
+
+.police {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    width: 80%;
+}

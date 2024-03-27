@@ -1,6 +1,7 @@
 import Logo from './logo'
 
 import '../style/footer.css'
+import { Link } from 'react-router-dom';
 function Footer() {
     return (
         <footer className='footer'>
@@ -43,16 +44,16 @@ function Footer() {
                 <div className='sectionTwo'>
                     <ul>
                         <li>
-                            سياسة الاعلان
+                            <Link to={`/advertising`}>    سياسة الاعلان</Link>
                         </li>
                         <li>
-                            سياسة حقوق النشر
+                            <Link to={`/publish`}>     حقوق النشر</Link>
                         </li>
                         <li>
-                            شروط الاستخدام
+                            <Link to={`/usage`}>    شروط الاستخدام</Link>
                         </li>
                         <li>
-                            سياسة الخصوصية
+                            <Link to={`/privacy`}> سياسة الخصوصية</Link>
                         </li>
                     </ul>
                 </div>

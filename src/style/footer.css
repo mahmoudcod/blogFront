@@ -7,17 +7,20 @@
 }
 
 
-.sectionOne,
-.sectionTwo,
+
+
 .sectionThree {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
+}
+
+.sectionOne {
+    display: flex;
+
 }
 
 .sectionTwo ul {
     display: flex;
-    justify-content: space-between;
 
 }
 
@@ -31,6 +34,10 @@
     margin-bottom: 10px;
 }
 
+.sectionTwo ul li a {
+    color: white;
+}
+
 .sectionOne h2 {
     display: flex;
     font-size: 20px;
@@ -39,7 +46,9 @@
 }
 
 .sectionOne div {
+    padding-left: 60px;
     margin-bottom: 20px;
+    font-size: 22px;
 }
 
 .sectionOne ul {
@@ -63,12 +72,20 @@
     .sectionTwo ul li {
         padding: 0;
         margin: 10px 0;
+        font-size: 13px;
 
     }
 
     .sectionOne {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        font-size: 16px;
+    }
+
+    .sectionOne div {
+        padding-left: 20px;
+        margin-bottom: 20px;
+        font-size: 16px;
     }
 
     .footerSmall {
