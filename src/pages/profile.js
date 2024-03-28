@@ -6,6 +6,7 @@ import { SlSocialFacebook } from "react-icons/sl";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useQuery, gql } from '@apollo/client';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import '../style/profile.css';
 
 const profileQuery = gql`
@@ -63,59 +64,69 @@ function Profile() {
     const profile = data.usersPermissionsUser.data.attributes;
 
     return (
-        <div>
-            <Header />
-            <div className='container'>
-                <div className='profile-details'>
-                    <div className='profile-cover'>
-                        {profile.cover && profile.cover.data && (
-                            <img src={`${profile.cover.data.attributes.url}`} alt='Cover' />
-                        )}
-                    </div>
-                    <div className='profile-info'>
-                        <h1>{profile.username}</h1>
-                        <p className='profile-info-disc'>{profile.description}</p>
-                        <div className='profile-social'>
-                            {profile.linkedin && (
-                                <a href={profile.linkedin} target='_blank' rel='noreferrer'>
-                                    <FaLinkedinIn />
-                                </a>
+        <HelmetProvider>
+            <Helmet>
+                <title>{profile.username}</title>
+                <meta name="description" content={profile.description} />
+                <meta property="og:title" content={profile.username} />
+                <meta property="og:description" content={profile.description} />
+                <meta property="og:image" content={profile.cover && profile.cover.data ? profile.cover.data.attributes.url : ''} />
+                <meta property="og:url" content={window.location.href} />
+            </Helmet>
+            <div>
+                <Header />
+                <div className='container'>
+                    <div className='profile-details'>
+                        <div className='profile-cover'>
+                            {profile.cover && profile.cover.data && (
+                                <img src={`${profile.cover.data.attributes.url}`} alt='Cover' />
                             )}
-                            {profile.facebook && (
-                                <a href={profile.facebook} target='_blank' rel='noreferrer'>
-                                    <SlSocialFacebook />
-                                </a>
-                            )}
-                            {profile.x && (
-                                <a href={profile.x} target='_blank' rel='noreferrer'>
-                                    <FaXTwitter />
-                                </a>
-                            )}
+                        </div>
+                        <div className='profile-info'>
+                            <h1>{profile.username}</h1>
+                            <p className='profile-info-disc'>{profile.description}</p>
+                            <div className='profile-social'>
+                                {profile.linkedin && (
+                                    <a href={profile.linkedin} target='_blank' rel='noreferrer'>
+                                        <FaLinkedinIn />
+                                    </a>
+                                )}
+                                {profile.facebook && (
+                                    <a href={profile.facebook} target='_blank' rel='noreferrer'>
+                                        <SlSocialFacebook />
+                                    </a>
+                                )}
+                                {profile.x && (
+                                    <a href={profile.x} target='_blank' rel='noreferrer'>
+                                        <FaXTwitter />
+                                    </a>
+                                )}
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='profile-posts'>
-                    <h2>مقالات <span>{profile.username}</span></h2>
-                    <div className='profile-posts-list'>
-                        {profile.posts && profile.posts.data && profile.posts.data.length > 0 ? (
-                            profile.posts.data.map((post) => (
-                                <div key={post.id} className='profile-posts-info'>
-                                    {post.attributes.cover && (
-                                        <img src={`${post.attributes.cover.data.attributes.url}`} alt='Cover' />
-                                    )}
-                                    <h3>{post.attributes.title}</h3>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No posts found.</p>
-                        )}
+                    <div className='profile-posts'>
+                        <h2>مقالات <span>{profile.username}</span></h2>
+                        <div className='profile-posts-list'>
+                            {profile.posts && profile.posts.data && profile.posts.data.length > 0 ? (
+                                profile.posts.data.map((post) => (
+                                    <div key={post.id} className='profile-posts-info'>
+                                        {post.attributes.cover && (
+                                            <img src={`${post.attributes.cover.data.attributes.url}`} alt='Cover' />
+                                        )}
+                                        <h3>{post.attributes.title}</h3>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No posts found.</p>
+                            )}
+                        </div>
                     </div>
-                </div>
 
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </HelmetProvider>
     );
 }
 
