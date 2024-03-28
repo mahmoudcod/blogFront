@@ -9,6 +9,7 @@ import Search from './pages/search';
 import Publish from './pages/publish';
 import Usage from './pages/usage';
 import Privacy from './pages/privacy';
+import Tags from './pages/tags';
 
 const client = new ApolloClient({
   uri: 'https://demoblog-h71e.onrender.com/graphql',
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/search/:searchQ" element={<Search />} />
+          <Route path="/tags/:id" element={<Tags />} />
           <Route path="/details/:id" element={<DetailsPage />} />
           <Route path="/category/:id" element={<CatDetails />} />
           <Route path="/advertising" element={<Advertising />} />

@@ -1,9 +1,8 @@
 
 import Header from '../component/header';
 import Footer from '../component/footer';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import CatLinks from '../component/catLinks';
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { FaBuilding } from "react-icons/fa6";
 import { PiBankFill } from "react-icons/pi";
@@ -22,6 +21,14 @@ const GET_CAT_DETAILS = gql`
                 id
                 attributes {
                     name
+                    sub_categories{
+                        data{
+                            id
+                            attributes{
+                                subName
+                            }
+                        }
+                    }
                     blogs{
                         data{
                             id
@@ -92,7 +99,9 @@ const CatDetails = () => {
                     <p className='cat-disc'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
                     </p>
                     <div className='cat-links'>
-                        <CatLinks />
+                        {data.category.data.attributes.sub_categories.data.map(sub => (
+                            <Link to={`/category/${sub.id}`} key={sub.id}>{sub.attributes.subName}</Link>
+                        ))}
                     </div>
                 </div>
                 <div className='first-blog'>
@@ -102,7 +111,7 @@ const CatDetails = () => {
                                 <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
                             </div>
                             <div className='blog-content'>
-                                <h3>{blog.attributes.title}</h3>
+                                <Link to={`/details/${blog.id}`} ><h3>{blog.attributes.title}</h3></Link>
                                 <p>{blog.attributes.blog.slice(0, 100)}</p>
                                 <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
                         </div>
@@ -116,7 +125,7 @@ const CatDetails = () => {
                             </div>
                             <div className='blog-content'>
                                 <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
-                                <h3>{blog.attributes.title}</h3>
+                                <Link to={`/details/${blog.id}`} ><h3>{blog.attributes.title}</h3></Link>
                                 <p>{blog.attributes.blog.slice(0, 100)}</p>
                             </div>
                         </div>

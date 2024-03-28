@@ -23,6 +23,22 @@
     padding: 10px 0;
 }
 
+/* tags */
+.tagsInfo {
+    display: flex;
+    padding: 10px 0;
+}
+
+.tagsInfo p {
+    padding: 5px 8px;
+    margin-left: 5px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 /* Left column */
 .leftColumn {
     float: left;
@@ -67,11 +83,11 @@
 }
 
 .article ol {
-    padding: 10px 30px;
+    padding: 5px 30px;
 }
 
 .article ol li {
-    padding: 10px 0;
+    padding: 4px 0;
 }
 
 .blog {
@@ -139,6 +155,9 @@
 
 .imgText {
     padding: 5px;
+    line-height: 1.5;
+    font-size: 13px;
+    font-weight: 300;
     text-align: center;
 }
 

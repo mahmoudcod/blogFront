@@ -45,6 +45,32 @@ ul {
     padding: 0 15px;
     font-size: 18px;
     font-weight: 700;
+    position: relative;
+    /* Added position relative */
+}
+
+.nav li:hover .sub-categories {
+    /* Added hover effect */
+    display: block;
+}
+
+.sub-categories {
+    display: none;
+    /* Initially hidden */
+    position: absolute;
+    top: 100%;
+    /* Position it below the parent li */
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sub-categories li {
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .show-search {
@@ -147,6 +173,18 @@ ul {
 
     .nav.show-menu li:hover {
         padding-left: 20px;
+    }
+
+    .sub-categories {
+        /* Initially hidden */
+        position: relative;
+        top: 100%;
+        /* Position it below the parent li */
+        left: 0;
+        background-color: none;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: none;
     }
 
     .nav.show-menu .menu-icon {

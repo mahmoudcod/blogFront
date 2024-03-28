@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { TiThMenu } from 'react-icons/ti';
-import { IoMdClose, IoMdSearch } from 'react-icons/io';
+import { IoMdClose, IoMdSearch, IoIosArrowDown } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import '../style/header.css';
-import Logo from './logo'
+import Logo from './logo';
 import { useQuery, gql } from '@apollo/client';
 
-const CatQurey = gql`
+const CatQuery = gql`
   query Getcat {
-    categories{
-        data{
-            id
-            attributes{
-                name
+    categories {
+      data {
+        id
+        attributes {
+          name
+          sub_categories {
+            data {
+              id
+              attributes {
+                subName
+              }
             }
+          }
         }
+      }
     }
   }
 `;
@@ -24,6 +32,7 @@ function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [hoveredCategory, setHoveredCategory] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,26 +50,40 @@ function Header() {
     setShowMenu(!showMenu);
     setShowSearch(false);
   };
+
   const toggleSearch = () => {
     setShowSearch(!showSearch);
     setShowMenu(false);
-  }
+  };
 
-  const { loading, error, data } = useQuery(CatQurey);
+  const { loading, error, data } = useQuery(CatQuery);
 
   if (loading) return null;
   if (error) return <p>Error....</p>;
 
-  const category = data.categories.data;
+  const categories = data.categories.data;
 
   return (
     <div className='container'>
       <header className="header">
         <Logo />
         <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
-          {category.map(cat => (
-            <li key={cat.id}> <Link to={`/category/${cat.id}`}> {cat.attributes.name}  </Link></li>
+          {categories.map(cat => (
+            <li key={cat.id} onMouseEnter={() => setHoveredCategory(cat.id)} onMouseLeave={() => setHoveredCategory(null)}>
+              <Link to={`/category/${cat.id}`}>
+                {cat.attributes.name}
+                {cat.attributes.sub_categories.data.length > 0 && <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: '0px' }} />}
+              </Link>
+              {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
+                <ul className="sub-categories">
+                  {cat.attributes.sub_categories.data.map(subCat => (
+                    <li key={subCat.id}><Link to={`/subcategory/${subCat.id}`}>{subCat.attributes.subName}</Link></li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
+
         </ul>
         <div className="search">
           <IoMdSearch onClick={toggleSearch} />
