@@ -152,11 +152,11 @@ const DetailsPage = () => {
                                 </div>
                             </div>
                             <div className='cal-profile'>
-                                {blog?.attributes?.users_permissions_user?.data?.id(<div className='profile'>
+                                {blog?.attributes?.users_permissions_user?.data?.id ? (<div className='profile'>
                                     <CgProfile />
                                     <p key={blog?.attributes?.users_permissions_user?.data?.id ?? ''}>   {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                     </p>
-                                </div>) ?? ''}
+                                </div>) : ''}
                                 <div className='cal'>
                                     <FaRegCalendarAlt />
                                     <p>{formattedPublishedAt}</p>
