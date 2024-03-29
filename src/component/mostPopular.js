@@ -8,6 +8,7 @@ const mostPopularQuery = gql`
         id
         attributes {
           title
+          slug
           categories {
             data {
               attributes {
@@ -21,7 +22,7 @@ const mostPopularQuery = gql`
   }
 `;
 
-function MostPopular({ currentId }) {
+function MostPopular() {
   const { loading, error, data } = useQuery(mostPopularQuery);
 
   if (loading) return null;
@@ -36,7 +37,7 @@ function MostPopular({ currentId }) {
         <div key={recent.id} className='mostPopular'>
           <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
           <h3 className="padd bor">
-            <Link to={currentId === recent.id ? "#" : `/details/${recent.id}`}>{recent.attributes.title}</Link>
+            <Link to={`/details/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
           </h3>
         </div>
       ))}

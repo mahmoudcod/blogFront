@@ -66,6 +66,7 @@ function Home() {
               <meta property="og:image" content="../public/Untitled.png" />
             </Helmet>
             <Header />
+
             <Grid />
             <Categories />
             <Recent />

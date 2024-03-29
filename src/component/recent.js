@@ -11,6 +11,7 @@ const recentQuery = gql`
         id
         attributes {
           title
+          slug
           blog
           description
           categories{
@@ -60,7 +61,7 @@ function Recent() {
               <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
             )}
             <div className='content'>
-              <Link to={`/details/${recent.id}`}>
+              <Link to={`/details/${recent.attributes.slug}`}>
                 <h3 className='title'>{recent.attributes.title}</h3>
               </Link>
 

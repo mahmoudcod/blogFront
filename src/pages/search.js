@@ -14,6 +14,7 @@ const SEARCH_BLOGS = gql`
                 id
                 attributes {
                     title
+                    slug
                     description
                     categories {
                         data {
@@ -76,7 +77,7 @@ const Search = () => {
                                     <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
                                 )}
                                 <div className='content'>
-                                    <Link to={`/details/${recent.id}`}>
+                                    <Link to={`/details/${recent.attributes.slug}`}>
                                         <h3 className='title'>{recent.attributes.title}</h3>
                                         <p className='dis'>{`${recent?.attributes?.description?.slice(0, 100) ?? ""}`}</p>
                                     </Link>

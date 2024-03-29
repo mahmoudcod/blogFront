@@ -18,6 +18,7 @@ query GetCat {
             id
             attributes {
               title
+              slug
               cover {
                 data {
                   attributes {
@@ -62,7 +63,7 @@ function CatTwo() {
                 )}
               </div>
               <div className='cardTwo-title'>
-                <Link to={`details/${project.id}`}> <h3>{project.attributes.title}</h3> </Link>
+                <Link to={`details/${project.attributes.slug}`}> <h3>{project.attributes.title}</h3> </Link>
               </div>
             </div>
           ))}

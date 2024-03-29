@@ -22,11 +22,12 @@ import { SlSocialInstagram } from "react-icons/sl";
 
 
 const blogQuery = gql`
-    query GetBlog($id: ID!) {
-        blog(id: $id) {
+    query GetBlog($slug: String!) {
+        blogs(filters: { slug:{eq:$slug} }) {
             data {
                 id
                 attributes {
+                    slug
                     title
                     blog
                     description
@@ -67,6 +68,7 @@ const blogQuery = gql`
                                         id
                                         attributes {
                                             title
+                                            slug
                                             publishedAt
                                             cover{
                                                 data{
@@ -97,11 +99,11 @@ const blogQuery = gql`
 `;
 
 const DetailsPage = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     const { loading, error, data } = useQuery(blogQuery, {
-        variables: { id },
+        variables: { slug },
     });
-    const blog = data?.blog?.data;
+    const blog = data?.blogs?.data[0];
     const [headings, setHeadings] = useState([]);
     // Effect to extract headings after rendering
     useEffect(() => {
@@ -147,7 +149,7 @@ const DetailsPage = () => {
                     <meta property="og:title" content={title} />
                     <meta property="og:description" content={blog.attributes.description} />
                     <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
-                    <meta property="og:url" content={window.location.href} />
+                    <meta property="og:url" content={`/details/${blog.attributes.slug}`} />
                     <meta name="twitter:card" content="summary_large_image" />
                 </Helmet>
                 <Header />
@@ -262,13 +264,13 @@ const DetailsPage = () => {
 
 
                                 <div className='comments'>
-                                    <CommentSection postId={id} />
+                                    <CommentSection />
                                 </div>
                             </div>
                         </div>
                         <div className="leftColumn">
                             <div className="dCard">
-                                <MostPopular currentId={id} />
+                                <MostPopular />
 
                             </div>
                             <div className="dCard">
@@ -280,7 +282,7 @@ const DetailsPage = () => {
                                 <h3>ذات صلة</h3>
                                 {categoryBlogs.map((blog) => (
                                     <div className='mostPopular' key={blog.id}>
-                                        <h3 className='title bor'><Link to={id === blog.id ? "#" : `/details/${blog.id}`} key={blog.id}>
+                                        <h3 className='title bor'><Link to={`/details/${blog.attributes.slug}`} key={blog.id}>
                                             {blog.attributes.title}
                                         </Link></h3>
                                     </div>
@@ -294,7 +296,7 @@ const DetailsPage = () => {
                             {categoryBlogs.slice(0, 4).map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
                                     <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                    <h3 className='title'> <Link to={id === blog.id ? "#" : `/details/${blog.id}`} key={blog.id}>
+                                    <h3 className='title'> <Link to={`/details/${blog.attributes.slug}`} key={blog.id}>
                                         {blog.attributes.title}
                                     </Link></h3>
                                     <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>

@@ -13,7 +13,7 @@ const CREATE_COMMENT = gql`
     }
 `;
 
-const CommentSection = ({ id }) => {
+const CommentSection = () => {
     const [commentData, setCommentData] = useState({ name: '', email: '', comment: '' });
 
     const [createComment] = useMutation(CREATE_COMMENT, {
@@ -28,7 +28,6 @@ const CommentSection = ({ id }) => {
         createComment({
             variables: {
                 data: {
-                    id,
                     name: commentData.name,
                     email: commentData.email,
                     comment: commentData.comment,

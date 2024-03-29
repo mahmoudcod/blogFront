@@ -18,6 +18,7 @@ query GetCat {
                  publishedAt
                         blog
               title
+              slug
               cover {
                 data {
                   attributes {
@@ -63,7 +64,7 @@ function CatThree() {
                 {blog.attributes.cover && blog.attributes.cover.data && (
                   <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 )}                <div className='content'>
-                  <Link to={`/details/${blog.id}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
+                  <Link to={`/details/${blog.attributes.slug}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
                   <p className='body'>{blog.attributes.blog}</p>
                 </div>
               </div>
