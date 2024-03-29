@@ -141,7 +141,6 @@ const DetailsPage = () => {
         <>
             <HelmetProvider>
                 <Helmet>
-
                     {/* open graph meta tags  */}
                     <meta name="description" content={blog.attributes.description} />
                     <meta name="keywords" content={blog.attributes.tags.data.map(tag => tag.attributes.name).join(', ')} />

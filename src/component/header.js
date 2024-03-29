@@ -19,6 +19,7 @@ const CatQuery = gql`
               id
               attributes {
                 subName
+                slug
               }
             }
           }
@@ -78,7 +79,7 @@ function Header() {
               {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
                 <ul className="sub-categories">
                   {cat.attributes.sub_categories.data.map(subCat => (
-                    <li key={subCat.id}><Link to={`/category/sub-category/${subCat.id}`}>{subCat.attributes.subName}</Link></li>
+                    <li key={subCat.id}><Link to={`/category/${cat.attributes.slug}/sub/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
                   ))}
                 </ul>
               )}

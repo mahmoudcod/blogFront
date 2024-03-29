@@ -10,6 +10,7 @@ import Publish from './pages/publish';
 import Usage from './pages/usage';
 import Privacy from './pages/privacy';
 import Tags from './pages/tags';
+import SupCatDetails from './pages/subCat';
 
 const client = new ApolloClient({
   uri: 'https://demoblog-h71e.onrender.com/graphql',
@@ -26,6 +27,7 @@ function App() {
           <Route path="/tags/:id" element={<Tags />} />
           <Route path="/details/:slug" element={<DetailsPage />} />
           <Route path="/category/:slug" element={<CatDetails />} />
+          <Route path="/category/:slug/sub/:slug" element={<SupCatDetails />} />
           <Route path="/advertising" element={<Advertising />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/usage" element={<Usage />} />
