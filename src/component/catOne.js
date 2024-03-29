@@ -11,6 +11,7 @@ const getCatOne = gql`
         data{
             id
             attributes{
+              slug
                 blogs{
                   data{
                     id
@@ -40,6 +41,7 @@ function CatOne() {
   if (error) return <p>error...</p>
 
   const projects = data.category.data.attributes.blogs.data.slice(0, 6);
+  const slug = data.category.data.attributes.slug;
 
   return (
     <>
@@ -47,9 +49,9 @@ function CatOne() {
         <div className='CatTitle'>
           <div className="title">
             <FaBuilding style={iconStyles} />
-            <h3>افكار المشاريع</h3>
+            <Link to={`/category/${slug}`}>    <h3>افكار المشاريع</h3></Link>
           </div>
-          <Link to='category/5'><p>اقراء المزيد</p></Link>
+          <Link to={`/category/${slug}`}><p>اقراء المزيد</p></Link>
         </div>
         <div className='catOneCards'>
           {projects.map((project) => (

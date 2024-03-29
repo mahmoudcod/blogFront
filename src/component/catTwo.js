@@ -13,6 +13,7 @@ query GetCat {
     data {
       id
       attributes {
+        slug
         blogs {
           data {
             id
@@ -50,9 +51,9 @@ function CatTwo() {
         <div className='CatTitle'>
           <div className='title'>
             <PiBankFill style={iconStyles} />
-            <h3>الاقتصاد</h3>
+            <Link to={`category/${data.category.data.attributes.slug}`}>   <h3>الاقتصاد</h3></Link>
           </div>
-          <Link to='category/6'>  <p>اقراء المزيد</p> </Link>
+          <Link to={`category/${data.category.data.attributes.slug}`}>  <p>اقراء المزيد</p> </Link>
         </div>
         <div className='catTwoCards'>
           {projects.map((project) => (

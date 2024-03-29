@@ -13,6 +13,7 @@ const CatQuery = gql`
         id
         attributes {
           name
+          slug
           sub_categories {
             data {
               id
@@ -70,14 +71,14 @@ function Header() {
         <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
           {categories.map(cat => (
             <li key={cat.id} onMouseEnter={() => setHoveredCategory(cat.id)} onMouseLeave={() => setHoveredCategory(null)}>
-              <Link to={`/category/${cat.id}`}>
+              <Link to={`/category/${cat.attributes.slug}`}>
                 {cat.attributes.name}
                 {cat.attributes.sub_categories.data.length > 0 && <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: '0px' }} />}
               </Link>
               {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
                 <ul className="sub-categories">
                   {cat.attributes.sub_categories.data.map(subCat => (
-                    <li key={subCat.id}><Link to={`/subcategory/${subCat.id}`}>{subCat.attributes.subName}</Link></li>
+                    <li key={subCat.id}><Link to={`/category/sub-category/${subCat.id}`}>{subCat.attributes.subName}</Link></li>
                   ))}
                 </ul>
               )}

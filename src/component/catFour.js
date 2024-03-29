@@ -9,6 +9,7 @@ query GetCat {
     data {
       id
       attributes {
+        slug
         blogs {
           data {
             id
@@ -41,6 +42,7 @@ function CatFour() {
   if (error) return <p>Error....</p>;
 
   const cat = data.category.data.attributes.blogs.data.slice(0, 8);
+  const slug = data.category.data.attributes.slug;
 
   return (
     <>
@@ -48,9 +50,9 @@ function CatFour() {
         <div className="CatTitle">
           <div className="title">
             <RiMoneyDollarCircleLine style={iconStyles} />
-            <h3>اسواق المال</h3>
+            <Link to={`/category/${slug}`}>  <h3>اسواق المال</h3></Link>
           </div>
-          <Link to='category/4'><p>اقراء المزيد</p> </Link>
+          <Link to={`/category/${slug}`}><p>اقراء المزيد</p> </Link>
         </div>
         <div className="catFourCards">
           {cat.map((blog) => {

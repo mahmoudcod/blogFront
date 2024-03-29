@@ -11,6 +11,7 @@ query GetCat {
     data {
       id
       attributes {
+        slug
         blogs {
           data {
             id
@@ -44,6 +45,7 @@ function CatThree() {
   if (error) return <p>Error....</p>;
 
   const cat = data.category.data.attributes.blogs.data.slice(0, 4);
+  const slug = data.category.data.attributes.slug;
 
   return (
     <>
@@ -51,9 +53,9 @@ function CatThree() {
         <div className='CatTitle'>
           <div className='title'>
             <IoCartOutline style={iconStyles} />
-            <h3>التجارة الاكترونية</h3>
+            <Link to={`/category/${slug}`}>    <h3>التجارة الاكترونية</h3></Link>
           </div>
-          <Link to="category/7"> <p>اقراء المزيد</p></Link>
+          <Link to={`/category/${slug}`}> <p>اقراء المزيد</p></Link>
 
         </div>
         <div className='catThreeCards'>

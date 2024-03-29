@@ -25,7 +25,7 @@ function App() {
           <Route path="/search/:searchQ" element={<Search />} />
           <Route path="/tags/:id" element={<Tags />} />
           <Route path="/details/:slug" element={<DetailsPage />} />
-          <Route path="/category/:id" element={<CatDetails />} />
+          <Route path="/category/:slug" element={<CatDetails />} />
           <Route path="/advertising" element={<Advertising />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/usage" element={<Usage />} />

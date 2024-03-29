@@ -11,6 +11,7 @@ const gridQuery = gql`
         id
         attributes {
           title
+          slug
           cover {
             data {
               attributes {

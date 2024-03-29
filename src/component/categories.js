@@ -9,6 +9,7 @@ const CatQurey = gql`
         data{
             id
             attributes{
+              slug
                 name
                 icon{
                     data{
