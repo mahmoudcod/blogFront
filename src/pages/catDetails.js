@@ -9,7 +9,6 @@ import { PiBankFill } from "react-icons/pi";
 import { IoCartOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import '../style/catDetails.css';
-import Loader from '../component/loading';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -67,7 +66,7 @@ const CatDetails = () => {
     let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
     const categories = data?.categories.data[0];  // Optional chaining
 
-    if (loading) return <Loader />;
+    if (loading) return null;
     if (error) return `Error! ${error.message}`;
     const CategoryIcon = () => {
         switch (categories.attributes.name) {

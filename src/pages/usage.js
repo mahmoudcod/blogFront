@@ -1,7 +1,6 @@
 
 
 import { useQuery, gql } from '@apollo/client';
-import Loader from '../component/loading';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Footer from '../component/footer';
@@ -31,7 +30,7 @@ const Usage = () => {
     const { loading, error, data } = useQuery(GET_ADVERTISING, {
         variables: { id },
     });
-    if (loading) return <Loader />;
+    if (loading) return null
     if (error) return `Error! ${error.message}`;
     return (
         <>

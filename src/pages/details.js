@@ -12,7 +12,6 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Loader from '../component/loading'
 import ReactMarkdown from 'react-markdown'
 import '../style/details.css'
 import { IoMdAdd } from "react-icons/io";
@@ -124,7 +123,7 @@ const DetailsPage = () => {
 
     const [showSources, setShowSources] = useState(false);
 
-    if (loading) return <Loader />
+    if (loading) return null
     if (error) return <p>Error....</p>;
 
     const { title, categories, publishedAt } = blog?.attributes || {};

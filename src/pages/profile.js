@@ -1,6 +1,5 @@
 import Header from '../component/header';
 import Footer from '../component/footer';
-import Loader from '../component/loading';
 import { useParams } from 'react-router-dom';
 import { SlSocialFacebook } from "react-icons/sl";
 import { FaXTwitter } from "react-icons/fa6";
@@ -58,7 +57,7 @@ function Profile() {
         variables: { id }
     });
 
-    if (loading) return <Loader />;
+    if (loading) return null
     if (error) return <p>Error: {error.message}</p>;
 
     const profile = data.usersPermissionsUser.data.attributes;

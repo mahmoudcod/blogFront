@@ -4,7 +4,6 @@ import Footer from '../component/footer';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import '../style/catDetails.css';
-import Loader from '../component/loading';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -72,7 +71,7 @@ const SupCatDetails = () => {
     });
     const subCategory = data?.subCategories.data[0];  // Optional chaining
 
-    if (loading) return <Loader />;
+    if (loading) return null
     if (error) return `Error! ${error.message}`;
 
     return (
