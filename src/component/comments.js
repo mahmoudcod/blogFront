@@ -14,8 +14,8 @@ const CREATE_COMMENT = gql`
 `;
 
 const CommentSection = () => {
-    const [commentData, setCommentData] = useState({ name: '', email: '', comment: '' });
 
+    const [commentData, setCommentData] = useState({ name: '', email: '', comment: '' });
     const [createComment] = useMutation(CREATE_COMMENT, {
         onCompleted: () => {
             // Optionally, you can handle success actions here

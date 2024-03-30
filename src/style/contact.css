@@ -1,0 +1,62 @@
+.contactUs {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactUs h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contactUs p {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
+.contactForm form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.contactForm form input {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+
+}
+
+.contactForm form textarea {
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+
+}
+
+.contacth3 {
+    margin-bottom: 30px;
+}
+
+.successMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 576px) {
+
+    .contactForm form {
+        width: 70%;
+    }
+
+    button {
+        width: 100px;
+    }
+}

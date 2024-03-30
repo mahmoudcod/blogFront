@@ -10,6 +10,7 @@ import Publish from './pages/publish';
 import Usage from './pages/usage';
 import Privacy from './pages/privacy';
 import Tags from './pages/tags';
+import Contact from './pages/contact';
 import SupCatDetails from './pages/subCat';
 
 const client = new ApolloClient({
@@ -33,6 +34,7 @@ function App() {
           <Route path="/usage" element={<Usage />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
