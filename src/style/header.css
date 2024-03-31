@@ -17,7 +17,7 @@ a {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    border-bottom: #eeeF solid 1px;
+    border-bottom: #eee solid 1px;
     top: 0;
     background-color: #fff;
 
@@ -169,7 +169,7 @@ ul {
         top: 10%;
         /* padding: 1.9rem 0 10px; */
         margin: 1rem 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #eee;
     }
 
     .nav.show-menu li:hover {

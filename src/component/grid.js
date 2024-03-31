@@ -53,7 +53,7 @@ function Grid() {
               <div className="card-content">
                 <div className="card-img">
                   {blog.attributes.cover && blog.attributes.cover.data && (
-                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   )}                   </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>
@@ -67,7 +67,7 @@ function Grid() {
               <div className="card-content">
                 <div className="card-img">
                   {blog.attributes.cover && blog.attributes.cover.data && (
-                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   )}                </div>
                 <div className="card-title">{blog.attributes.title}</div>
               </div>
