@@ -1,15 +1,17 @@
+
 import Slider from 'react-slick';
 import '../style/grid.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useQuery, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 const gridQuery = gql`
   query GetGrid {
     blogs {
       data {
         id
-        attributes {
+     attributes {
           title
           slug
           cover {
@@ -52,10 +54,15 @@ function Grid() {
             <div key={blog.id} className="card content">
               <div className="card-content">
                 <div className="card-img">
-                  {blog.attributes.cover && blog.attributes.cover.data && (
-                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                  )}                   </div>
-                <div className="card-title">{blog.attributes.title}</div>
+                  <Link to={`/details/${blog.attributes.slug}`}>
+                    {blog.attributes.cover && blog.attributes.cover.data && (
+                      <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                    )}
+                  </Link>
+                </div>
+                <Link to={`/details/${blog.attributes.slug}`}>
+                  <h3 className="card-title">{blog.attributes.title}</h3>
+                </Link>
               </div>
             </div>
           ))}
@@ -66,10 +73,14 @@ function Grid() {
             <div key={blog.id} className="card content">
               <div className="card-content">
                 <div className="card-img">
-                  {blog.attributes.cover && blog.attributes.cover.data && (
-                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                  )}                </div>
-                <div className="card-title">{blog.attributes.title}</div>
+                  <Link to={`/details/${blog.attributes.slug}`}>
+                    {blog.attributes.cover && blog.attributes.cover.data && (
+                      <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                    )}
+                  </Link>               </div>
+                <Link to={`/details/${blog.attributes.slug}`}>
+                  <h3 className="card-title">{blog.attributes.title}</h3>
+                </Link>
               </div>
             </div>
           ))}

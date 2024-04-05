@@ -14,7 +14,7 @@ import Contact from './pages/contact';
 import SupCatDetails from './pages/subCat';
 
 const client = new ApolloClient({
-  uri: 'http://144.91.117.210:1337/graphql',
+  uri: 'http://144.91.117.210/graphql',
   cache: new InMemoryCache()
 });
 
