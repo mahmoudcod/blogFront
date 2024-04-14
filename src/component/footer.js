@@ -57,7 +57,7 @@ function Footer() {
                             <ul>
                                 {chunk.map((item, itemIndex) => (
                                     <li key={item.slug}>
-                                        <Link to={`/category/${item.subName ? `${item.slug}/sub/${item.slug}` : item.slug}`}>
+                                        <Link to={`/category/${item.subName ? `${item.slug}/${item.slug}` : item.slug}`}>
                                             {item.name || item.subName}
                                         </Link>
                                     </li>

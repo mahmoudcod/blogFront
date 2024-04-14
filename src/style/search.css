@@ -25,8 +25,6 @@
 }
 
 .cat-name {
-    border-bottom: 1px solid #000;
-    width: fit-content;
     color: #000;
 }
 
@@ -35,39 +33,18 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
     }
 
-}
-
-.ll {
-    width: 360px;
-    height: 100px;
-    display: block;
-    position: relative;
-    background-image: linear-gradient(100deg, transparent, rgba(38, 50, 56, 0.5) 50%, transparent 80%), linear-gradient(#FFF 20px, transparent 0), linear-gradient(#FFF 20px, transparent 0), linear-gradient(#FFF 20px, transparent 0);
-    background-repeat: no-repeat;
-    background-size: 75px 100px, 125px 20px, 260px 20px, 260px 20px;
-    background-position: 0% 0, 120px 0, 120px 40px, 120px 80px;
-    box-sizing: border-box;
-    animation: animloader 1s linear infinite;
-}
-
-.ll::after {
-    content: '';
-    box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    background: #FFF;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-@keyframes animloader {
-    0% {
-        background-position: 0% 0, 120px 0, 120px 40px, 120px 80px;
+    .search-cards img {
+        width: 250px;
+        height: 150px;
     }
 
-    100% {
-        background-position: 100% 0, 120px 0, 120px 40px, 120px 80px;
+}
+
+@media screen and (max-width: 756px) {
+
+    .search-cards img {
+        width: 150px;
+        height: 100px;
     }
+
 }

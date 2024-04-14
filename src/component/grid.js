@@ -4,7 +4,6 @@ import '../style/grid.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
 
 const gridQuery = gql`
   query GetGrid {
@@ -46,23 +45,26 @@ function Grid() {
 
   const blogs = data.blogs.data.slice(0, 4);
 
+
+
+
+  const goToLink = (slug) => {
+    window.location.href = `/${slug}`;
+  };
+
   return (
     <div className='container'>
       {isSmallScreen ? (
         <Slider {...settings}>
           {blogs.map((blog) => (
-            <div key={blog.id} className="card content">
+            <div key={blog.id} className="card content" onClick={() => goToLink(blog.attributes.slug)}>
               <div className="card-content">
                 <div className="card-img">
-                  <Link to={`/details/${blog.attributes.slug}`}>
-                    {blog.attributes.cover && blog.attributes.cover.data && (
-                      <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                    )}
-                  </Link>
+                  {blog.attributes.cover && blog.attributes.cover.data && (
+                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  )}
                 </div>
-                <Link to={`/details/${blog.attributes.slug}`}>
-                  <h3 className="card-title">{blog.attributes.title}</h3>
-                </Link>
+                <h3 className="card-title">{blog.attributes.title}</h3>
               </div>
             </div>
           ))}
@@ -70,17 +72,14 @@ function Grid() {
       ) : (
         <div className='cards'>
           {blogs.map((blog) => (
-            <div key={blog.id} className="card content">
+            <div key={blog.id} className="card content" onClick={() => goToLink(blog.attributes.slug)}>
               <div className="card-content">
                 <div className="card-img">
-                  <Link to={`/details/${blog.attributes.slug}`}>
-                    {blog.attributes.cover && blog.attributes.cover.data && (
-                      <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                    )}
-                  </Link>               </div>
-                <Link to={`/details/${blog.attributes.slug}`}>
-                  <h3 className="card-title">{blog.attributes.title}</h3>
-                </Link>
+                  {blog.attributes.cover && blog.attributes.cover.data && (
+                    <img fetchpriority="high" src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  )}
+                </div>
+                <h3 className="card-title">{blog.attributes.title}</h3>
               </div>
             </div>
           ))}
@@ -88,6 +87,7 @@ function Grid() {
       )}
     </div>
   );
+
 }
 
 export default Grid;

@@ -12,6 +12,7 @@ const mostPopularQuery = gql`
           categories {
             data {
               attributes {
+                slug
                 name
               }
             }
@@ -31,13 +32,16 @@ function MostPopular() {
   const blogs = data.blogs.data.slice(0, 10);
 
   return (
+
     <>
-      <h3>الأكثر قراءة</h3>
+      <h3 style={{ fontSize: '20px' }}>الأكثر قراءة</h3>
       {blogs.map((recent) => (
         <div key={recent.id} className='mostPopular'>
-          <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
+          <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
+            <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
+          </Link>
           <h3 className="padd bor">
-            <Link to={`/details/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
+            <Link to={`/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
           </h3>
         </div>
       ))}

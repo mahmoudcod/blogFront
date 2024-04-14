@@ -8,6 +8,7 @@
 a {
     text-decoration: none;
     color: black;
+    display: contents;
 }
 
 .header {
@@ -20,6 +21,7 @@ a {
     border-bottom: #eee solid 1px;
     top: 0;
     background-color: #fff;
+    z-index: 20;
 
 }
 
@@ -43,9 +45,14 @@ ul {
 
 .nav li {
     padding: 0 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     position: relative;
+    /* Added position relative */
+}
+
+.nav li:hover {
+    background-color: #fff;
     /* Added position relative */
 }
 
@@ -56,22 +63,27 @@ ul {
 
 .sub-categories {
     display: none;
-    /* Initially hidden */
     position: absolute;
+    width: 200px;
     top: 100%;
-    /* Position it below the parent li */
     left: 0;
     background-color: #fff;
     padding: 10px;
+    border-bottom: 3px solid #0280CD;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1010;
 }
 
 .sub-categories li {
     padding: 10px 0;
     font-size: 14px;
     font-weight: 400;
+    border-bottom: 1px dotted #ccc;
+}
+
+.sub-categories li a {
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .show-search {
@@ -153,9 +165,13 @@ ul {
         display: none;
     }
 
+    .nav li {
+        border-bottom: none;
+    }
+
     .nav.show-menu {
         display: block;
-
+        margin-top: 3rem;
         background-color: #fff;
         height: 100%;
         width: 100%;
@@ -167,9 +183,14 @@ ul {
     .nav.show-menu li {
         position: relative;
         top: 10%;
-        /* padding: 1.9rem 0 10px; */
-        margin: 1rem 0;
-        border-bottom: 1px solid #eee;
+
+    }
+
+    .nav.show-menu li a {
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dotted #ccc;
     }
 
     .nav.show-menu li:hover {
@@ -182,10 +203,14 @@ ul {
         top: 100%;
         /* Position it below the parent li */
         left: 0;
+        width: 100%;
         background-color: none;
-        padding: 10px;
-        border-radius: 5px;
+        border-bottom: none;
         box-shadow: none;
+    }
+
+    .sub-categories li {
+        padding: 0;
     }
 
     .nav.show-menu .menu-icon {

@@ -45,16 +45,18 @@
 .title {
     color: #000;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .body {
     padding: 10px 0;
+    font-size: 14px;
+    line-height: 20px;
     color: gray;
 }
 
 .cat {
-    border-bottom: 1px solid #ccc;
     width: fit-content;
     cursor: pointer;
 }
@@ -68,8 +70,8 @@
 }
 
 .recentCard img {
-    width: 200px;
-    height: auto;
+    width: 180px;
+    height: 160px;
     object-fit: cover;
     margin-left: 12px;
     border-radius: 4px;
@@ -93,8 +95,8 @@
     }
 
     .recentCard img {
-        width: 200px;
-        height: auto;
+        width: 180px;
+        height: 160px;
     }
 
 }

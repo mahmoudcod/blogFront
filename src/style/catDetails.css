@@ -70,10 +70,11 @@ h3 {
 }
 
 
-.other-blogs {
+.other-blogs .infinite-scroll-component {
     display: grid;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: 1fr 1fr;
     margin-top: 20px;
+    gap: 10px;
 }
 
 .other-blog-card {

@@ -1,4 +1,4 @@
-
+import React, { useRef } from 'react';
 import Header from '../component/header';
 import Footer from '../component/footer';
 import { useParams, Link } from 'react-router-dom';
@@ -11,11 +11,12 @@ import { CgProfile } from "react-icons/cg";
 import '../style/catDetails.css';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
 const GET_CAT_DETAILS = gql`
-    query GetCatDetails($slug: String!) {
+    query GetCatDetails($slug: String!, $limit: Int!, $start: Int!) {
         categories(filters: { slug:{eq:$slug} }) {
              data{
                 id
@@ -31,7 +32,7 @@ const GET_CAT_DETAILS = gql`
                             }
                         }
                     }
-                    blogs{
+                    blogs(pagination: {limit: $limit, start: $start}, sort: "createdAt:desc") {
                         data{
                             id
                             attributes{
@@ -60,17 +61,54 @@ const GET_CAT_DETAILS = gql`
 
 const CatDetails = () => {
     const { slug } = useParams();
-    const { loading, error, data } = useQuery(GET_CAT_DETAILS, {
-        variables: { slug },
+    const { loading, error, data, fetchMore } = useQuery(GET_CAT_DETAILS, {
+        variables: { slug, start: 0, limit: 4 },
     });
+    const categories = data?.categories?.data[0].attributes;
+
+    const currentDataRef = useRef(null);
+
+    const fetchMoreData = () => {
+        currentDataRef.current = data;
+        fetchMore({
+            variables: {
+                start: data.categories.data[0].attributes.blogs.data.length,
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                let newBlogs = fetchMoreResult.categories.data[0].attributes.blogs.data;
+                let oldBlogs = prev.categories && prev.categories.data && prev.categories.data[0] && prev.categories.data[0].attributes && prev.categories.data[0].attributes.blogs && prev.categories.data[0].attributes.blogs.data ? prev.categories.data[0].attributes.blogs.data : (currentDataRef.current && currentDataRef.current.categories ? currentDataRef.current.categories.data[0].attributes.blogs.data : []);
+                return {
+                    categories: {
+                        ...fetchMoreResult.categories,
+                        data: [
+                            {
+                                ...fetchMoreResult.categories.data[0],
+                                attributes: {
+                                    ...fetchMoreResult.categories.data[0].attributes,
+                                    blogs: {
+                                        ...fetchMoreResult.categories.data[0].attributes.blogs,
+                                        data: [
+                                            ...oldBlogs,
+                                            ...newBlogs,
+                                        ],
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                };
+            },
+        });
+    };
+
     let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
-    const categories = data?.categories.data[0];  // Optional chaining
 
     if (loading) return null;
     if (error) return `Error! ${error.message}`;
     const CategoryIcon = () => {
-        switch (categories.attributes.name) {
-            case 'اسواق المال':
+        switch (categories.name) {
+            case ' صناع المال':
                 return <RiMoneyDollarCircleLine style={iconStyles} />;
             case 'ادارة الوقت':
                 return <CgProfile style={iconStyles} />;
@@ -93,14 +131,14 @@ const CatDetails = () => {
             <HelmetProvider>
                 <Helmet>
                     {/* normal meta tags */}
-                    <title>{categories.attributes.name}</title>
-                    <meta name="description" content={categories.attributes.name} />
+                    <title>{categories.name}</title>
+                    <meta name="description" content={categories.name} />
                     <meta name="keywords" content="Category, Blogs, Details" />
                     <meta name="author" content="Your Name" />
                     {/* meta tags for openGraph */}
-                    <meta property="og:title" content={categories.attributes.name} />
+                    <meta property="og:title" content={categories.name} />
                     {/* <meta property="og:description" content={categories.attributes.description}/> */}
-                    <meta property="og:image" content={categories.attributes.blogs.data[0]?.attributes.cover.data.attributes.url} />
+                    <meta property="og:image" content={categories.blogs.data[0]?.attributes.cover.data.attributes.url} />
                     <meta property="og:type" content="website" />
                 </Helmet>
 
@@ -109,43 +147,54 @@ const CatDetails = () => {
                     <div className='cat-details'>
                         <div className='catTitle-details'>
                             < CategoryIcon />
-                            <h2  >{categories.attributes.name}</h2>
+                            <h2  >{categories.name}</h2>
                         </div>
                         <p className='cat-disc'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
                         </p>
                         <div className='cat-links'>
-                            {categories.attributes.sub_categories.data.map(sub => (
-                                <Link to={`/category/${categories.attributes.slug}/sub/${sub.attributes.slug}`} key={sub.id} className={window.location.pathname === `/category/${categories.attributes.slug}/sub/${sub.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
+                            {categories.sub_categories.data.map(sub => (
+                                <Link to={`/category/${categories.slug}/${sub.attributes.slug}`} key={sub.id} className={window.location.pathname === `/${categories.slug}/${sub.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
                             ))}
                         </div>
                     </div>
                     <div className='first-blog'>
-                        {categories.attributes.blogs.data.slice(0, 1).map(blog => (
+                        {categories.blogs.data.slice(0, 1).map(blog => (
                             <div key={blog.id} className='first-blog'>
                                 <div className='blog-img'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                    <Link to={`/${blog.attributes.slug}`}>
+                                        <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                    </Link>
                                 </div>
                                 <div className='blog-content'>
-                                    <Link to={`/details/${blog.attributes.slug}`} ><h3>{blog.attributes.title}</h3></Link>
+                                    <Link to={`/${blog.attributes.slug}`} ><h3>{blog.attributes.title}</h3></Link>
                                     <p>{blog.attributes.blog.slice(0, 100)}</p>
                                     <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
                             </div>
                         ))}
                     </div>
                     <div className='other-blogs'>
-                        {categories.attributes.blogs.data.slice(1).map(blog => (
-                            <div key={blog.id} className='other-blog-card'>
-                                <div className='blog-img'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                        <InfiniteScroll
+                            dataLength={categories.blogs.data.length}
+                            next={fetchMoreData}
+                            hasMore={true}
+                        >
+                            {categories.blogs.data.map(blog => (
+                                <div key={blog.id} className='other-blog-card'>
+                                    <div className='blog-img'>
+                                        <Link to={`/${blog.attributes.slug}`}>
+                                            <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                        </Link>
+                                    </div>
+                                    <div className='blog-content'>
+                                        <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
+                                        <Link to={`/${blog.attributes.slug}`}><h3>{blog.attributes.title}</h3></Link>
+                                        <p>{blog.attributes.blog.slice(0, 100)}</p>
+                                    </div>
                                 </div>
-                                <div className='blog-content'>
-                                    <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
-                                    <Link to={`/details/${blog.attributes.slug}`}><h3>{blog.attributes.title}</h3></Link>
-                                    <p>{blog.attributes.blog.slice(0, 100)}</p>
-                                </div>
-                            </div>
 
-                        ))}
+                            ))}
+                        </InfiniteScroll>
+
                     </div>
                 </div>
                 <Footer />

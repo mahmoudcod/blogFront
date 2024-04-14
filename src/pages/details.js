@@ -37,6 +37,7 @@ const blogQuery = gql`
                             id
                             attributes{
                                 name
+                                slug
                             }
                         }
                     }
@@ -45,7 +46,11 @@ const blogQuery = gql`
                             id
                             attributes{
                                 username
+                                slug
                                 description
+                                facebook
+                                x
+                                linkedin
                                 show
                                 cover{
                                     data{
@@ -147,7 +152,7 @@ const DetailsPage = () => {
                     <meta property="og:title" content={title} />
                     <meta property="og:description" content={blog.attributes.description} />
                     <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
-                    <meta property="og:url" content={`/details/${blog.attributes.slug}`} />
+                    <meta property="og:url" content={`/${blog?.attributes?.slug}`} />
                     <meta name="twitter:card" content="summary_large_image" />
                 </Helmet>
                 <Header />
@@ -220,7 +225,7 @@ const DetailsPage = () => {
                                 </div>
                                 <div className='tagsInfo'>
                                     {blog.attributes.tags.data.map((tag) => (
-                                        <Link to={`/tags/${tag.id}`} key={tag.id}>
+                                        <Link to={`/tags/${tag.attributes.slug}`} key={tag.id}>
                                             <p>{tag.attributes.name}</p>
                                         </Link>
                                     ))}
@@ -229,26 +234,34 @@ const DetailsPage = () => {
                                     <div className='author'>
                                         <div className='authorInfo'>
                                             <div className='profileInfo'>
-                                                <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}`}>
+                                                <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
                                                     <img
                                                         loading='lazy'
                                                         src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
                                                         alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                                     />
                                                 </Link>
-                                                <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
-                                                    {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
-                                                </p>
+                                                <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                                    <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
+                                                        {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                                    </p>
+                                                </Link>
                                             </div>
                                             <div className='profileSocial'>
                                                 <div className='socialI'>
-                                                    <SlSocialTwitter />
+                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.x}>
+                                                        <SlSocialTwitter />
+                                                    </Link>
                                                 </div>
                                                 <div className='socialI'>
-                                                    <SlSocialFacebook />
+                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.facebook}>
+                                                        <SlSocialFacebook />
+                                                    </Link>
                                                 </div>
                                                 <div className='socialI'>
-                                                    <SlSocialInstagram />
+                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.linkedin}>
+                                                        <SlSocialInstagram />
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -273,14 +286,14 @@ const DetailsPage = () => {
                             </div>
                             <div className="dCard">
                                 <div className="fakeimg">
-                                    <p>adds</p>
+                                    <p>ADS</p>
                                 </div>
                             </div>
                             <div className="dCard">
-                                <h3>ذات صلة</h3>
+                                <h3 style={{ fontSize: '20px' }}>ذات صلة</h3>
                                 {categoryBlogs.map((blog) => (
                                     <div className='mostPopular' key={blog.id}>
-                                        <h3 className='title bor'><Link to={`/details/${blog.attributes.slug}`} key={blog.id}>
+                                        <h3 className='title bor'><Link to={`/${blog.attributes.slug}`} key={blog.id}>
                                             {blog.attributes.title}
                                         </Link></h3>
                                     </div>
@@ -293,8 +306,10 @@ const DetailsPage = () => {
                         <div className='suggestion-flex'>
                             {categoryBlogs.slice(0, 4).map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
-                                    <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                    <h3 className='title'> <Link to={`/details/${blog.attributes.slug}`} key={blog.id}>
+                                    <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                        <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
+                                    </Link>
+                                    <h3 className='title'> <Link to={`/${blog.attributes.slug}`} key={blog.id}>
                                         {blog.attributes.title}
                                     </Link></h3>
                                     <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>

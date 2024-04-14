@@ -1,3 +1,4 @@
+import React from 'react'; // Add this line
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import Home from './pages/home';
@@ -14,7 +15,7 @@ import Contact from './pages/contact';
 import SupCatDetails from './pages/subCat';
 
 const client = new ApolloClient({
-  uri: 'http://144.91.117.210/graphql',
+  uri: 'http://localhost:1337/graphql',
   cache: new InMemoryCache()
 });
 
@@ -25,15 +26,15 @@ function App() {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/search/:searchQ" element={<Search />} />
-          <Route path="/tags/:id" element={<Tags />} />
-          <Route path="/details/:slug" element={<DetailsPage />} />
+          <Route path="/tags/:slug" element={<Tags />} />
           <Route path="/category/:slug" element={<CatDetails />} />
-          <Route path="/category/:slug/sub/:slug" element={<SupCatDetails />} />
+          <Route path="/category/:slug/:slug" element={<SupCatDetails />} />
+          <Route path="/:slug" element={<DetailsPage />} />
           <Route path="/advertising" element={<Advertising />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/usage" element={<Usage />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:slug" element={<Profile />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>

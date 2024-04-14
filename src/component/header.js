@@ -79,7 +79,7 @@ function Header() {
               {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
                 <ul className="sub-categories">
                   {cat.attributes.sub_categories.data.map(subCat => (
-                    <li key={subCat.id}><Link to={`/category/${cat.attributes.slug}/sub/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
+                    <li key={subCat.id}><Link to={`/category/${cat.attributes.slug}/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
                   ))}
                 </ul>
               )}
@@ -91,7 +91,7 @@ function Header() {
           <IoMdSearch onClick={toggleSearch} />
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="بحث..."
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             className={showSearch ? 'show-search' : 'display-none'}

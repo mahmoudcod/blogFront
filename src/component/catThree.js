@@ -36,7 +36,7 @@ query GetCat {
 }
 `;
 
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
+let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
 
 function CatThree() {
   const { loading, error, data } = useQuery(getCatThree);
@@ -64,13 +64,17 @@ function CatThree() {
             return (
               <div key={blog.id} className='catThreeCardLeft'>
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  <Link to={`/${blog.attributes.slug}`} >
+                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  </Link>
+
                 )}                <div className='content'>
-                  <Link to={`/details/${blog.attributes.slug}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
-                  <p className='body'>{blog.attributes.blog}</p>
+                  <Link to={`/${blog.attributes.slug}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
                 </div>
               </div>
+
             );
+
           })}
         </div>
       </div>

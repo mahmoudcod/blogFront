@@ -1,4 +1,4 @@
-
+import { useState, useRef } from 'react';
 import Header from '../component/header';
 import Footer from '../component/footer';
 import { useParams, Link } from 'react-router-dom';
@@ -6,11 +6,12 @@ import { useQuery, gql } from '@apollo/client';
 import '../style/catDetails.css';
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
 const GET_CAT_DETAILS = gql`
-    query GetCatDetails($slug: String!) {
+    query GetCatDetails($slug: String!, $limit: Int!,$start: Int!) {
         subCategories(filters: {slug:{eq:$slug}}) {
              data{
                 id
@@ -35,7 +36,7 @@ const GET_CAT_DETAILS = gql`
                             }
                         }
                     }
-                    posts{
+                    posts(pagination: {limit: $limit, start: $start}, sort: "createdAt:desc") {
                         data{
                             id
                             attributes{
@@ -66,11 +67,50 @@ const SupCatDetails = () => {
 
 
     const { slug } = useParams();
-    const { loading, error, data } = useQuery(GET_CAT_DETAILS, {
-        variables: { slug },
+    const { loading, error, data, fetchMore } = useQuery(GET_CAT_DETAILS, {
+        variables: { slug, limit: 4, start: 0 },
     });
     const subCategory = data?.subCategories.data[0];  // Optional chaining
 
+    const [hasMore, setHasMore] = useState(true);
+    const currentDataRef = useRef(null);
+
+    const fetchMoreData = () => {
+        currentDataRef.current = data;
+        fetchMore({
+            variables: {
+                start: data.subCategories.data[0].attributes.posts.data.length,
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                if (fetchMoreResult.subCategories.data[0].attributes.posts.data.length < 4) {
+                    setHasMore(false);
+                }
+                let newBlogs = fetchMoreResult.subCategories.data[0].attributes.posts.data;
+                let oldBlogs = prev.subCategories && prev.subCategories.data && prev.subCategories.data[0] && prev.subCategories.data[0].attributes && prev.subCategories.data[0].attributes.posts && prev.subCategories.data[0].attributes.posts.data ? prev.subCategories.data[0].attributes.posts.data : (currentDataRef.current && currentDataRef.current.subCategories ? currentDataRef.current.subCategories.data[0].attributes.posts.data : []);
+                return {
+                    subCategories: {
+                        ...fetchMoreResult.subCategories,
+                        data: [
+                            {
+                                ...fetchMoreResult.subCategories.data[0],
+                                attributes: {
+                                    ...fetchMoreResult.subCategories.data[0].attributes,
+                                    posts: {
+                                        ...fetchMoreResult.subCategories.data[0].attributes.posts,
+                                        data: [
+                                            ...oldBlogs,
+                                            ...newBlogs,
+                                        ],
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                };
+            },
+        });
+    };
     if (loading) return null
     if (error) return `Error! ${error.message}`;
 
@@ -98,7 +138,7 @@ const SupCatDetails = () => {
                         </p>
                         <div className='cat-links'>
                             {subCategory.attributes.category.data.attributes.sub_categories.data.map(sub => (
-                                <Link to={`/category/${subCategory.attributes.category.data.attributes.slug}/sub/${sub.attributes.slug}`} key={sub.id} className={window.location.pathname === `/category/${subCategory.attributes.category.data.attributes.slug}/sub/${sub.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
+                                <Link to={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}`} key={sub.id} className={window.location.pathname === `/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
                             ))}
                         </div>
                     </div>
@@ -106,30 +146,42 @@ const SupCatDetails = () => {
                         {subCategory.attributes.posts.data.slice(0, 1).map(blog => (
                             <div key={blog.id} className='first-blog'>
                                 <div className='blog-img'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                    <Link to={`/${blog.attributes.slug}`}>
+                                        <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                    </Link>
                                 </div>
                                 <div className='blog-content'>
-                                    <Link to={`/details/${blog.attributes.slug}`} ><h3>{blog.attributes.title}</h3></Link>
+                                    <Link to={`/${blog.attributes.slug}`} ><h3>{blog.attributes.title}</h3></Link>
                                     <p>{blog.attributes.blog.slice(0, 100)}</p>
                                     <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
                             </div>
                         ))}
                     </div>
                     <div className='other-blogs'>
-                        {subCategory.attributes.posts.data.slice(1).map(blog => (
-                            <div key={blog.id} className='other-blog-card'>
-                                <div className='blog-img'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                        <InfiniteScroll
+                            dataLength={subCategory.attributes.posts.data.length}
+                            next={fetchMoreData}
+                            hasMore={hasMore}
+                        >
+                            {subCategory.attributes.posts.data.slice(1).map(blog => (
+                                <div key={blog.id} className='other-blog-card'>
+                                    <div className='blog-img'>
+                                        <Link to={`/${blog.attributes.slug}`}>
+                                            <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                        </Link>
+                                    </div>
+                                    <div className='blog-content'>
+                                        <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
+                                        <Link to={`/${blog.attributes.slug}`}><h3>{blog.attributes.title}</h3></Link>
+                                        <p>{blog.attributes.blog.slice(0, 100)}</p>
+                                    </div>
                                 </div>
-                                <div className='blog-content'>
-                                    <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
-                                    <Link to={`/details/${blog.attributes.slug}`}><h3>{blog.attributes.title}</h3></Link>
-                                    <p>{blog.attributes.blog.slice(0, 100)}</p>
-                                </div>
-                            </div>
+                            ))}
 
-                        ))}
+                        </InfiniteScroll>
+
                     </div>
+
                 </div>
                 <Footer />
             </HelmetProvider>

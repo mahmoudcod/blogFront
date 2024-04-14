@@ -34,7 +34,7 @@ query GetCat {
 }
 `;
 
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
+let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
 function CatFour() {
   const { loading, error, data } = useQuery(getCatFour);
 
@@ -50,7 +50,7 @@ function CatFour() {
         <div className="CatTitle">
           <div className="title">
             <RiMoneyDollarCircleLine style={iconStyles} />
-            <Link to={`/category/${slug}`}>  <h3>اسواق المال</h3></Link>
+            <Link to={`/category/${slug}`}>  <h3> صناع المال</h3></Link>
           </div>
           <Link to={`/category/${slug}`}><p>اقراء المزيد</p> </Link>
         </div>
@@ -59,10 +59,14 @@ function CatFour() {
 
             return (
               <div key={blog.id} className='catFourCard'>
+
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  <Link to={`/${blog.attributes.slug}`}>
+                    <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                  </Link>
+
                 )}                <div className='content'>
-                  <Link to={`details/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
+                  <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
                   <p className='body'>{blog.attributes.blog.slice(0, 100)}...</p>
                 </div>
               </div>

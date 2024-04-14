@@ -35,7 +35,7 @@ const recentQuery = gql`
   }
 `;
 
-const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "20px" };
+const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
 
 function Recent() {
   const { loading, error, data } = useQuery(recentQuery);
@@ -58,17 +58,21 @@ function Recent() {
         {blogs.map((recent) => (
           <div key={recent.id} className='recentCard'>
             {recent.attributes.cover && recent.attributes.cover.data && (
-              <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
+              <Link to={`/${recent.attributes.slug}`}>
+                <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
+              </Link>
             )}
             <div className='content'>
-              <Link to={`/details/${recent.attributes.slug}`}>
+              <Link to={`/${recent.attributes.slug}`}>
                 <h3 className='title'>{recent.attributes.title}</h3>
               </Link>
 
               <p className='body'>{recent.attributes.blog.slice(0, 100)}...</p>
               {recent.attributes.categories && (
                 recent.attributes.categories.data.length > 0 &&
-                <h4 className='cat'>{recent.attributes.categories.data[0].attributes.name}</h4>
+                <Link to={`/category/${recent.attributes.categories.data[0].attributes.name}`}>
+                  <h4 className='cat'>{recent.attributes.categories.data[0].attributes.name}</h4>
+                </Link>
               )}
 
 
