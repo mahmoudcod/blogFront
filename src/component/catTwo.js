@@ -66,7 +66,7 @@ function CatTwo() {
                 )}
               </div>
               <div className='cardTwo-title'>
-                <Link to={`/${project.attributes.slug}`}> <h3>{project.attributes.title}</h3> </Link>
+                <Link to={`/${project.attributes.slug}`}> <h3 className="title">{project.attributes.title}</h3> </Link>
               </div>
             </div>
           ))}

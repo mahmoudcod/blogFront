@@ -11,6 +11,8 @@ a {
     display: contents;
 }
 
+
+
 .header {
     position: relative;
     max-width: 100%;
@@ -26,7 +28,7 @@ a {
 }
 
 .logo img {
-    width: 100px;
+    width: 150px;
     height: auto;
     object-fit: contain;
     padding: 0;
@@ -51,9 +53,12 @@ ul {
     /* Added position relative */
 }
 
-.nav li:hover {
-    background-color: #fff;
-    /* Added position relative */
+.nav li a {
+    display: inline;
+}
+
+.nav li a:hover {
+    color: #0280CD;
 }
 
 .nav li:hover .sub-categories {
@@ -105,6 +110,7 @@ ul {
     position: relative;
     display: block;
     cursor: pointer;
+    font-size: 32px;
     z-index: 1020;
 }
 
@@ -154,7 +160,6 @@ ul {
 @media (max-width: 768px) {
     .header {
         width: auto;
-        padding: 20px 0;
     }
 
     .menu-icon {

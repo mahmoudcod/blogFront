@@ -3,8 +3,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 2.8rem 1.8rem;
-    max-width: 100%;
+    margin: 0 auto 1.8rem;
+    max-width: 85%;
 }
 
 .cards {
@@ -124,7 +124,7 @@
     }
 
     .container {
-        padding: 1rem;
+        padding: 1rem auto;
     }
 
     .card {

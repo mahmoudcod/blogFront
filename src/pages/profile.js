@@ -164,7 +164,7 @@ function Profile() {
                                                 </Link>
                                             )}
                                             <Link to={`/${post.attributes.slug}`}>
-                                                <h3>{post.attributes.title}</h3>
+                                                <h3 className='title'>{post.attributes.title}</h3>
                                             </Link>
                                         </div>
                                     ))

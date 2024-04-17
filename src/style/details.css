@@ -70,6 +70,15 @@
 
 }
 
+
+.title:hover {
+    color: rgb(22, 135, 206);
+}
+
+.bor:hover {
+    color: rgb(22, 135, 206);
+}
+
 .source {
     width: 100%;
     height: auto;
@@ -162,11 +171,12 @@
     text-align: center;
 }
 
-.mostPopular a {
-    display: contents;
-    width: 0;
-    height: 0;
-    overflow: hidden;
+.mostPopular .title a {
+    display: inline;
+}
+
+.mostPopular .title a:hover {
+    color: #0280CD;
 }
 
 .row {
@@ -302,7 +312,7 @@ small {
     flex-direction: column;
     padding: 10px 0;
     margin-left: 1rem;
-    width: 23.93%;
+    width: 23.8%;
 }
 
 .suggestion-flex .mostPopular img {

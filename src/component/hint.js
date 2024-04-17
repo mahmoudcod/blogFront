@@ -1,15 +1,34 @@
 
+import { gql, useQuery } from '@apollo/client';
 
 import '../style/hint.css'
+
+const gridQuery = gql`
+  query Hint {
+    hint {
+      data {
+        id
+     attributes {
+        importantHInt
+        }
+      }
+    }
+  }
+`;
+
 function Hint() {
+  const { loading, error, data } = useQuery(gridQuery);
+
+  if (loading) return null;
+  if (error) return <p>Error: {error.message}</p>;
+  const hint = data.hint.data.attributes.importantHInt
   return (
-<div className='container'>
+    <div className='container'>
 
-<div className='hint'>
-  <p>إن المعلومات الاستثمارية والتعليقات والأفكار الواردة هنا ليست ضمن الاستشارات أو التوصيات الإستثمارية. والغرض منها هو توضيح الأفكار وتسهيلها دون الأخذ بها كتوصيات مالية. تستند التعليقات الواردة والشروحات على الآراء الشخصية لمن يقدمون المشورة وقد لا تكون هذه الآراء مناسبة لوضعك المالي والإستثماري وتفصيلاتك المتعلقة بالمخاطرة والعائد. بالنسبة للمعلومات المكتوبة والرسوم التوضيحية ضمن نطاق موقعنا، فإنها قد كُتبت لإثراء الثقافة المالية والحصول على معلومات تُفيد المستخدم العربي، وهي تخلي مسئوليتنا من أي قرار استثماري وما قد يترتب عليه.</p>
-</div>
-
-</div>
+      <div className='hint'>
+        <p>{hint}</p>
+      </div>
+    </div>
   );
 }
 

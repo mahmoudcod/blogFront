@@ -62,7 +62,7 @@ function CatOne() {
                   <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 </Link>
               )}
-              <Link to={`/${project.attributes.slug}`}>  <h3>{project.attributes.title}</h3></Link>
+              <Link to={`/${project.attributes.slug}`}>  <h3 className="title">{project.attributes.title}</h3></Link>
             </div>
           ))}
         </div>

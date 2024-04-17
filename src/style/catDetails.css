@@ -23,6 +23,7 @@
 }
 
 .cat-links a {
+    display: inline;
     color: #0280CD;
     font-size: 14px;
     border: #0280CD 1px solid;

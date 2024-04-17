@@ -151,7 +151,7 @@ const SupCatDetails = () => {
                                     </Link>
                                 </div>
                                 <div className='blog-content'>
-                                    <Link to={`/${blog.attributes.slug}`} ><h3>{blog.attributes.title}</h3></Link>
+                                    <Link to={`/${blog.attributes.slug}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
                                     <p>{blog.attributes.blog.slice(0, 100)}</p>
                                     <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
                             </div>
@@ -172,7 +172,7 @@ const SupCatDetails = () => {
                                     </div>
                                     <div className='blog-content'>
                                         <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
-                                        <Link to={`/${blog.attributes.slug}`}><h3>{blog.attributes.title}</h3></Link>
+                                        <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
                                         <p>{blog.attributes.blog.slice(0, 100)}</p>
                                     </div>
                                 </div>

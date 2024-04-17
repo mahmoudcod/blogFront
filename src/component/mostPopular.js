@@ -40,7 +40,7 @@ function MostPopular() {
           <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
             <small className="padd">{recent.attributes.categories.data[0].attributes.name}</small>
           </Link>
-          <h3 className="padd bor">
+          <h3 className="padd bor title">
             <Link to={`/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
           </h3>
         </div>
