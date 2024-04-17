@@ -102,9 +102,7 @@ const CatDetails = () => {
         });
     };
 
-    let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
-
-    if (loading) return null;
+    let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" }; if (loading) return null;
     if (error) return `Error! ${error.message}`;
     const CategoryIcon = () => {
         switch (categories.name) {

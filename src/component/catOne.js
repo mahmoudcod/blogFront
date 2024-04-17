@@ -3,9 +3,7 @@ import { FaBuilding } from "react-icons/fa6";
 import '../style/catOne.css'
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client'
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
-
-const getCatOne = gql`
+let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" }; const getCatOne = gql`
        query GetCat {
  category(id:6){
         data{

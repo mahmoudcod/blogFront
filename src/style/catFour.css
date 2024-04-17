@@ -6,12 +6,13 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 2rem;
+    margin-bottom: 10px;
 }
 
 .CatTitle h3 {
     color: rgb(22, 135, 206);
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 22px;
 }
 
 .CatTitle p {

@@ -5,9 +5,7 @@ import '../style/catTwo.css'
 import { useQuery, gql } from '@apollo/client'
 import { Link } from 'react-router-dom';
 
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
-
-const getCatTwo = gql`
+let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" }; const getCatTwo = gql`
 query GetCat {
   category(id: 7) {
     data {

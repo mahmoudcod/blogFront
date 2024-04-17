@@ -36,9 +36,7 @@ query GetCat {
 }
 `;
 
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
-
-function CatThree() {
+let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" }; function CatThree() {
   const { loading, error, data } = useQuery(getCatThree);
 
   if (loading) return null;
