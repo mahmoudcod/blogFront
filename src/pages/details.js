@@ -163,13 +163,7 @@ const DetailsPage = () => {
                     <div className="row">
                         <div className="rightColumn">
                             <div className="dCard">
-                                <h3>{title}</h3>
-                                <div className='imgCard'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
-                                    <div className='imgText'>
-                                        <p>{blog.attributes.description}</p>
-                                    </div>
-                                </div>
+                                <h3 className='title-details'>{title}</h3>
                                 <div className='cal-profile'>
                                     {blog?.attributes?.users_permissions_user?.data?.id ? (<div className='profile'>
                                         <CgProfile />
@@ -179,6 +173,12 @@ const DetailsPage = () => {
                                     <div className='cal'>
                                         <FaRegCalendarAlt />
                                         <p>{formattedPublishedAt}</p>
+                                    </div>
+                                </div>
+                                <div className='imgCard'>
+                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
+                                    <div className='imgText'>
+                                        <p>{blog.attributes.description}</p>
                                     </div>
                                 </div>
                                 <div className='holder'>
@@ -290,7 +290,7 @@ const DetailsPage = () => {
                                 </div>
                             </div>
                             <div className="dCard">
-                                <h3 style={{ fontSize: '20px' }}>ذات صلة</h3>
+                                <h3 className='title-details'>ذات صلة</h3>
                                 {categoryBlogs.map((blog) => (
                                     <div className='mostPopular' key={blog.id}>
                                         <h3 className='title bor'><Link to={`/${blog.attributes.slug}`} key={blog.id}>
