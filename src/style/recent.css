@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
 
 .CatTitle h3 {
-    color: rgb(22, 135, 206);
-    font-weight: bold;
-    font-size: 20px;
+    color: #0280CD;
+    font-family: Almarai;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
 
 }
 

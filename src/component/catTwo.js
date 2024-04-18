@@ -40,7 +40,7 @@ function CatTwo() {
   if (loading) return null;
   if (error) return <p>Error: {error.message}</p>;
 
-  const projects = data.category.data.attributes.blogs.data.slice(0, 8);
+  const projects = data.category.data.attributes.blogs.data.slice(0, 6);
 
 
   return (

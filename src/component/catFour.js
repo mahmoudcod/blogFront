@@ -34,7 +34,7 @@ query GetCat {
 }
 `;
 
-let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
+let iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "5px" };
 function CatFour() {
   const { loading, error, data } = useQuery(getCatFour);
 
@@ -67,7 +67,6 @@ function CatFour() {
 
                 )}                <div className='content'>
                   <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
-                  <p className='body'>{blog.attributes.blog.slice(0, 100)}...</p>
                 </div>
               </div>
             );

@@ -1,29 +1,36 @@
 .categories {
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-    margin: 0 auto;
-    margin-bottom: 1rem;
+    margin: 100px auto 0px;
 }
 
 .category {
-    width: calc(16.666% - 10px);
-    margin-bottom: 8px;
+    width: 11%;
+    margin: 0 31px 21px;
     box-sizing: border-box;
 }
 
 .category img {
-    width: 40px;
+    width: 85px;
     border-radius: 50%;
-    padding: 8px;
+    padding: 28px;
     box-sizing: border-box;
     background-color: #C6C6C6;
 }
 
 .category h4 {
-    margin-top: 10px;
+    margin-top: 9px;
+    color: #000;
     text-align: center;
+    font-family: Almarai;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 33px;
+    /* 165% */
 }
 
 /* Media query for smaller screens (e.g., phones) */

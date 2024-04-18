@@ -2,11 +2,6 @@
 
 
 
-.CatTitle h3 {
-    color: rgb(22, 135, 206);
-    font-weight: bold;
-    font-size: 1.2em;
-}
 
 .CatTitle p {
     color: rgb(22, 135, 206);
@@ -25,45 +20,37 @@
     margin-top: 10px;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    grid-template-areas:
-        "d d a a"
-        "d d b b"
-        "d d c c";
+
 }
 
 
-.catThreeCardLeft:nth-child(1) {
-    grid-area: a;
+.catThreeCardRight {
+    margin: 10px 0;
 }
 
-.catThreeCardLeft:nth-child(2) {
-    grid-area: b;
-}
-
-.catThreeCardLeft:nth-child(3) {
-    grid-area: c;
-}
-
-.catThreeCardLeft:nth-child(4) {
-    grid-area: d;
-    flex-direction: column;
-}
-
-.catThreeCardLeft:nth-child(4) img {
+.catThreeCardRight img {
     width: 100%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
     margin-left: 0;
+    border-radius: 4px;
 }
 
 .catThreeCardLeft {
     display: flex;
+    flex-direction: column;
+}
+
+.catThreeCardLeft div {
+    display: flex;
+    margin: 10px;
 }
 
 .catThreeCardLeft img {
-    width: 125px;
+    width: 280px;
+    height: 210px;
     margin-left: 12px;
     border-radius: 4px;
 }
@@ -79,26 +66,15 @@
 
     .catThreeCards {
         grid-template-columns: 1fr;
-        grid-template-areas:
-            "d"
-            "c"
-            "b"
-            "a";
+
     }
 
-    .catThreeCardLeft {
-        flex-direction: row;
-    }
 
     .catThreeCardLeft img {
         width: 180px;
         height: 160px;
     }
 
-    .catThreeCardLeft:nth-child(4) img {
-        width: 100%;
-        object-fit: cover;
-    }
 
 
 }

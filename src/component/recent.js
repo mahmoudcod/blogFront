@@ -35,7 +35,7 @@ const recentQuery = gql`
   }
 `;
 
-const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "10px" };
+const iconStyles = { color: "#0280CD", fontSize: "1.8rem", marginLeft: "5px" };
 
 function Recent() {
   const { loading, error, data } = useQuery(recentQuery);
