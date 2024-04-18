@@ -84,6 +84,7 @@
 
 .catOneCard img {
     width: 100%;
+    aspect-ratio: 14/9;
     object-fit: cover;
 }
 
@@ -112,7 +113,6 @@
     }
 
     .catOneCard img {
-        width: 100%;
         width: 100%;
         padding: 0;
         height: auto;

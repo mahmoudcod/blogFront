@@ -62,7 +62,7 @@
 
 .first-blog .blog-content p,
 h3 {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .blog-content p {
@@ -74,29 +74,27 @@ h3 {
 
 .other-blogs .infinite-scroll-component {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     margin-top: 20px;
-    gap: 10px;
+    gap: 5px;
 }
 
 .other-blog-card {
     display: flex;
-    margin-left: 15px;
+    flex-direction: column;
 }
 
 .other-blog-card img {
     width: 250px;
-    height: 200px;
+    aspect-ratio: 14/9;
     object-fit: cover;
-    margin-left: 15px;
-    margin-bottom: 20px;
     padding: 0;
     border-radius: 4px;
 }
 
 .other-blog-card .blog-content p,
 h3 {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 
@@ -134,11 +132,11 @@ h3 {
         width: 100%;
     }
 
-
-    .other-blogs {
+    .other-blogs .infinite-scroll-component {
         display: grid;
-        grid-template-columns: 1fr;
-        margin: 0;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 20px;
+        gap: 5px;
     }
 
     p.cat-disc {

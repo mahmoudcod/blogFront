@@ -46,8 +46,8 @@ function CatThree() {
   const slug = data.category.data.attributes.slug;
 
   // Split blogs into left and right arrays
-  const leftBlogs = blogs.slice(0, 3);
-  const rightBlog = blogs.slice(3, 4); // Only one card for the right side
+  const leftBlogs = blogs.slice(0, 4);
+  const rightBlog = blogs.slice(4, 5); // Only one card for the right side
 
   return (
     <>

@@ -142,21 +142,6 @@ const SupCatDetails = () => {
                             ))}
                         </div>
                     </div>
-                    <div className='first-blog'>
-                        {subCategory.attributes.posts.data.slice(0, 1).map(blog => (
-                            <div key={blog.id} className='first-blog'>
-                                <div className='blog-img'>
-                                    <Link to={`/${blog.attributes.slug}`}>
-                                        <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
-                                    </Link>
-                                </div>
-                                <div className='blog-content'>
-                                    <Link to={`/${blog.attributes.slug}`} ><h3 className='title'>{blog.attributes.title}</h3></Link>
-                                    <p>{blog.attributes.blog.slice(0, 100)}</p>
-                                    <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>                            </div>
-                            </div>
-                        ))}
-                    </div>
                     <div className='other-blogs'>
                         <InfiniteScroll
                             dataLength={subCategory.attributes.posts.data.length}
@@ -171,9 +156,7 @@ const SupCatDetails = () => {
                                         </Link>
                                     </div>
                                     <div className='blog-content'>
-                                        <p>{format(new Date(blog.attributes.createdAt), "dd MMMM yyyy", { locale: ar })}</p>
                                         <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
-                                        <p>{blog.attributes.blog.slice(0, 100)}</p>
                                     </div>
                                 </div>
                             ))}
