@@ -67,6 +67,7 @@ const blogQuery = gql`
                             id
                             attributes {
                                 name
+                                slug
                                 blogs {
                                     data {
                                         id
@@ -158,7 +159,9 @@ const DetailsPage = () => {
                 <Header />
                 <div className='container'>
                     {categories.data.length > 0 && (
-                        <small>{categories.data[0].attributes.name}</small>
+                        <Link to={`/category/${categories.data[0].attributes.slug}`}>
+                            <small className='hov'>{categories.data[0].attributes.name}</small>
+                        </Link>
                     )}
                     <div className="row">
                         <div className="rightColumn">
@@ -312,7 +315,6 @@ const DetailsPage = () => {
                                     <h3 className='title'> <Link to={`/${blog.attributes.slug}`} key={blog.id}>
                                         {blog.attributes.title}
                                     </Link></h3>
-                                    <span className='after'>{format(new Date(blog.attributes.publishedAt), "dd MMMM yyyy", { locale: ar })}</span>
                                 </div>
                             ))}
                         </div>

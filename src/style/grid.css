@@ -28,6 +28,7 @@
     cursor: pointer;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
+    transition: all 0.20s ease;
 }
 
 .card:hover {

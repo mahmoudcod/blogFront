@@ -26,6 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.20s ease;
 }
 
 .title:hover {

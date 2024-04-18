@@ -37,6 +37,12 @@
     color: #000;
     font-size: 14px;
     font-weight: 500;
+    transition: all 0.19s ease-out;
+}
+
+.tagsInfo p:hover {
+    background-color: black;
+    color: white;
 }
 
 /* Left column */
@@ -68,6 +74,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 214.6%;
+    transition: all 0.20s ease;
     /* 47.212px */
 
 }
@@ -206,10 +213,20 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+}
+
+.hov {
+    transition: all 0.20s ease;
+}
+
+.hov:hover {
+    color: #0280CD;
 }
 
 .mostPopular .title a {
     display: inline;
+    transition: all 0.20s ease;
 }
 
 .mostPopular .title a:hover {
@@ -231,7 +248,7 @@
 .mostPopular {
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 0px 0 9px;
 }
 
 .mostPopular .cat-details {
@@ -241,6 +258,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.mostPopular .cat-details:hover {
+    color: #0280CD;
 }
 
 small {
@@ -260,7 +281,7 @@ small {
     font-style: normal;
     font-weight: 800;
     line-height: 30px;
-    padding: 10px 0;
+    padding: 0px 0 10px;
     margin: 0;
     border-bottom: 1px solid #C2C2C2;
 
@@ -308,7 +329,6 @@ small {
 }
 
 .authorInfo {
-    margin: 1rem 0;
     display: flex;
     align-content: center;
     justify-content: space-between;
@@ -317,10 +337,10 @@ small {
 
 .authorDesc {
     color: #292D32;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 214.6%;
+    line-height: 26px;
     /* 34.336px */
     word-wrap: 'break-word';
 }
@@ -398,7 +418,13 @@ small {
 }
 
 .suggestion-flex .mostPopular img {
-    border-radius: 5px;
+    aspect-ratio: 14/9;
+    border-radius: 4px;
+    transition: all 0.23s ease-in-out;
+}
+
+.suggestion-flex .mostPopular img:hover {
+    padding: 5px;
 }
 
 .suggestion-flex .mostPopular:nth-child(4) {

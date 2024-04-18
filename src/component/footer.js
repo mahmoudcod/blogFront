@@ -85,7 +85,7 @@ function Footer() {
                 </div>
                 <div className='sectionThree'>
                     <p> 2024© جميع الحقوق محفوظة</p>
-                    <small className='footerSmall'>صمم بكل حب في ادا</small>
+                    <a href='https://adainc.co/'>  <small className='footerSmall'>صمم بكل حب في ادا</small></a>
                 </div>
             </div>
         </footer>
