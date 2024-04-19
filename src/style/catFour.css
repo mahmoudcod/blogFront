@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 2rem;
-    margin-bottom: 10px;
 }
 
 
@@ -19,7 +18,7 @@
 .catFourCards {
     display: flex;
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 20px;
     width: 100%;
     margin-top: 10px;
 }
@@ -41,7 +40,7 @@
 
 .catFourCard img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 14/9;
     padding: 0;
     object-fit: cover;
 }

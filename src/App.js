@@ -13,6 +13,8 @@ import Privacy from './pages/privacy';
 import Tags from './pages/tags';
 import Contact from './pages/contact';
 import SupCatDetails from './pages/subCat';
+import About from './pages/about';
+import { HelmetProvider } from 'react-helmet-async';
 
 const client = new ApolloClient({
   uri: 'http://144.91.117.210:1337/graphql',
@@ -21,24 +23,27 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route path="/search/:searchQ" element={<Search />} />
-          <Route path="/tags/:slug" element={<Tags />} />
-          <Route path="/category/:slug" element={<CatDetails />} />
-          <Route path="/category/:slug/:slug" element={<SupCatDetails />} />
-          <Route path="/:slug" element={<DetailsPage />} />
-          <Route path="/advertising" element={<Advertising />} />
-          <Route path="/publish" element={<Publish />} />
-          <Route path="/usage" element={<Usage />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/profile/:slug" element={<Profile />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </BrowserRouter>
-    </ApolloProvider>
+    <HelmetProvider>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/search/:searchQ" element={<Search />} />
+            <Route path="/tags/:slug" element={<Tags />} />
+            <Route path="/category/:slug" element={<CatDetails />} />
+            <Route path="/category/:slug/:slug" element={<SupCatDetails />} />
+            <Route path="/:slug" element={<DetailsPage />} />
+            <Route path="/advertising" element={<Advertising />} />
+            <Route path="/publish" element={<Publish />} />
+            <Route path="/usage" element={<Usage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/profile/:slug" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </BrowserRouter>
+      </ApolloProvider>
+    </HelmetProvider>
   );
 }
 

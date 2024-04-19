@@ -43,7 +43,7 @@ const SEARCH_BLOGS = gql`
 const Search = () => {
     const { searchQ } = useParams();
     const [searchBlogs, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_BLOGS, {
-        variables: { searchQ, start: 0, limit: 4 },
+        variables: { searchQ, start: 0, limit: 12 },
     });
     const [hasMore, setHasMore] = useState(true);
 

@@ -51,7 +51,7 @@ const TagsBlog = gql`
 const Tags = () => {
     const { slug } = useParams();
     const { loading, error, data, fetchMore } = useQuery(TagsBlog, {
-        variables: { slug, limit: 4, start: 0 },
+        variables: { slug, limit: 12, start: 0 },
     });
     const tags = data?.tags?.data && data.tags.data[0];
     const [hasMore, setHasMore] = useState(true);
@@ -108,7 +108,7 @@ const Tags = () => {
                 <Header />
                 <div className='container'>
 
-                    <h3 className='search-title'>دليله : {tags?.attributes?.name}  </h3>
+                    <h3 className='search-title'>دليليه : {tags?.attributes?.name}  </h3>
                     <InfiniteScroll
                         dataLength={tags ? tags.attributes.posts.data.length : 0}
                         next={loadMore}

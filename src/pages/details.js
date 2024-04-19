@@ -143,187 +143,186 @@ const DetailsPage = () => {
 
 
     return (
-        <>
-            <HelmetProvider>
-                <Helmet>
-                    {/* open graph meta tags  */}
-                    <meta name="description" content={blog.attributes.description} />
-                    <meta name="keywords" content={blog.attributes.tags.data.map(tag => tag.attributes.name).join(', ')} />
-                    <title>{title}</title>
-                    <meta property="og:title" content={title} />
-                    <meta property="og:description" content={blog.attributes.description} />
-                    <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
-                    <meta property="og:url" content={`/${blog?.attributes?.slug}`} />
-                    <meta name="twitter:card" content="summary_large_image" />
-                </Helmet>
-                <Header />
-                <div className='container'>
-                    {categories.data.length > 0 && (
-                        <Link to={`/category/${categories.data[0].attributes.slug}`}>
-                            <small className='hov'>{categories.data[0].attributes.name}</small>
-                        </Link>
-                    )}
-                    <div className="row">
-                        <div className="rightColumn">
-                            <div className="dCard">
-                                <h3 className='title-details'>{title}</h3>
-                                <div className='cal-profile'>
-                                    {blog?.attributes?.users_permissions_user?.data?.id ? (<div className='profile'>
-                                        <CgProfile />
+        <HelmetProvider>
+            <Helmet>
+                {/* open graph meta tags  */}
+                <meta name="description" content={blog.attributes.description} />
+                <meta name="keywords" content={blog.attributes.tags.data.map(tag => tag.attributes.name).join(', ')} />
+                <title>{title}</title>
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={blog.attributes.description} />
+                <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
+                <meta property="og:url" content={`/${blog?.attributes?.slug}`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+            <Header />
+            <div className='container'>
+                {categories.data.length > 0 && (
+                    <Link to={`/category/${categories.data[0].attributes.slug}`}>
+                        <small className='hov'>{categories.data[0].attributes.name}</small>
+                    </Link>
+                )}
+                <div className="row">
+                    <div className="rightColumn">
+                        <div className="dCard">
+                            <h3 className='title-details'>{title}</h3>
+                            <div className='cal-profile'>
+                                {blog?.attributes?.users_permissions_user?.data?.id ? (<div className='profile'>
+                                    <CgProfile />
+                                    <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
                                         <p key={blog?.attributes?.users_permissions_user?.data?.id ?? ''}>   {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                         </p>
-                                    </div>) : ''}
-                                    <div className='cal'>
-                                        <FaRegCalendarAlt />
-                                        <p>{formattedPublishedAt}</p>
+                                    </Link>
+                                </div>) : ''}
+                                <div className='cal'>
+                                    <FaRegCalendarAlt />
+                                    <p>{formattedPublishedAt}</p>
+                                </div>
+                            </div>
+                            <div className='imgCard'>
+                                <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
+                                <div className='imgText'>
+                                    <p>{blog.attributes.description}</p>
+                                </div>
+                            </div>
+                            <div className='holder'>
+                                <div className='social'>
+                                    <div className='socialI'>
+                                        <SlSocialTwitter />
+                                    </div>
+                                    <div className='socialI'>
+                                        <SlSocialFacebook />
+                                    </div>
+                                    <div className='socialI'>
+                                        <SlSocialInstagram />
                                     </div>
                                 </div>
-                                <div className='imgCard'>
-                                    <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={title} />
-                                    <div className='imgText'>
-                                        <p>{blog.attributes.description}</p>
+                                <div className='blog-holder'>
+                                    <div className='article'>
+                                        <h3>محتويات المقالة</h3>
+                                        <ol>
+                                            {headings.map((heading, index) => (
+                                                <li key={index}>
+                                                    <a href={`#${heading.id}`}>{heading.text}</a>
+                                                </li>
+                                            ))}
+                                        </ol>
+                                    </div>
+                                    <div id='rendered-html' className='blog'>
+                                        <ReactMarkdown >
+                                            {blog.attributes.blog}
+                                        </ReactMarkdown>
                                     </div>
                                 </div>
-                                <div className='holder'>
-                                    <div className='social'>
-                                        <div className='socialI'>
-                                            <SlSocialTwitter />
-                                        </div>
-                                        <div className='socialI'>
-                                            <SlSocialFacebook />
-                                        </div>
-                                        <div className='socialI'>
-                                            <SlSocialInstagram />
-                                        </div>
-                                    </div>
-                                    <div className='blog-holder'>
-                                        <div className='article'>
-                                            <h3>محتويات المقالة</h3>
-                                            <ol>
-                                                {headings.map((heading, index) => (
-                                                    <li key={index}>
-                                                        <a href={`#${heading.id}`}>{heading.text}</a>
-                                                    </li>
-                                                ))}
-                                            </ol>
-                                        </div>
-                                        <div id='rendered-html' className='blog'>
-                                            <ReactMarkdown >
-                                                {blog.attributes.blog}
-                                            </ReactMarkdown>
-                                        </div>
-                                    </div>
 
+                            </div>
+                            <div className='source'>
+                                <div className='toggle'>
+                                    <h3>المصادر</h3>
+                                    <IoMdAdd className='addIcon' onClick={toggleSources} />
                                 </div>
-                                <div className='source'>
-                                    <div className='toggle'>
-                                        <h3>المصادر</h3>
-                                        <IoMdAdd className='addIcon' onClick={toggleSources} />
-                                    </div>
-                                    {showSources && (
-                                        <div className='sourceInfo'>
-                                            <ReactMarkdown>{blog.attributes.sources}</ReactMarkdown>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className='tagsInfo'>
-                                    {blog.attributes.tags.data.map((tag) => (
-                                        <Link to={`/tags/${tag.attributes.slug}`} key={tag.id}>
-                                            <p>{tag.attributes.name}</p>
-                                        </Link>
-                                    ))}
-                                </div>
-                                {show && (
-                                    <div className='author'>
-                                        <div className='authorInfo'>
-                                            <div className='profileInfo'>
-                                                <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
-                                                    <img
-                                                        loading='lazy'
-                                                        src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
-                                                        alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
-                                                    />
-                                                </Link>
-                                                <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
-                                                    <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
-                                                        {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
-                                                    </p>
-                                                </Link>
-                                            </div>
-                                            <div className='profileSocial'>
-                                                <div className='socialI'>
-                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.x}>
-                                                        <SlSocialTwitter />
-                                                    </Link>
-                                                </div>
-                                                <div className='socialI'>
-                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.facebook}>
-                                                        <SlSocialFacebook />
-                                                    </Link>
-                                                </div>
-                                                <div className='socialI'>
-                                                    <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.linkedin}>
-                                                        <SlSocialInstagram />
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='authorDesc'>
-                                            <p>
-                                                {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.description}
-                                            </p>
-                                        </div>
+                                {showSources && (
+                                    <div className='sourceInfo'>
+                                        <ReactMarkdown>{blog.attributes.sources}</ReactMarkdown>
                                     </div>
                                 )}
-
-
-                                <div className='comments'>
-                                    <CommentSection />
-                                </div>
                             </div>
-                        </div>
-                        <div className="leftColumn">
-                            <div className="dCard">
-                                <MostPopular />
-
-                            </div>
-                            <div className="dCard">
-                                <div className="fakeimg">
-                                    <p>ADS</p>
-                                </div>
-                            </div>
-                            <div className="dCard">
-                                <h3 className='title-details'>ذات صلة</h3>
-                                {categoryBlogs.map((blog) => (
-                                    <div className='mostPopular' key={blog.id}>
-                                        <h3 className='title bor'><Link to={`/${blog.attributes.slug}`} key={blog.id}>
-                                            {blog.attributes.title}
-                                        </Link></h3>
-                                    </div>
+                            <div className='tagsInfo'>
+                                {blog.attributes.tags.data.map((tag) => (
+                                    <Link to={`/tags/${tag.attributes.slug}`} key={tag.id}>
+                                        <p>{tag.attributes.name}</p>
+                                    </Link>
                                 ))}
+                            </div>
+                            {show && (
+                                <div className='author'>
+                                    <div className='authorInfo'>
+                                        <div className='profileInfo'>
+                                            <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                                <img
+                                                    loading='lazy'
+                                                    src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
+                                                    alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                                />
+                                            </Link>
+                                            <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                                <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
+                                                    {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
+                                                </p>
+                                            </Link>
+                                        </div>
+                                        <div className='profileSocial'>
+                                            <div className='socialI'>
+                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.x}>
+                                                    <SlSocialTwitter />
+                                                </Link>
+                                            </div>
+                                            <div className='socialI'>
+                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.facebook}>
+                                                    <SlSocialFacebook />
+                                                </Link>
+                                            </div>
+                                            <div className='socialI'>
+                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.linkedin}>
+                                                    <SlSocialInstagram />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='authorDesc'>
+                                        <p>
+                                            {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+
+
+                            <div className='comments'>
+                                <CommentSection />
                             </div>
                         </div>
                     </div>
-                    <div className='suggestion'>
-                        <h3 className='suggestion-comment-title'> قد يعجبك ايضا</h3>
-                        <div className='suggestion-flex'>
-                            {categoryBlogs.slice(0, 4).map((blog) => (
+                    <div className="leftColumn">
+                        <div className="dCard">
+                            <MostPopular />
+
+                        </div>
+                        <div className="dCard">
+                            <div className="fakeimg">
+                                <p>ADS</p>
+                            </div>
+                        </div>
+                        <div className="dCard">
+                            <h3 className='title-main'>ذات صلة</h3>
+                            {categoryBlogs.map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
-                                    <Link to={`/${blog.attributes.slug}`} key={blog.id}>
-                                        <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
-                                    </Link>
-                                    <h3 className='title'> <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                    <h1 className='title bor'><Link to={`/${blog.attributes.slug}`} key={blog.id}>
                                         {blog.attributes.title}
-                                    </Link></h3>
+                                    </Link></h1>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                <Footer />
-            </HelmetProvider>
-        </>
-
+                <div className='suggestion'>
+                    <h3 className='suggestion-comment-title'> قد يعجبك ايضا</h3>
+                    <div className='suggestion-flex'>
+                        {categoryBlogs.slice(0, 4).map((blog) => (
+                            <div className='mostPopular' key={blog.id}>
+                                <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                    <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
+                                </Link>
+                                <h3 className='title'> <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                    {blog.attributes.title}
+                                </Link></h3>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <Footer />
+        </HelmetProvider >
     );
 };
 

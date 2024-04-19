@@ -68,7 +68,7 @@ const SupCatDetails = () => {
 
     const { slug } = useParams();
     const { loading, error, data, fetchMore } = useQuery(GET_CAT_DETAILS, {
-        variables: { slug, limit: 4, start: 0 },
+        variables: { slug, limit: 12, start: 0 },
     });
     const subCategory = data?.subCategories.data[0];  // Optional chaining
 

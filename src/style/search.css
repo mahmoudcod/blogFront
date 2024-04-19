@@ -14,7 +14,7 @@
 
 .search-cards img {
     width: 350px;
-    height: 190px;
+    aspect-ratio: 14/9;
 }
 
 

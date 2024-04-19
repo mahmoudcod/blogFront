@@ -61,14 +61,13 @@
     border: #F6F6F6 solid 1px;
     width: 100%;
     height: auto;
-    background-color: #F6F6F6;
-    padding: 10px 0;
-
+    background-color: #fff;
 }
 
 .article h3 {
-    border-bottom: #000 solid 1px;
+    background-color: #F6F6F6;
     padding: 0 10px;
+    margin: 0;
     color: #000;
     font-size: 22px;
     font-style: normal;
@@ -91,12 +90,26 @@
 .source {
     width: 100%;
     height: auto;
-    background-color: #F6F6F6;
+    background-color: #fff;
+    border: #F6F6F6 1px solid;
+}
 
+.source ul,
+.source a,
+.source ol,
+.source p,
+.source h1,
+.source h2,
+.source h3,
+.source h4,
+.source h5,
+.source h6 {
+    display: inline;
+    color: #0280CD;
 }
 
 .source .toggle {
-    border-bottom: #000 solid 1px;
+    background-color: #F6F6F6;
     padding: 0 10px;
 }
 
@@ -104,13 +117,25 @@
     padding: 5px 30px;
 }
 
-.article ol li {
-    font-size: 18px;
+.article ol li a {
+    display: inline;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 214.6%;
+    color: #0280CD;
     /* 38.628px */
 }
+
+.article ol li {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 214.6%;
+    color: #0280CD;
+    /* 38.628px */
+}
+
 
 .blog {
     width: 95%;
@@ -132,6 +157,27 @@
     margin: 10px 0 0 0;
     padding: 0;
     object-fit: contain;
+}
+
+.blog h1,
+.blog h2,
+.blog h3,
+.blog h4,
+.blog h5,
+.blog h6 {
+    margin-top: 20px;
+    padding: 10px 0;
+    border-bottom: #0280CD 3px solid;
+    width: fit-content;
+}
+
+.blog ul {
+    list-style: disc;
+    margin: 10px 0;
+}
+
+.blog ul li {
+    margin: 10px;
 }
 
 .toggle {
@@ -190,7 +236,20 @@
 .title-details {
     color: #000;
     font-family: Almarai;
-    font-size: 26px;
+    font-size: 30px;
+    flex-wrap: wrap;
+    width: 75%;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 34px;
+    /* 130.769% */
+}
+
+.title-main {
+    color: #000;
+    font-family: Almarai;
+    font-size: 24px;
+    flex-wrap: wrap;
     font-style: normal;
     font-weight: 800;
     line-height: 34px;
@@ -283,7 +342,7 @@ small {
     line-height: 30px;
     padding: 0px 0 10px;
     margin: 0;
-    border-bottom: 1px solid #C2C2C2;
+    border-bottom: 1px solid #aaaaaa;
 
 }
 
@@ -352,7 +411,13 @@ small {
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
+    transition: all 0.24s ease-in-out;
     line-height: 214.6%;
+    /* 64.38px */
+}
+
+.authorInfo p:hover {
+    color: #0280CD;
     /* 64.38px */
 }
 
@@ -374,7 +439,7 @@ small {
 }
 
 .profileSocial .socialI {
-    padding: 10px 11px;
+    padding: 10px 11.4px;
     margin: 0 10px;
     border: 1px solid #000;
     border-radius: 50%;

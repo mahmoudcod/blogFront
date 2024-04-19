@@ -33,7 +33,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-gap: 1em;
+    grid-gap: 20px;
     grid-template-areas:
         "a a b b"
         "c d e f";
@@ -78,9 +78,6 @@
     grid-area: f;
 }
 
-.catOneCard {
-    margin-bottom: 1rem;
-}
 
 .catOneCard img {
     width: 100%;

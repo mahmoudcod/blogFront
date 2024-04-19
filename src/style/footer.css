@@ -27,14 +27,18 @@
 }
 
 .sectionOne ul li a {
+    display: inline;
     color: white;
+    transition: all 0.24s ease-in-out;
+}
+
+.sectionOne ul li a:hover {
+    color: black;
 }
 
 .sectionTwo ul {
     display: flex;
-
 }
-
 
 .first {
     font-weight: 600;
@@ -46,8 +50,19 @@
     font-size: 14px;
 }
 
+.sectionTwo ul li:hover {
+    color: black;
+}
+
 .sectionTwo ul li a {
+    display: inline;
     color: white;
+    transition: all 0.24s ease-in-out;
+}
+
+
+.sectionTwo ul li a:hover {
+    color: black;
 }
 
 .sectionOne h2 {
@@ -58,7 +73,6 @@
 }
 
 .sectionOne div {
-    padding-left: 60px;
     margin-bottom: 20px;
     font-size: 18px;
 }
@@ -78,6 +92,11 @@
 
 .footerSmall {
     color: white;
+    transition: all 0.24s ease-in-out;
+}
+
+.footerSmall:hover {
+    color: black;
 }
 
 @media screen and (max-width: 768px) {

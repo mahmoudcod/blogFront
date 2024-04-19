@@ -58,7 +58,7 @@ const profileQuery = gql`
 function Profile() {
     const { slug } = useParams();
     const { loading, error, data, fetchMore } = useQuery(profileQuery, {
-        variables: { slug, limit: 4, start: 0 }
+        variables: { slug, limit: 12, start: 0 }
     });
     const [loadingMore, setLoadingMore] = useState(false);
 

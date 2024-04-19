@@ -46,8 +46,8 @@ function CatThree() {
   const slug = data.category.data.attributes.slug;
 
   // Split blogs into left and right arrays
-  const leftBlogs = blogs.slice(0, 3);
-  const rightBlog = blogs.slice(3, 4); // Only one card for the right side
+  const leftBlogs = blogs.slice(0, 4);
+  const rightBlog = blogs.slice(4, 5); // Only one card for the right side
 
   return (
     <>
@@ -70,7 +70,6 @@ function CatThree() {
                 )}
                 <div className='content'>
                   <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
-                  <p>{blog.attributes.blog.slice(0.50)}...</p>
                 </div>
               </div>
             ))}
@@ -85,7 +84,6 @@ function CatThree() {
                 )}
                 <div className='content'>
                   <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
-                  <div> <p>{blog.attributes.blog.slice(0, 50)}...</p></div>
                 </div>
               </div>
             ))}

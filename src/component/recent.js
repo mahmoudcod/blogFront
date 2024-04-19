@@ -18,6 +18,7 @@ const recentQuery = gql`
             data{
                 attributes{
                     name
+                    slug
                 }
             }
           }
@@ -70,7 +71,7 @@ function Recent() {
               <p className='body'>{recent.attributes.blog.slice(0, 100)}...</p>
               {recent.attributes.categories && (
                 recent.attributes.categories.data.length > 0 &&
-                <Link to={`/category/${recent.attributes.categories.data[0].attributes.name}`}>
+                <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
                   <h4 className='cat'>{recent.attributes.categories.data[0].attributes.name}</h4>
                 </Link>
               )}

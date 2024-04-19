@@ -61,7 +61,7 @@
 }
 
 .body {
-    padding: 10px 0;
+    padding: 0px 0 10px;
     font-size: 14px;
     line-height: 20px;
     color: gray;
@@ -82,6 +82,7 @@
 
 .recentCard img {
     width: 70%;
+    aspect-ratio: 11/9;
     height: 170px;
     object-fit: cover;
     margin-left: 12px;

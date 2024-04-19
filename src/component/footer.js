@@ -46,6 +46,7 @@ function Footer() {
     };
 
     const lastItem = <li><Link to={`/contact`}> اتصل بنا</Link> </li>;
+    const anotherItem = <li><Link to={`/about`}> عن صناع المال</Link> </li>;
 
     return (
         <footer className='footer'>
@@ -63,6 +64,7 @@ function Footer() {
                                     </li>
                                 ))}
                                 {index === chunkArray(allItems, 4).length - 1 && lastItem}
+                                {index === chunkArray(allItems, 4).length - 1 && anotherItem}
                             </ul>
                         </div>
                     ))}
@@ -85,7 +87,7 @@ function Footer() {
                 </div>
                 <div className='sectionThree'>
                     <p> 2024© جميع الحقوق محفوظة</p>
-                    <a href='https://adainc.co/'>  <small className='footerSmall'>صمم بكل حب في ادا</small></a>
+                    <a href='https://adainc.co/' target='blank'>  <small className='footerSmall'>صمم بكل حب في ادا</small></a>
                 </div>
             </div>
         </footer>

@@ -62,7 +62,7 @@ const GET_CAT_DETAILS = gql`
 const CatDetails = () => {
     const { slug } = useParams();
     const { loading, error, data, fetchMore } = useQuery(GET_CAT_DETAILS, {
-        variables: { slug, start: 0, limit: 4 },
+        variables: { slug, start: 0, limit: 12 },
     });
     const categories = data?.categories?.data[0].attributes;
 

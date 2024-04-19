@@ -5,6 +5,7 @@
     flex-direction: column;
     margin: 0 auto 1.8rem;
     max-width: 85%;
+    height: 100%;
 }
 
 .cards {
