@@ -1,53 +1,47 @@
-
-import '../style/categories.css'
+import '../style/categories.css';
 import { useQuery, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
-const CatQurey = gql`
-
-  query Getcat {
-    categories{
-        data{
-            id
-            attributes{
-              slug
-                name
-                icon{
-                    data{
-                        attributes{
-                            url
-                        }
-                    }
-                }
+const CatQuery = gql`
+  query GetCat {
+    categories {
+      data {
+        id
+        attributes {
+          slug
+          name
+          isShow
+          icon {
+            data {
+              attributes {
+                url
+              }
             }
+          }
         }
+      }
     }
-}
-
-
+  }
 `;
+
 function Categories() {
-  const { loading, error, data } = useQuery(CatQurey);
+  const { loading, error, data } = useQuery(CatQuery);
 
   if (loading) return null;
   if (error) return <p>Error....</p>;
 
-  const categories = data.categories.data;
+  const categories = data.categories.data.filter(category => category.attributes.isShow); // Filter categories based on isShow attribute
 
   return (
     <div className='categories'>
       {categories.map((category) => (
         <div key={category.id} className='category'>
-          {category.attributes.icon && category.attributes.icon.data && (
-            <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
-          )}
-          <h4>{category.attributes.name}</h4>
-        </div>
-      ))}
-      {categories.map((category) => (
-        <div key={category.id} className='category'>
-          {category.attributes.icon && category.attributes.icon.data && (
-            <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
-          )}          <h4>{category.attributes.name}</h4>
+          <Link to={`/category/${category.attributes.slug}`}>
+            {category.attributes.icon && category.attributes.icon.data && (
+              <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
+            )}
+            <h4>{category.attributes.name}</h4>
+          </Link>
         </div>
       ))}
     </div>
