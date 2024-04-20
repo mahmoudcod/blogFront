@@ -15,19 +15,26 @@ a {
     display: flex;
     flex-direction: column;
     margin: 0 auto 1.8rem;
-    max-width: 85%;
+    width: 85%;
 }
 
 .header {
     display: flex;
-    position: sticky;
-    top: 00%;
-
+    position: relative;
+    top: 0;
+    z-index: 1000;
+    width: 85%;
+    margin: 0 auto 1.8rem;
     justify-content: space-between;
     align-items: center;
     align-content: center;
     border-bottom: #eee solid 1px;
     background-color: #fff;
+}
+
+.header.sticky {
+    position: sticky;
+
 }
 
 .logo img {
@@ -103,7 +110,7 @@ ul {
     width: 100%;
     padding: 20px;
     border-radius: 30px;
-    left: 0%;
+    left: 0;
     font-size: 19px;
     z-index: 1000;
     border: none;

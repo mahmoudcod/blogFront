@@ -94,42 +94,44 @@ const Search = () => {
                 <div className='container'>
 
                     <h3 className='search-title'> نتيجة بحث "{searchQ}"</h3>
-                    <InfiniteScroll
-                        dataLength={data ? data.blogs.data.length : 0}
-                        next={loadMore}
-                        hasMore={hasMore}
-                        endMessage={
-                            <p style={{ textAlign: 'center' }}>
-                                <b></b>
-                            </p>
-                        }
-                    >
+                    <div className='other-blogs'>
+                        <InfiniteScroll
+                            dataLength={data ? data.blogs.data.length : 0}
+                            next={loadMore}
+                            hasMore={hasMore}
+                            endMessage={
+                                <p style={{ textAlign: 'center' }}>
+                                    <b></b>
+                                </p>
+                            }
+                        >
 
-                        <div className='search-cards'>
+
                             {loading && null}
                             {error && <p>Error....</p>}
                             {data && data.blogs.data.length === 0 && (
                                 <p>لا توجد نتائج عن "{searchQ}"</p>
                             )}
                             {data && data.blogs.data.map((recent) => (
-                                <div key={recent.id} className='recentCard'>
-                                    {recent.attributes.cover && recent.attributes.cover.data && (
-                                        <Link to={`/${recent.attributes.slug}`}>
-                                            <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
-                                        </Link>
-                                    )}
-                                    <div className='content'>
+                                <div key={recent.id} className='other-blog-card'>
+                                    <div className='blog-img'>
+                                        {recent.attributes.cover && recent.attributes.cover.data && (
+                                            <Link to={`/${recent.attributes.slug}`}>
+                                                <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
+                                            </Link>
+                                        )}
+                                    </div>
+
+                                    <div className='blog-content'>
                                         <Link to={`/${recent.attributes.slug}`}>
                                             <h3 className='title'>{recent.attributes.title}</h3>
-                                            <p className='dis'>{`${recent?.attributes?.description?.slice(0, 100) ?? ""}`}</p>
                                         </Link>
-                                        <small className='cat-name'>{recent.attributes.categories.data[0].attributes.name}</small>
                                     </div>
                                 </div>
                             ))}
 
-                        </div>
-                    </InfiniteScroll>
+                        </InfiniteScroll>
+                    </div>
 
                 </div>
                 <Footer />

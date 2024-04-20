@@ -35,6 +35,7 @@ function Header() {
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,7 +47,23 @@ function Header() {
     return () => {
       window.removeEventListener('resize', handleResizeListener);
     };
-  }, []); // Empty dependency array ensures this effect runs once on mount
+  }, []);
+
+  useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setIsSticky(currentScrollPos > 0 && currentScrollPos > prevScrollPos);
+      prevScrollPos = currentScrollPos;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -66,50 +83,47 @@ function Header() {
   const categories = data.categories.data;
 
   return (
-    <div className='container'>
-      <header className="header">
-        <Logo />
-        <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
-          {categories.map(cat => (
-            <li key={cat.id} onMouseEnter={() => setHoveredCategory(cat.id)} onMouseLeave={() => setHoveredCategory(null)}>
-              <Link to={`/category/${cat.attributes.slug}`}>
-                {cat.attributes.name}
-                {cat.attributes.sub_categories.data.length > 0 && <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: '0px' }} />}
-              </Link>
-              {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
-                <ul className="sub-categories">
-                  {cat.attributes.sub_categories.data.map(subCat => (
-                    <li key={subCat.id}><Link to={`/category/${cat.attributes.slug}/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-
-        </ul>
-        <div className="search">
-          <IoMdSearch onClick={toggleSearch} />
-          <input
-            type="text"
-            placeholder="بحث..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            className={showSearch ? 'show-search' : 'display-none'}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                window.location.href = `/search/${searchValue}`;
-              }
-            }}
-          />
-          {showSearch && <div className="overlay" onClick={() => setShowMenu(false)}></div>}
-          {isSmallScreen && (
-            <div className="menu-icon" onClick={toggleMenu}>
-              {showMenu ? <IoMdClose /> : <TiThMenu />}
-            </div>
-          )}
-        </div>
-      </header>
-    </div>
+    <header className={`header ${isSticky ? 'sticky' : ''}`}>
+      <Logo />
+      <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
+        {categories.map(cat => (
+          <li key={cat.id} onMouseEnter={() => setHoveredCategory(cat.id)} onMouseLeave={() => setHoveredCategory(null)}>
+            <Link to={`/category/${cat.attributes.slug}`}>
+              {cat.attributes.name}
+              {cat.attributes.sub_categories.data.length > 0 && <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: '0px' }} />}
+            </Link>
+            {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
+              <ul className="sub-categories">
+                {cat.attributes.sub_categories.data.map(subCat => (
+                  <li key={subCat.id}><Link to={`/category/${cat.attributes.slug}/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div className="search">
+        <IoMdSearch onClick={toggleSearch} />
+        <input
+          type="text"
+          placeholder="بحث..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          className={showSearch ? 'show-search' : 'display-none'}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              window.location.href = `/search/${searchValue}`;
+            }
+          }}
+        />
+        {showSearch && <div className="overlay" onClick={() => setShowMenu(false)}></div>}
+        {isSmallScreen && (
+          <div className="menu-icon" onClick={toggleMenu}>
+            {showMenu ? <IoMdClose /> : <TiThMenu />}
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
 

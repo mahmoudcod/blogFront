@@ -4,8 +4,6 @@ import Footer from '../component/footer';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import '../style/catDetails.css';
-import { format } from 'date-fns';
-import { ar } from 'date-fns/locale';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
