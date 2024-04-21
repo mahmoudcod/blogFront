@@ -3,6 +3,13 @@
     margin: 0px;
     box-sizing: border-box;
     text-decoration: none;
+
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    /* Adjust the transition duration and timing function as needed */
 }
 
 a {
@@ -185,6 +192,8 @@ ul {
     .nav li {
         border-bottom: none;
     }
+
+
 
     .nav.show-menu {
         display: block;
