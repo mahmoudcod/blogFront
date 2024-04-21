@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import '../style/comment.css';
+
 
 const CREATE_COMMENT = gql`
     mutation createComment($data: CommentInput!) {

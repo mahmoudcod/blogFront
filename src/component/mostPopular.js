@@ -1,6 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
-import { Link } from 'react-router-dom';
-
+import Link from 'next/link';
+import React from 'react';
 const mostPopularQuery = gql`
   query mostPopular {
     blogs {
@@ -37,11 +37,11 @@ function MostPopular() {
       <h3 className="title-main">الأكثر قراءة</h3>
       {blogs.map((recent) => (
         <div key={recent.id} className='mostPopular'>
-          <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
+          <Link href={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
             <small className="cat-details">{recent.attributes.categories.data[0].attributes.name}</small>
           </Link>
           <h3 className="padd bor title">
-            <Link to={`/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
+            <Link href={`/${recent.attributes.slug}`}>{recent.attributes.title}</Link>
           </h3>
         </div>
       ))}

@@ -1,11 +1,10 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { gql, useQuery } from "@apollo/client";
-import { Link, useParams } from 'react-router-dom';
-import Header from '../component/header';
-import Footer from '../component/footer';
-import '../style/search.css';
+import Link from 'next/link';
+import Header from '../../component/header';
+import Footer from '../../component/footer';
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useRouter } from 'next/router';
 
 
 const TagsBlog = gql`
@@ -49,7 +48,8 @@ const TagsBlog = gql`
 
 
 const Tags = () => {
-    const { slug } = useParams();
+    const router = useRouter(); // Get router object from useRouter
+    const { slug } = router.query; // Access query parameters
     const { loading, error, data, fetchMore } = useQuery(TagsBlog, {
         variables: { slug, limit: 12, start: 0 },
     });
@@ -100,53 +100,48 @@ const Tags = () => {
 
     return (
         <>
-            <HelmetProvider>
-                <Helmet>
-                    <title>{tags?.attributes?.name}</title>
-                    <meta name="description" content={tags?.attributes?.name} />
-                </Helmet>
-                <Header />
-                <div className='container'>
 
-                    <h3 className='search-title'> كلمة دليليه: {tags?.attributes?.name}  </h3>
-                    <div className='other-blogs'>
-                        <InfiniteScroll
-                            dataLength={tags ? tags.attributes.posts.data.length : 0}
-                            next={loadMore}
-                            hasMore={hasMore}
-                            endMessage={
-                                <p style={{ textAlign: 'center' }}>
-                                    <b></b>
-                                </p>
-                            }
-                        >
-                            {loading && null}
-                            {error && <p>Error....</p>}
-                            {data && data.tags.data.length === 0 && (
-                                <p>لا توجد نتائج عن "{tags?.attributes?.name}"</p>
-                            )}
-                            {tags && tags.attributes.posts.data.map((recent) => (
-                                <div key={recent.id} className='other-blog-card'>
-                                    <div className='blog-img'>
-                                        {recent.attributes.cover && recent.attributes.cover.data && (
-                                            <Link to={`/${recent.attributes.slug}`}>
-                                                <img src={recent.attributes.cover.data.attributes.url} alt={recent.attributes.title} />
-                                            </Link>
-                                        )}
-                                    </div>
+            <Header />
+            <div className='container'>
 
-                                    <div className='blog-content'>
-                                        <Link to={`/${recent.attributes.slug}`}>
-                                            <h3 className='title'>{recent.attributes.title}</h3>
+                <h3 className='search-title'> كلمة دليليه: {tags?.attributes?.name}  </h3>
+                <div className='other-blogs'>
+                    <InfiniteScroll
+                        dataLength={tags ? tags.attributes.posts.data.length : 0}
+                        next={loadMore}
+                        hasMore={hasMore}
+                        endMessage={
+                            <p style={{ textAlign: 'center' }}>
+                                <b></b>
+                            </p>
+                        }
+                    >
+                        {loading && null}
+                        {error && <p>Error....</p>}
+                        {data && data.tags.data.length === 0 && (
+                            <p>لا توجد نتائج عن "{tags?.attributes?.name}"</p>
+                        )}
+                        {tags && tags.attributes.posts.data.map((recent) => (
+                            <div key={recent.id} className='other-blog-card'>
+                                <div className='blog-img'>
+                                    {recent.attributes.cover && recent.attributes.cover.data && (
+                                        <Link href={`/${recent.attributes.slug}`}>
+                                            <img src={recent.attributes.cover.data.attributes.url} alt={recent.attributes.title} />
                                         </Link>
-                                    </div>
+                                    )}
                                 </div>
-                            ))}
-                        </InfiniteScroll>
-                    </div>
+
+                                <div className='blog-content'>
+                                    <Link href={`/${recent.attributes.slug}`}>
+                                        <h3 className='title'>{recent.attributes.title}</h3>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </InfiniteScroll>
                 </div>
-                <Footer />
-            </HelmetProvider>
+            </div>
+            <Footer />
         </>
     );
 }

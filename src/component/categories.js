@@ -1,6 +1,6 @@
-import '../style/categories.css';
+import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const CatQuery = gql`
   query GetCat {
@@ -36,7 +36,7 @@ function Categories() {
     <div className='categories'>
       {categories.map((category) => (
         <div key={category.id} className='category'>
-          <Link to={`/category/${category.attributes.slug}`}>
+          <Link href={`/category/${category.attributes.slug}`}>
             {category.attributes.icon && category.attributes.icon.data && (
               <img loading='lazy' src={`${category.attributes.icon.data.attributes.url}`} alt='Gamer' />
             )}

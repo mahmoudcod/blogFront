@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
-
+import Link from 'next/link';
+import React from 'react';
 const logoQuery = gql`
   query GetLogo {
     logo {
@@ -30,7 +30,7 @@ function Logo() {
 
   return (
     <div className="logo">
-      <Link to='/'><img loading='lazy' src={`${logo}`} alt="logo" /> </Link>
+      <Link href='/'><img loading='lazy' src={`${logo}`} alt="logo" /> </Link>
     </div>
   );
 }

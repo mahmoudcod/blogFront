@@ -1,7 +1,7 @@
-import '../style/catThree.css';
+import React from 'react';
 import { IoCartOutline } from "react-icons/io5";
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const getCatThree = gql`
   query GetCat {
@@ -55,21 +55,21 @@ function CatThree() {
         <div className='CatTitle'>
           <div className='title'>
             <IoCartOutline style={iconStyles} />
-            <Link to={`/category/${slug}`}><h3>التجارة الاكترونية</h3></Link>
+            <Link href={`/category/${slug}`}><h3>التجارة الاكترونية</h3></Link>
           </div>
-          <Link to={`/category/${slug}`}><p>اقراء المزيد</p></Link>
+          <Link href={`/category/${slug}`}><p>اقراء المزيد</p></Link>
         </div>
         <div className='catThreeCards'>
           <div className='catThreeCardRight'>
             {rightBlog.map((blog) => (
               <div key={blog.id}>
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <Link to={`/${blog.attributes.slug}`} >
+                  <Link href={`/${blog.attributes.slug}`} >
                     <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   </Link>
                 )}
                 <div className='content'>
-                  <Link to={`/${blog.attributes.slug}`}><h3 className='title' style={{ fontSize: '28px', width: '100%', lineHeight: '36px' }}>{blog.attributes.title}</h3></Link>
+                  <Link href={`/${blog.attributes.slug}`}><h3 className='title' style={{ fontSize: '28px', width: '100%', lineHeight: '36px' }}>{blog.attributes.title}</h3></Link>
                 </div>
               </div>
             ))}
@@ -78,12 +78,12 @@ function CatThree() {
             {leftBlogs.map((blog) => (
               <div key={blog.id}>
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <Link to={`/${blog.attributes.slug}`} >
+                  <Link href={`/${blog.attributes.slug}`} >
                     <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   </Link>
                 )}
                 <div className='content'>
-                  <Link to={`/${blog.attributes.slug}`}><h3 id='title'>{blog.attributes.title}</h3></Link>
+                  <Link href={`/${blog.attributes.slug}`}><h3 id='title'>{blog.attributes.title}</h3></Link>
                   <div> <p>{blog.attributes.blog.slice(0, 50)}...</p></div>
                 </div>
               </div>

@@ -1,9 +1,7 @@
-
-
+import React from 'react';
 import { PiBankFill } from "react-icons/pi";
-import '../style/catTwo.css'
 import { useQuery, gql } from '@apollo/client'
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" }; const getCatTwo = gql`
 query GetCat {
@@ -49,22 +47,22 @@ function CatTwo() {
         <div className='CatTitle'>
           <div className='title'>
             <PiBankFill style={iconStyles} />
-            <Link to={`/category/${data.category.data.attributes.slug}`}>   <h3>الاقتصاد</h3></Link>
+            <Link href={`/category/${data.category.data.attributes.slug}`}>   <h3>الاقتصاد</h3></Link>
           </div>
-          <Link to={`/category/${data.category.data.attributes.slug}`}>  <p>اقراء المزيد</p> </Link>
+          <Link href={`/category/${data.category.data.attributes.slug}`}>  <p>اقراء المزيد</p> </Link>
         </div>
         <div className='catTwoCards'>
           {projects.map((project) => (
             <div className='catTwoCard' key={project.id}>
               <div className='cardTwo-img'>
                 {project.attributes.cover && project.attributes.cover.data && (
-                  <Link to={`/${project.attributes.slug}`}>
+                  <Link href={`/${project.attributes.slug}`}>
                     <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   </Link>
                 )}
               </div>
               <div className='cardTwo-title'>
-                <Link to={`/${project.attributes.slug}`}> <h3 className="title">{project.attributes.title}</h3> </Link>
+                <Link href={`/${project.attributes.slug}`}> <h3 className="title">{project.attributes.title}</h3> </Link>
               </div>
             </div>
           ))}

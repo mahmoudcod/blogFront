@@ -1,8 +1,8 @@
 
-import '../style/recent.css';
+import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { IoNewspaperOutline } from "react-icons/io5";
-import { Link, } from 'react-router-dom';
+import Link from 'next/link';
 
 const recentQuery = gql`
   query GetBlogs {
@@ -59,19 +59,19 @@ function Recent() {
         {blogs.map((recent) => (
           <div key={recent.id} className='recentCard'>
             {recent.attributes.cover && recent.attributes.cover.data && (
-              <Link to={`/${recent.attributes.slug}`}>
+              <Link href={`/${recent.attributes.slug}`}>
                 <img loading='lazy' src={`${recent.attributes.cover.data.attributes.url}`} alt='Gamer' />
               </Link>
             )}
             <div className='content'>
-              <Link to={`/${recent.attributes.slug}`}>
+              <Link href={`/${recent.attributes.slug}`}>
                 <h3 className='title'>{recent.attributes.title}</h3>
               </Link>
 
               <p className='body'>{recent.attributes.blog.slice(0, 50)}...</p>
               {recent.attributes.categories && (
                 recent.attributes.categories.data.length > 0 &&
-                <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
+                <Link href={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
                   <h4 className='cat'>{recent.attributes.categories.data[0].attributes.name}</h4>
                 </Link>
               )}

@@ -139,6 +139,7 @@ ul {
 
 .search {
     display: flex;
+    z-index: 1242;
 }
 
 .overlay {

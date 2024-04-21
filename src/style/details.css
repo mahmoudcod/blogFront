@@ -277,6 +277,7 @@
 
 .hov {
     transition: all 0.20s ease;
+    width: fit-content;
 }
 
 .hov:hover {
@@ -546,6 +547,11 @@ small {
     /* .social {
         display: none;
     } */
+
+    .title-details {
+        width: 100%;
+    }
+
     .profileSocial .socialI {
         padding: 5px;
 

@@ -1,23 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import Head from 'next/head'; // Import Head from next/head
 import Header from '../component/header';
 import CommentSection from '../component/comments';
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
 import MostPopular from '../component/mostPopular';
 import Footer from '../component/footer';
 import { CgProfile } from "react-icons/cg";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ar } from 'date-fns/locale';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ReactMarkdown from 'react-markdown'
-import '../style/details.css'
 import { IoMdAdd } from "react-icons/io";
 import { SlSocialTwitter } from "react-icons/sl";
 import { SlSocialFacebook } from "react-icons/sl";
 import { SlSocialInstagram } from "react-icons/sl";
+import { useRouter } from 'next/router';
 
 
 const blogQuery = gql`
@@ -104,7 +103,8 @@ const blogQuery = gql`
 `;
 
 const DetailsPage = () => {
-    const { slug } = useParams();
+    const router = useRouter(); // Get router object from useRouter
+    const { slug } = router.query; // Access query parameters
     const { loading, error, data } = useQuery(blogQuery, {
         variables: { slug },
     });
@@ -143,22 +143,24 @@ const DetailsPage = () => {
 
 
     return (
-        <HelmetProvider>
-            <Helmet>
-                {/* open graph meta tags  */}
-                <meta name="description" content={blog.attributes.description} />
-                <meta name="keywords" content={blog.attributes.tags.data.map(tag => tag.attributes.name).join(', ')} />
+        <>
+            <Head>
+                {/* Meta Tags */}
                 <title>{title}</title>
+                <meta name="description" content={blog.attributes.description} />
+
+                {/* Open Graph Meta Tags */}
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={blog.attributes.description} />
                 <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
-                <meta property="og:url" content={`/${blog?.attributes?.slug}`} />
-                <meta name="twitter:card" content="summary_large_image" />
-            </Helmet>
+                <meta property="og:url" content={`https://money.ektesad.com/${slug}`} />
+                <meta property="og:type" content="article" />
+            </Head>
+
             <Header />
             <div className='container'>
                 {categories.data.length > 0 && (
-                    <Link to={`/category/${categories.data[0].attributes.slug}`}>
+                    <Link href={`/category/${categories.data[0].attributes.slug}`}>
                         <small className='hov'>{categories.data[0].attributes.name}</small>
                     </Link>
                 )}
@@ -169,7 +171,7 @@ const DetailsPage = () => {
                             <div className='cal-profile'>
                                 {blog?.attributes?.users_permissions_user?.data?.id ? (<div className='profile'>
                                     <CgProfile />
-                                    <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                    <Link href={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
                                         <p key={blog?.attributes?.users_permissions_user?.data?.id ?? ''}>   {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                         </p>
                                     </Link>
@@ -229,7 +231,7 @@ const DetailsPage = () => {
                             </div>
                             <div className='tagsInfo'>
                                 {blog.attributes.tags.data.map((tag) => (
-                                    <Link to={`/tags/${tag.attributes.slug}`} key={tag.id}>
+                                    <Link href={`/tags/${tag.attributes.slug}`} key={tag.id}>
                                         <p>{tag.attributes.name}</p>
                                     </Link>
                                 ))}
@@ -238,14 +240,14 @@ const DetailsPage = () => {
                                 <div className='author'>
                                     <div className='authorInfo'>
                                         <div className='profileInfo'>
-                                            <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                            <Link href={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
                                                 <img
                                                     loading='lazy'
                                                     src={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover && blog.attributes.users_permissions_user.data.attributes.cover.data && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes && blog.attributes.users_permissions_user.data.attributes.cover.data.attributes.url}
                                                     alt={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                                 />
                                             </Link>
-                                            <Link to={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
+                                            <Link href={`/profile/${blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes.slug}`}>
                                                 <p key={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.id}>
                                                     {blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.username}
                                                 </p>
@@ -253,17 +255,17 @@ const DetailsPage = () => {
                                         </div>
                                         <div className='profileSocial'>
                                             <div className='socialI'>
-                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.x}>
+                                                <Link href={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.x}>
                                                     <SlSocialTwitter />
                                                 </Link>
                                             </div>
                                             <div className='socialI'>
-                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.facebook}>
+                                                <Link href={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.facebook}>
                                                     <SlSocialFacebook />
                                                 </Link>
                                             </div>
                                             <div className='socialI'>
-                                                <Link to={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.linkedin}>
+                                                <Link href={blog && blog.attributes && blog.attributes.users_permissions_user && blog.attributes.users_permissions_user.data && blog.attributes.users_permissions_user.data.attributes && blog.attributes.users_permissions_user.data.attributes.linkedin}>
                                                     <SlSocialInstagram />
                                                 </Link>
                                             </div>
@@ -297,7 +299,7 @@ const DetailsPage = () => {
                             <h3 className='title-main'>ذات صلة</h3>
                             {categoryBlogs.map((blog) => (
                                 <div className='mostPopular' key={blog.id}>
-                                    <h1 className='title bor'><Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                    <h1 className='title bor'><Link href={`/${blog.attributes.slug}`} key={blog.id}>
                                         {blog.attributes.title}
                                     </Link></h1>
                                 </div>
@@ -310,10 +312,10 @@ const DetailsPage = () => {
                     <div className='suggestion-flex'>
                         {categoryBlogs.slice(0, 4).map((blog) => (
                             <div className='mostPopular' key={blog.id}>
-                                <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                <Link href={`/${blog.attributes.slug}`} key={blog.id}>
                                     <img src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
                                 </Link>
-                                <h3 className='title'> <Link to={`/${blog.attributes.slug}`} key={blog.id}>
+                                <h3 className='title'> <Link href={`/${blog.attributes.slug}`} key={blog.id}>
                                     {blog.attributes.title}
                                 </Link></h3>
                             </div>
@@ -322,7 +324,7 @@ const DetailsPage = () => {
                 </div>
             </div>
             <Footer />
-        </HelmetProvider >
+        </>
     );
 };
 

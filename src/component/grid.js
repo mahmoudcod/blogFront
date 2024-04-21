@@ -1,6 +1,5 @@
-
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
-import '../style/grid.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useQuery, gql } from '@apollo/client';
@@ -10,7 +9,7 @@ const gridQuery = gql`
     blogs {
       data {
         id
-     attributes {
+        attributes {
           title
           slug
           cover {
@@ -27,7 +26,21 @@ const gridQuery = gql`
 `;
 
 function Grid() {
-  const isSmallScreen = window.innerWidth <= 768;
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Call initially to set the correct value
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const settings = {
     dots: true,
@@ -44,9 +57,6 @@ function Grid() {
   if (error) return <p>Error: {error.message}</p>;
 
   const blogs = data.blogs.data.slice(0, 4);
-
-
-
 
   const goToLink = (slug) => {
     window.location.href = `/${slug}`;
@@ -87,7 +97,6 @@ function Grid() {
       )}
     </div>
   );
-
 }
 
 export default Grid;

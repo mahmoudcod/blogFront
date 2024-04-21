@@ -1,7 +1,11 @@
-.hint{
-    margin-top:20px;
+.hint {
+    margin-top: 20px;
     border-radius: 8px;
     padding: 2rem;
-    background-color: #C2C2C2;
-    color:black
+    border: 2px solid #aaa;
+    color: black
+}
+
+.hint p {
+    line-height: 24px;
 }

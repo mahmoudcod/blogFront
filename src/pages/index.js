@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Header from '../component/header';
 import Grid from '../component/grid';
 import Categories from '../component/categories';
@@ -24,11 +23,8 @@ function Home() {
   }, []);
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        <title>صناع المال</title>
-        {/* Your meta tags */}
-      </Helmet>
+    <>
+
       <div className={isLoaded ? '' : 'fade-out'}>
         <Header />
         <Grid />
@@ -41,7 +37,7 @@ function Home() {
         <Hint />
         <Footer />
       </div>
-    </HelmetProvider>
+    </>
   );
 }
 

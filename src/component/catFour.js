@@ -1,7 +1,6 @@
-
+import React from 'react';
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { Link } from 'react-router-dom';
-import '../style/catFour.css'
+import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
 const getCatFour = gql`
 query GetCat {
@@ -50,9 +49,9 @@ function CatFour() {
         <div className="CatTitle">
           <div className="title">
             <RiMoneyDollarCircleLine style={iconStyles} />
-            <Link to={`/category/${slug}`}>  <h3> صناع المال</h3></Link>
+            <Link href={`/category/${slug}`}>  <h3> صناع المال</h3></Link>
           </div>
-          <Link to={`/category/${slug}`}><p>اقراء المزيد</p> </Link>
+          <Link href={`/category/${slug}`}><p>اقراء المزيد</p> </Link>
         </div>
         <div className="catFourCards">
           {cat.map((blog) => {
@@ -61,12 +60,12 @@ function CatFour() {
               <div key={blog.id} className='catFourCard'>
 
                 {blog.attributes.cover && blog.attributes.cover.data && (
-                  <Link to={`/${blog.attributes.slug}`}>
+                  <Link href={`/${blog.attributes.slug}`}>
                     <img loading='lazy' src={`${blog.attributes.cover.data.attributes.url}`} alt='Gamer' />
                   </Link>
 
                 )}                <div className='content'>
-                  <Link to={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
+                  <Link href={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
                 </div>
               </div>
             );

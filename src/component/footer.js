@@ -1,6 +1,6 @@
 import Logo from './logo';
-import '../style/footer.css';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_FOOTER = gql`
@@ -45,8 +45,8 @@ function Footer() {
         return chunkedArray;
     };
 
-    const lastItem = <li><Link to={`/contact`}> اتصل بنا</Link> </li>;
-    const anotherItem = <li><Link to={`/about`}> عن صناع المال</Link> </li>;
+    const lastItem = <li><Link href={`/contact`}> اتصل بنا</Link> </li>;
+    const anotherItem = <li><Link href={`/about`}> عن صناع المال</Link> </li>;
 
     return (
         <footer className='footer'>
@@ -58,7 +58,7 @@ function Footer() {
                             <ul>
                                 {chunk.map((item, itemIndex) => (
                                     <li key={item.slug}>
-                                        <Link to={`/category/${item.subName ? `${item.slug}/${item.slug}` : item.slug}`}>
+                                        <Link href={`/category/${item.subName ? `${item.slug}/${item.slug}` : item.slug}`}>
                                             {item.name || item.subName}
                                         </Link>
                                     </li>
@@ -72,16 +72,16 @@ function Footer() {
                 <div className='sectionTwo'>
                     <ul>
                         <li>
-                            <Link to={`/advertising`}> سياسة الاعلان</Link>
+                            <Link href={`/advertising`}> سياسة الاعلان</Link>
                         </li>
                         <li>
-                            <Link to={`/publish`}> حقوق النشر</Link>
+                            <Link href={`/publish`}> حقوق النشر</Link>
                         </li>
                         <li>
-                            <Link to={`/usage`}> شروط الاستخدام</Link>
+                            <Link href={`/usage`}> شروط الاستخدام</Link>
                         </li>
                         <li>
-                            <Link to={`/privacy`}> سياسة الخصوصية</Link>
+                            <Link href={`/privacy`}> سياسة الخصوصية</Link>
                         </li>
                     </ul>
                 </div>

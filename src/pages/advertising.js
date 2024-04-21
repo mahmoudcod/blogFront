@@ -1,11 +1,10 @@
 
-
+import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Footer from '../component/footer';
 import Header from '../component/header';
-import '../style/police.css';
+import { useRouter } from 'next/router';
 
 
 
@@ -25,10 +24,8 @@ query GetAdvertising {
 
 
 const Advertising = () => {
-    const { id } = useParams();
-    const { loading, error, data } = useQuery(GET_ADVERTISING, {
-        variables: { id },
-    });
+    const router = useRouter();
+    const { loading, error, data } = useQuery(GET_ADVERTISING);
     if (loading) return null;
     if (error) return `Error! ${error.message}`;
     return (

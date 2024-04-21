@@ -1,7 +1,7 @@
-
+import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 
-import '../style/hint.css'
+
 
 const gridQuery = gql`
   query Hint {

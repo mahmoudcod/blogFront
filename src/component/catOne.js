@@ -1,7 +1,6 @@
-
+import React from 'react';
 import { FaBuilding } from "react-icons/fa6";
-import '../style/catOne.css'
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client'
 let iconStyles = { color: "#0280CD", fontSize: "32px", marginLeft: "5px" };
 const getCatOne = gql`
@@ -48,20 +47,20 @@ function CatOne() {
         <div className='CatTitle'>
           <div className="title">
             <FaBuilding style={iconStyles} />
-            <Link to={`/category/${slug}`}>    <h3>افكار المشاريع</h3></Link>
+            <Link href={`/category/${slug}`}>    <h3>افكار المشاريع</h3></Link>
           </div>
-          <Link to={`/category/${slug}`}><p>اقراء المزيد</p></Link>
+          <Link href={`/category/${slug}`}><p>اقراء المزيد</p></Link>
         </div>
         <div className='catOneCards'>
           {projects.map((project) => (
             <div className='catOneCard' key={project.id}>
 
               {project.attributes.cover && project.attributes.cover.data && (
-                <Link to={`/${project.attributes.slug}`}>
+                <Link href={`/${project.attributes.slug}`}>
                   <img loading='lazy' src={`${project.attributes.cover.data.attributes.url}`} alt='Gamer' />
                 </Link>
               )}
-              <Link to={`/${project.attributes.slug}`}>  <h3 className="title">{project.attributes.title}</h3></Link>
+              <Link href={`/${project.attributes.slug}`}>  <h3 className="title">{project.attributes.title}</h3></Link>
             </div>
           ))}
         </div>
