@@ -147,11 +147,11 @@ const DetailsPage = () => {
             <Head>
                 {/* Meta Tags */}
                 <title>{title}</title>
-                <meta name="description" content={blog.attributes.description} />
+                <meta name="description" content={blog.attributes.description || "this is the desc"} />
 
                 {/* Open Graph Meta Tags */}
                 <meta property="og:title" content={title} />
-                <meta property="og:description" content={blog.attributes.description} />
+                <meta property="og:description" content={blog.attributes.description || "this is the disc"} />
                 <meta property="og:image" content={blog.attributes.cover.data.attributes.url} />
                 <meta property="og:url" content={`https://money.ektesad.com/${slug}`} />
                 <meta property="og:type" content="article" />
