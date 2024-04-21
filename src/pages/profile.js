@@ -115,8 +115,8 @@ function Profile() {
             <div>
                 <Header />
                 <div className='container'>
-                    <div className='title' style={{ marginBottom: '3rem' }}>
-                        <h2>الكاتب {profile.username}</h2>
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h2 >الكاتب: {profile.username}</h2>
                     </div>
                     <div className='profile-details'>
                         <div className='profile-cover'>

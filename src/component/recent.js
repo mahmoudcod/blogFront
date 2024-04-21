@@ -68,7 +68,7 @@ function Recent() {
                 <h3 className='title'>{recent.attributes.title}</h3>
               </Link>
 
-              <p className='body'>{recent.attributes.blog.slice(0, 100)}...</p>
+              <p className='body'>{recent.attributes.blog.slice(0, 50)}...</p>
               {recent.attributes.categories && (
                 recent.attributes.categories.data.length > 0 &&
                 <Link to={`/category/${recent.attributes.categories.data[0].attributes.slug}`}>
