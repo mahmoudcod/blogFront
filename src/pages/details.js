@@ -110,11 +110,11 @@ const DetailsPage = () => {
     });
     const blog = data?.blogs?.data[0];
     const [headings, setHeadings] = useState([]);
-    // Effect to extract headings after rendering
     useEffect(() => {
         if (blog) {
-            // Select rendered <h> elements after the blog data is available
+
             const renderedHtml = document.getElementById('rendered-html');
+
             if (renderedHtml) {
                 const hElements = renderedHtml.querySelectorAll('h1, h2, h3, h4, h5, h6');
                 const extractedHeadings = Array.from(hElements).map((heading, index) => {

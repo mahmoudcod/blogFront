@@ -2,7 +2,7 @@
 
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown'
 import Footer from '../component/footer';
 import Header from '../component/header';
 import { Helmet, HelmetProvider } from 'react-helmet-async';

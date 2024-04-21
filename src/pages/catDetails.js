@@ -9,8 +9,6 @@ import { PiBankFill } from "react-icons/pi";
 import { IoCartOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import '../style/catDetails.css';
-import { format } from 'date-fns';
-import { ar } from 'date-fns/locale';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 

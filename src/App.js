@@ -17,7 +17,7 @@ import About from './pages/about';
 import { HelmetProvider } from 'react-helmet-async';
 
 const client = new ApolloClient({
-  uri: 'http://144.91.117.210:1337/graphql',
+  uri: 'https://money-api.ektesad.com/graphql',
   cache: new InMemoryCache()
 });
 
