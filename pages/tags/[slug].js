@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { gql, useQuery } from "@apollo/client";
 import Link from 'next/link';
-import Header from '../../component/header';
-import Footer from '../../component/footer';
+import Header from '../../src/component/header';
+import Footer from '../../src/component/footer';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from 'next/router';
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import Header from '../../../component/header';
-import Footer from '../../../component/footer';
+import Header from '../../../src/component/header';
+import Footer from '../../../src/component/footer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';

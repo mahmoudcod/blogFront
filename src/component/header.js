@@ -104,8 +104,8 @@ function Header() {
           </li>
         ))}
       </ul>
-      <div className="search" onClick={toggleSearch}>
-        {showSearch ? <IoMdClose /> : <IoMdSearch />}
+      <div className="search">
+        {showSearch ? <IoMdClose /> : <IoMdSearch onClick={toggleSearch} />}
         <input
           type="text"
           placeholder="بحث..."

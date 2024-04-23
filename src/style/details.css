@@ -311,7 +311,13 @@
     padding: 0px 0 9px;
 }
 
-.mostPopular .cat-details {
+.mostPopular-two {
+    display: flex;
+    flex-direction: column;
+}
+
+.mostPopular .cat-details,
+.mostPopular-two .cat-details {
     color: #828282;
     font-family: Almarai;
     font-size: 14px;
@@ -320,7 +326,8 @@
     line-height: normal;
 }
 
-.mostPopular .cat-details:hover {
+.mostPopular .cat-details:hover,
+.mostPopular-two .cat-details:hover {
     color: #0280CD;
 }
 
@@ -334,14 +341,24 @@ small {
 
 }
 
-.mostPopular .bor {
+.mostPopular-two .title a {
+    display: inline;
+    transition: all 0.20s ease;
+}
+
+.mostPopular-two .title a:hover {
+    color: #0280CD;
+}
+
+.mostPopular .bor,
+.mostPopular-two .bor {
     color: #000;
     font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 800;
-    line-height: 30px;
-    padding: 0px 0 10px;
+    line-height: 24px;
+    padding: 10px 0;
     margin: 0;
     border-bottom: 1px solid #aaaaaa;
 

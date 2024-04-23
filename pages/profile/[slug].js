@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'; // Import useRouter from next/router
-import Header from '../../component/header';
-import Footer from '../../component/footer';
+import Header from '../../src/component/header';
+import Footer from '../../src/component/footer';
 import Link from 'next/link';
 import { SlSocialFacebook } from "react-icons/sl";
 import { FaXTwitter } from "react-icons/fa6";
