@@ -83,7 +83,7 @@ function CatThree() {
                   </Link>
                 )}
                 <div className='content'>
-                  <Link href={`/${blog.attributes.slug}`}><h3 id='title'>{blog.attributes.title}</h3></Link>
+                  <Link href={`/${blog.attributes.slug}`}><h3 id='title-two'>{blog.attributes.title}</h3></Link>
                   <div> <p>{blog.attributes.blog.slice(0, 50)}...</p></div>
                 </div>
               </div>

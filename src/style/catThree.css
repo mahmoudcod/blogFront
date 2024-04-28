@@ -12,14 +12,14 @@
 }
 
 
-#title {
+.title-two {
     font-size: 20px;
     line-height: 28px;
     margin: 0 10px;
     transition: all 0.23s ease;
 }
 
-#title:hover {
+.title-two:hover {
     color: rgb(22, 135, 206);
 }
 
