@@ -1,8 +1,8 @@
 //pages/_app.js
 import React from 'react';
+import '../src/index.css'
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../src/lip/apolloClient';
-import '../src/index.css'
 import '../src/style/catDetails.css'
 import '../src/style/categories.css'
 import '../src/style/catFour.css'
