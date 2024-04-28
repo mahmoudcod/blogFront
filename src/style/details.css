@@ -143,7 +143,6 @@
 
 .blog p {
     color: #000;
-    font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -193,7 +192,6 @@
 
 .toggle h3 {
     color: #000;
-    font-family: Almarai;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -235,7 +233,6 @@
 
 .title-details {
     color: #000;
-    font-family: Almarai;
     font-size: 30px;
     flex-wrap: wrap;
     width: 75%;
@@ -247,7 +244,6 @@
 
 .title-main {
     color: #000;
-    font-family: Almarai;
     font-size: 24px;
     flex-wrap: wrap;
     font-style: normal;
@@ -267,7 +263,6 @@
     padding: 5px;
     color: #000;
     text-align: center;
-    font-family: Almarai;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -319,7 +314,6 @@
 .mostPopular .cat-details,
 .mostPopular-two .cat-details {
     color: #828282;
-    font-family: Almarai;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -333,7 +327,6 @@
 
 small {
     color: #828282;
-    font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -353,7 +346,6 @@ small {
 .mostPopular .bor,
 .mostPopular-two .bor {
     color: #000;
-    font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 800;
@@ -382,7 +374,6 @@ small {
 .profile p {
     padding: 0 5px;
     color: #828282;
-    font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -398,7 +389,6 @@ small {
     padding: 0 5px;
     color: #828282;
     text-align: center;
-    font-family: Almarai;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -425,7 +415,6 @@ small {
 .authorInfo p {
     padding: 0 10px;
     color: #292D32;
-    font-family: Almarai;
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
@@ -471,7 +460,6 @@ small {
 .suggestion-comment-title {
     color: #000;
     text-align: right;
-    font-family: Almarai;
     font-size: 32px;
     font-style: normal;
     font-weight: 700;

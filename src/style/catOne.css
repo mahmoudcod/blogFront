@@ -1,24 +1,5 @@
-* {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-padding: 0px;
-margin: 0px;
-box-sizing: border-box;
-font-family: Almarai;
-}
-
 .CatTitle h3 {
     color: #0280CD;
-    font-family: Almarai;
     font-size: 26px;
     font-style: normal;
     font-weight: 800;
