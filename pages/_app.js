@@ -27,7 +27,6 @@ function App({ Component, pageProps }) {
     return (
         <ApolloProvider client={apolloClient}>
             <div dir="rtl" >
-
                 <Component {...pageProps} />
             </div>
         </ApolloProvider>

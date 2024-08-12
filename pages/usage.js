@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import Footer from '../src/component/footer';
 import Header from '../src/component/header';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 
 

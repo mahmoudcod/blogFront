@@ -81,7 +81,7 @@ function Footer() {
                             <Link href={`/usage`}> شروط الاستخدام</Link>
                         </li>
                         <li>
-                            <Link href={`/privacy`}> سياسة الخصوصية</Link>
+                            <Link href={`/about`}> سياسة الخصوصية</Link>
                         </li>
                     </ul>
                 </div>

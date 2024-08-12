@@ -25,26 +25,21 @@ function Home() {
 
   return (
     <>
-      <Layout
-        title={'صناع المال'}
-        description={'صناع المال هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد'}
-        image={`https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png`}
-      >
-        <div className={isLoaded ? '' : 'fade-out'}>
 
-          <Header />
-          <Grid />
-          <Categories />
-          <Recent />
-          <CatOne />
-          <CatTwo />
-          <CatThree />
-          <CatFour />
-          <Hint />
-          <Footer />
+      <div className={isLoaded ? '' : 'fade-out'}>
 
-        </div>
-      </Layout>
+        <Header />
+        <Grid />
+        <Categories />
+        <Recent />
+        <CatOne />
+        <CatTwo />
+        <CatThree />
+        <CatFour />
+        <Hint />
+        <Footer />
+
+      </div>
     </>
   );
 }

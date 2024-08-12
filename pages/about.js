@@ -23,30 +23,35 @@ const About = () => {
   const router = useRouter(); // Get router object
   const { loading, error, data } = useQuery(GET_ADVERTISING);
 
-  if (loading) return null;
-  if (error) return `Error! ${error.message}`;
+  const title = 'عن موقع صناع المال';
+  const description = 'صناع المال هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد';
+  const image = 'https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png';
+
 
   return (
-    <>
-      <Layout
-        title={' عن موقع صناع المال | صناع المال'}
-        description={'صناع المال هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد'}
-        image={`https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png`}
-      ></Layout>
+
+    <Layout
+      title={title}
+      description={description}
+      image={image}
+    >
 
       <Header />
-      <div className='container'>
-        <div className='police-details'>
-          <h2>عن موقع صناع المال </h2>
-          <p className='police-dic'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
-          </p>
-        </div>
-        <div className='police'>
-          <ReactMarkdown key={data.police.data.id}>{data.police.data.attributes.about}</ReactMarkdown>
-        </div>
-      </div>
+      {loading && <p></p>}
+      {error && <p>خطأ: {error.message}</p>}
+      {data && (
+        <div className='container'>
+          <div className='police-details'>
+            <h2>عن موقع صناع المال </h2>
+            <p className='police-dic'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
+            </p>
+          </div>
+          <div className='police'>
+            <ReactMarkdown key={data.police.data.id}>{data.police.data.attributes.about}</ReactMarkdown>
+          </div>
+        </div>)};
       <Footer />
-    </>
+    </Layout>
   );
 }
 
