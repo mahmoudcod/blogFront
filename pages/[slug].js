@@ -13,7 +13,7 @@ import { ar } from 'date-fns/locale';
 import ReactMarkdown from 'react-markdown'
 import { IoMdAdd } from "react-icons/io";
 import { SlSocialTwitter, SlSocialFacebook, SlSocialInstagram } from "react-icons/sl";
-import { initializeApollo } from '../src/lip/apolloClient';  // Make sure to initialize Apollo Client on the server
+import { initializeApollo } from '../src/lip/apolloClient';
 
 const blogQuery = gql`
     query GetBlog($slug: String!) {
@@ -94,11 +94,18 @@ const blogQuery = gql`
                 }
             }
         }
+        logo {
+            data {
+                attributes {
+                    appName
+                }
+            }
+        }
     }
 `;
 
 export async function getServerSideProps(context) {
-    const apolloClient = initializeApollo(); // Initialize Apollo Client
+    const apolloClient = initializeApollo();
 
     const { slug } = context.params;
 
@@ -107,7 +114,6 @@ export async function getServerSideProps(context) {
         variables: { slug },
     });
 
-    // Check if the blog exists, otherwise return a 404 status
     if (!data.blogs.data.length) {
         return {
             notFound: true,
@@ -117,11 +123,12 @@ export async function getServerSideProps(context) {
     return {
         props: {
             blog: data.blogs.data[0],
+            appName: data.logo.data.attributes.appName,
         },
     };
 }
 
-const DetailsPage = ({ blog }) => {
+const DetailsPage = ({ blog, appName }) => {
     const [headings, setHeadings] = useState([]);
     const [showSources, setShowSources] = useState(false);
 
@@ -144,8 +151,7 @@ const DetailsPage = ({ blog }) => {
         setShowSources(!showSources);
     };
 
-    // Use blog data for metadata if available
-    const pageTitle = blog?.attributes?.title;
+    const pageTitle = blog?.attributes?.title ? `${blog.attributes.title} - ${appName}` : appName;
     const pageDescription = blog?.attributes?.description;
     const pageImage = blog?.attributes?.cover?.data?.attributes?.url;
 

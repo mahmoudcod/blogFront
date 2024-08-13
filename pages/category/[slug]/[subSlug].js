@@ -1,21 +1,21 @@
 import React, { useState, useRef } from 'react';
+import { useQuery, gql } from '@apollo/client';
+import Layout from '../../../src/component/layout';
 import Header from '../../../src/component/header';
 import Footer from '../../../src/component/footer';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useQuery, gql } from '@apollo/client';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-
+import { initializeApollo } from '../../../src/lip/apolloClient';
 
 const GET_CAT_DETAILS = gql`
-    query GetCatDetails($subSlug: String!, $limit: Int!,$start: Int!) {
+    query GetCatDetails($subSlug: String!, $limit: Int!, $start: Int!) {
         subCategories(filters: {slug:{eq:$subSlug}}) {
              data{
                 id
                 attributes {
                     subName
                     slug
+                    description
                     category{
                         data{
                             id
@@ -58,47 +58,60 @@ const GET_CAT_DETAILS = gql`
     }
 `;
 
+export async function getServerSideProps(context) {
+    const apolloClient = initializeApollo();
+    const { subSlug } = context.params;
 
-
-
-const SupCatDetails = () => {
-
-    const router = useRouter();
-    const { subSlug } = router.query;
-    const { loading, error, data, fetchMore } = useQuery(GET_CAT_DETAILS, {
+    const { data } = await apolloClient.query({
+        query: GET_CAT_DETAILS,
         variables: { subSlug, limit: 12, start: 0 },
     });
-    const subCategory = data?.subCategories.data[0];  // Optional chaining
 
+    if (!data.subCategories.data.length) {
+        return {
+            notFound: true,
+        };
+    }
+
+    return {
+        props: {
+            subCategory: data.subCategories.data[0],
+        },
+    };
+}
+
+const SupCatDetails = ({ subCategory: initialSubCategory }) => {
     const [hasMore, setHasMore] = useState(true);
-    const currentDataRef = useRef(null);
+    const { data, fetchMore } = useQuery(GET_CAT_DETAILS, {
+        variables: { subSlug: initialSubCategory.attributes.slug, limit: 12, start: 0 },
+    });
 
     const fetchMoreData = () => {
-        currentDataRef.current = data;
         fetchMore({
             variables: {
+                subSlug: initialSubCategory.attributes.slug,
                 start: data.subCategories.data[0].attributes.posts.data.length,
+                limit: 12,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
-                if (fetchMoreResult.subCategories.data[0].attributes.posts.data.length < 4) {
+                if (!fetchMoreResult || fetchMoreResult.subCategories.data[0].attributes.posts.data.length === 0) {
                     setHasMore(false);
+                    return prev;
                 }
-                let newBlogs = fetchMoreResult.subCategories.data[0].attributes.posts.data;
-                let oldBlogs = prev.subCategories && prev.subCategories.data && prev.subCategories.data[0] && prev.subCategories.data[0].attributes && prev.subCategories.data[0].attributes.posts && prev.subCategories.data[0].attributes.posts.data ? prev.subCategories.data[0].attributes.posts.data : (currentDataRef.current && currentDataRef.current.subCategories ? currentDataRef.current.subCategories.data[0].attributes.posts.data : []);
+                const newPosts = fetchMoreResult.subCategories.data[0].attributes.posts.data;
                 return {
                     subCategories: {
-                        ...fetchMoreResult.subCategories,
+                        ...prev.subCategories,
                         data: [
                             {
-                                ...fetchMoreResult.subCategories.data[0],
+                                ...prev.subCategories.data[0],
                                 attributes: {
-                                    ...fetchMoreResult.subCategories.data[0].attributes,
+                                    ...prev.subCategories.data[0].attributes,
                                     posts: {
-                                        ...fetchMoreResult.subCategories.data[0].attributes.posts,
+                                        ...prev.subCategories.data[0].attributes.posts,
                                         data: [
-                                            ...oldBlogs,
-                                            ...newBlogs,
+                                            ...prev.subCategories.data[0].attributes.posts.data,
+                                            ...newPosts,
                                         ],
                                     },
                                 },
@@ -109,24 +122,29 @@ const SupCatDetails = () => {
             },
         });
     };
-    if (loading) return null
-    if (error) return `Error! ${error.message}`;
+
+    const subCategory = data ? data.subCategories.data[0] : initialSubCategory;
+
+    const pageTitle = `${subCategory.attributes.subName}`;
+    const pageDescription = subCategory.attributes.description;
+    const pageImage = subCategory.attributes.posts.data[0]?.attributes.cover.data.attributes.url;
 
     return (
-        <>
-
-
+        <Layout
+            title={pageTitle}
+            description={pageDescription}
+            image={pageImage}
+        >
             <Header />
             <div className='container'>
                 <div className='cat-details'>
                     <div className='catTitle-details'>
-                        <h2  >{subCategory.attributes.subName}</h2>
+                        <h2>{subCategory.attributes.subName}</h2>
                     </div>
-                    <p className='cat-disc'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
-                    </p>
+                    <p className='cat-disc'>{subCategory.attributes.description}</p>
                     <div className='cat-links'>
                         {subCategory.attributes.category.data.attributes.sub_categories.data.map(sub => (
-                            <Link href={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}`} key={sub.id} className={window.location.pathname === `/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
+                            <Link href={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}`} key={sub.id} className={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}` === `/category/${subCategory.attributes.category.data.attributes.slug}/${subCategory.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
                         ))}
                     </div>
                 </div>
@@ -135,12 +153,13 @@ const SupCatDetails = () => {
                         dataLength={subCategory.attributes.posts.data.length}
                         next={fetchMoreData}
                         hasMore={hasMore}
+                        loader={<h4></h4>}
                     >
-                        {subCategory.attributes.posts.data.slice(1).map(blog => (
+                        {subCategory.attributes.posts.data.map(blog => (
                             <div key={blog.id} className='other-blog-card'>
                                 <div className='blog-img'>
                                     <Link href={`/${blog.attributes.slug}`}>
-                                        <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt='blog' />
+                                        <img loading='lazy' src={blog.attributes.cover.data.attributes.url} alt={blog.attributes.title} />
                                     </Link>
                                 </div>
                                 <div className='blog-content'>
@@ -148,14 +167,11 @@ const SupCatDetails = () => {
                                 </div>
                             </div>
                         ))}
-
                     </InfiniteScroll>
-
                 </div>
-
             </div>
             <Footer />
-        </>
+        </Layout>
     );
 };
 

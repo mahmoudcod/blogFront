@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
+import { useRouter } from 'next/router';
 import Header from '../../src/component/header';
 import Footer from '../../src/component/footer';
 import Link from 'next/link';
 import { SlSocialFacebook } from "react-icons/sl";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
-import { useQuery, gql } from '@apollo/client';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Layout from '../../src/component/layout';
+import { initializeApollo } from '../../src/lip/apolloClient'; // Import the Apollo client initialization
+import { gql } from '@apollo/client';
 
 const profileQuery = gql`
     query GetProfile($slug: String!, $limit: Int!, $start: Int!) {
@@ -51,12 +53,32 @@ const profileQuery = gql`
     }
 `;
 
-function Profile() {
-    const router = useRouter(); // Get router object from useRouter
-    const { slug } = router.query; // Access query parameters
-    const { loading, error, data, fetchMore } = useQuery(profileQuery, {
-        variables: { slug, limit: 12, start: 0 }
+// Server-side function to fetch data
+export async function getServerSideProps(context) {
+    const apolloClient = initializeApollo(); // Initialize Apollo Client
+
+    const { slug } = context.params;
+
+    const { data } = await apolloClient.query({
+        query: profileQuery,
+        variables: { slug, limit: 12, start: 0 },
     });
+
+    // Check if the profile exists, otherwise return a 404 status
+    if (!data.usersPermissionsUsers.data.length) {
+        return {
+            notFound: true,
+        };
+    }
+
+    return {
+        props: {
+            profile: data.usersPermissionsUsers.data[0].attributes,
+        },
+    };
+}
+
+function Profile({ profile }) {
     const [loadingMore, setLoadingMore] = useState(false);
 
     const fetchMoreData = () => {
@@ -92,17 +114,17 @@ function Profile() {
         });
     };
 
-    if (loading) return null;
-    if (error) return <p>Error: {error.message}</p>;
-
-    const profile = data.usersPermissionsUsers.data[0].attributes;
+    // Set up metadata
+    const pageTitle = `Profile of ${profile.username}`;
+    const pageDescription = profile.description;
+    const pageImage = profile.cover?.data?.attributes?.url;
 
     return (
-        <>
+        <Layout title={pageTitle} description={pageDescription} image={pageImage}>
             <Header />
             <div className='container'>
                 <div style={{ marginBottom: '3rem' }}>
-                    <h2 >الكاتب: {profile.username}</h2>
+                    <h2>الكاتب: {profile.username}</h2>
                 </div>
                 <div className='profile-details'>
                     <div className='profile-cover'>
@@ -129,7 +151,6 @@ function Profile() {
                                     <FaXTwitter />
                                 </a>
                             )}
-
                         </div>
                     </div>
                 </div>
@@ -160,10 +181,9 @@ function Profile() {
                         </div>
                     </InfiniteScroll>
                 </div>
-
             </div>
             <Footer />
-        </>
+        </Layout>
     );
 }
 
