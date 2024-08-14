@@ -49,7 +49,7 @@ function CatTwo() {
             <PiBankFill style={iconStyles} />
             <Link href={`/category/${data.category.data.attributes.slug}`}>   <h3>الاقتصاد</h3></Link>
           </div>
-          <Link href={`/category/${data.category.data.attributes.slug}`}>  <p>اقراء المزيد</p> </Link>
+          <Link href={`/category/${data.category.data.attributes.slug}`}>  <p>اقرأ المزيد</p> </Link>
         </div>
         <div className='catTwoCards'>
           {projects.map((project) => (

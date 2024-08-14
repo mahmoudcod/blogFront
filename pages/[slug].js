@@ -75,13 +75,13 @@ const blogQuery = gql`
                                                         url
                                                     }
                                                 }
-                                            }
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
+                }
+            }
+        }
+    }
                     publishedAt
                     cover {
                         data {
@@ -153,6 +153,11 @@ const DetailsPage = ({ blog, appName }) => {
     const pageTitle = blog?.attributes?.title ? `${blog.attributes.title} - ${appName}` : appName;
     const pageDescription = blog?.attributes?.description;
     const pageImage = blog?.attributes?.cover?.data?.attributes?.url;
+
+    // Filter out the current blog post from related posts
+    const relatedBlogs = blog.attributes.categories.data[0].attributes.blogs.data.filter(
+        relatedBlog => relatedBlog.id !== blog.id
+    );
 
     return (
         <Layout
@@ -292,37 +297,41 @@ const DetailsPage = ({ blog, appName }) => {
                                     <p>ADS</p>
                                 </div>
                             </div>
-                            <div className="dCard">
-                                <h3 className='title-main'>ذات صلة</h3>
-                                {blog.attributes.categories.data[0].attributes.blogs.data.slice(0, 5).map((relatedBlog) => (
-                                    <div className='mostPopular-two' key={relatedBlog.id}>
-                                        <h1 className='title bor'>
-                                            <Link href={`/${relatedBlog.attributes.slug}`}>
-                                                {relatedBlog.attributes.title}
+                            {relatedBlogs.length > 0 && (
+                                <div className="dCard">
+                                    <h3 className='title-main'>ذات صلة</h3>
+                                    {relatedBlogs.slice(0, 5).map((relatedBlog) => (
+                                        <div className='mostPopular-two' key={relatedBlog.id}>
+                                            <h1 className='title bor'>
+                                                <Link href={`/${relatedBlog.attributes.slug}`}>
+                                                    {relatedBlog.attributes.title}
+                                                </Link>
+                                            </h1>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    {relatedBlogs.length > 0 && (
+                        <div className='suggestion'>
+                            <h3 className='suggestion-comment-title'>قد يعجبك ايضا</h3>
+                            <div className='suggestion-flex'>
+                                {relatedBlogs.slice(0, 4).map((suggestedBlog) => (
+                                    <div className='mostPopular' key={suggestedBlog.id}>
+                                        <Link href={`/${suggestedBlog.attributes.slug}`}>
+                                            <img src={suggestedBlog.attributes.cover.data.attributes.url} alt={suggestedBlog.attributes.title} />
+                                        </Link>
+                                        <h3 className='title'>
+                                            <Link href={`/${suggestedBlog.attributes.slug}`}>
+                                                {suggestedBlog.attributes.title}
                                             </Link>
-                                        </h1>
+                                        </h3>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                    </div>
-                    <div className='suggestion'>
-                        <h3 className='suggestion-comment-title'>قد يعجبك ايضا</h3>
-                        <div className='suggestion-flex'>
-                            {blog.attributes.categories.data[0].attributes.blogs.data.slice(0, 4).map((suggestedBlog) => (
-                                <div className='mostPopular' key={suggestedBlog.id}>
-                                    <Link href={`/${suggestedBlog.attributes.slug}`}>
-                                        <img src={suggestedBlog.attributes.cover.data.attributes.url} alt={suggestedBlog.attributes.title} />
-                                    </Link>
-                                    <h3 className='title'>
-                                        <Link href={`/${suggestedBlog.attributes.slug}`}>
-                                            {suggestedBlog.attributes.title}
-                                        </Link>
-                                    </h3>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    )}
                 </>
             </div>
             <Footer />

@@ -49,7 +49,7 @@ function CatOne() {
             <FaBuilding style={iconStyles} />
             <Link href={`/category/${slug}`}>    <h3>افكار المشاريع</h3></Link>
           </div>
-          <Link href={`/category/${slug}`}><p>اقراء المزيد</p></Link>
+          <Link href={`/category/${slug}`}><p>اقرأ المزيد</p></Link>
         </div>
         <div className='catOneCards'>
           {projects.map((project) => (

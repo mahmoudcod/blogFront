@@ -29,7 +29,7 @@ const CatQuery = gql`
 `;
 
 function Header() {
-  const [isSmallScreen, setIsSmallScreen] = useState(false); // Initialize with false initially
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -43,7 +43,6 @@ function Header() {
 
     const handleResizeListener = window.addEventListener('resize', handleResize);
 
-    // Set initial value of isSmallScreen on component mount
     handleResize();
 
     return () => {
@@ -77,6 +76,12 @@ function Header() {
     setShowMenu(false);
   };
 
+  const handleCategoryClick = () => {
+    if (isSmallScreen) {
+      setShowMenu(false);
+    }
+  };
+
   const { loading, error, data } = useQuery(CatQuery);
 
   if (loading) return null;
@@ -88,16 +93,26 @@ function Header() {
     <header className={`header ${isSticky ? 'sticky' : ''}`}>
       <Logo />
       <ul className={`nav ${isSmallScreen && showMenu ? 'show-menu' : ''}`}>
-        {categories.map(cat => (
-          <li key={cat.id} onMouseEnter={() => setHoveredCategory(cat.id)} onMouseLeave={() => setHoveredCategory(null)}>
-            <Link href={`/category/${cat.attributes.slug}`}>
+        {categories.map((cat) => (
+          <li
+            key={cat.id}
+            onMouseEnter={() => !isSmallScreen && setHoveredCategory(cat.id)}
+            onMouseLeave={() => !isSmallScreen && setHoveredCategory(null)}
+          >
+            <Link href={`/category/${cat.attributes.slug}`} onClick={handleCategoryClick}>
               {cat.attributes.name}
-              {cat.attributes.sub_categories.data.length > 0 && <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: " -4px 2" }} />}
+              {!isSmallScreen && cat.attributes.sub_categories.data.length > 0 && (
+                <IoIosArrowDown style={{ color: '#000', fontSize: '15px', margin: '-4px 2px' }} />
+              )}
             </Link>
-            {hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
+            {!isSmallScreen && hoveredCategory === cat.id && cat.attributes.sub_categories.data.length > 0 && (
               <ul className="sub-categories">
-                {cat.attributes.sub_categories.data.map(subCat => (
-                  <li key={subCat.id}><Link href={`/category/${cat.attributes.slug}/${subCat.attributes.slug}`}>{subCat.attributes.subName}</Link></li>
+                {cat.attributes.sub_categories.data.map((subCat) => (
+                  <li key={subCat.id}>
+                    <Link href={`/category/${cat.attributes.slug}/${subCat.attributes.slug}`} onClick={handleCategoryClick}>
+                      {subCat.attributes.subName}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             )}

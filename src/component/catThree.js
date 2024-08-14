@@ -57,7 +57,7 @@ function CatThree() {
             <IoCartOutline style={iconStyles} />
             <Link href={`/category/${slug}`}><h3>التجارة الاكترونية</h3></Link>
           </div>
-          <Link href={`/category/${slug}`}><p>اقراء المزيد</p></Link>
+          <Link href={`/category/${slug}`}><p>اقرأ المزيد</p></Link>
         </div>
         <div className='catThreeCards'>
           <div className='catThreeCardRight'>

@@ -51,7 +51,7 @@ function CatFour() {
             <RiMoneyDollarCircleLine style={iconStyles} />
             <Link href={`/category/${slug}`}>  <h3> صناع المال</h3></Link>
           </div>
-          <Link href={`/category/${slug}`}><p>اقراء المزيد</p> </Link>
+          <Link href={`/category/${slug}`}><p>اقرأ المزيد</p> </Link>
         </div>
         <div className="catFourCards">
           {cat.map((blog) => {
