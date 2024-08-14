@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import Header from '../../src/component/header';
 import Footer from '../../src/component/footer';
 import Link from 'next/link';
@@ -24,15 +23,15 @@ const profileQuery = gql`
                     x
                     facebook
                     posts (pagination: {limit: $limit, start: $start}, sort: "createdAt:desc") {
-                        data{
+                        data {
                             id
-                            attributes{
+                            attributes {
                                 title
                                 slug
                                 createdAt
-                                cover{
-                                    data{
-                                        attributes{
+                                cover {
+                                    data {
+                                        attributes {
                                             url
                                         }
                                     }
@@ -53,19 +52,38 @@ const profileQuery = gql`
     }
 `;
 
-// Server-side function to fetch data
+const GET_LOGO = gql`
+  query getLogo {
+    logo {
+        data {
+            id
+            attributes {
+                appName
+            }
+        }
+    }
+}
+
+`;
+
 export async function getServerSideProps(context) {
-    const apolloClient = initializeApollo(); // Initialize Apollo Client
+    const apolloClient = initializeApollo();
 
     const { slug } = context.params;
 
-    const { data } = await apolloClient.query({
+    // Fetch profile data and app name
+    const { data: profileData } = await apolloClient.query({
         query: profileQuery,
         variables: { slug, limit: 12, start: 0 },
     });
 
+    const { data: logoData } = await apolloClient.query({
+        query: GET_LOGO,
+    });
+
+
     // Check if the profile exists, otherwise return a 404 status
-    if (!data.usersPermissionsUsers.data.length) {
+    if (!profileData.usersPermissionsUsers.data.length) {
         return {
             notFound: true,
         };
@@ -73,19 +91,20 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            profile: data.usersPermissionsUsers.data[0].attributes,
+            profile: profileData.usersPermissionsUsers.data[0].attributes,
+            appName: logoData.logo.data.attributes.appName,
         },
     };
 }
 
-function Profile({ profile }) {
+function Profile({ profile, appName }) {
     const [loadingMore, setLoadingMore] = useState(false);
 
     const fetchMoreData = () => {
         setLoadingMore(true);
         fetchMore({
             variables: {
-                start: profile.posts.data.length
+                start: profile.posts.data.length,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
                 setLoadingMore(false);
@@ -102,76 +121,76 @@ function Profile({ profile }) {
                                         ...prev.usersPermissionsUsers.data[0].attributes.posts,
                                         data: [
                                             ...prev.usersPermissionsUsers.data[0].attributes.posts.data,
-                                            ...fetchMoreResult.usersPermissionsUsers.data[0].attributes.posts.data
-                                        ]
-                                    }
-                                }
-                            }
-                        ]
-                    }
+                                            ...fetchMoreResult.usersPermissionsUsers.data[0].attributes.posts.data,
+                                        ],
+                                    },
+                                },
+                            },
+                        ],
+                    },
                 });
-            }
+            },
         });
     };
 
-    // Set up metadata
-    const pageTitle = `Profile of ${profile.username}`;
+    // Set up metadata with the app name
+    const pageTitle = `${profile.username} - ${appName}`;
     const pageDescription = profile.description;
     const pageImage = profile.cover?.data?.attributes?.url;
 
     return (
         <Layout title={pageTitle} description={pageDescription} image={pageImage}>
             <Header />
-            <div className='container'>
+            <div className="container">
                 <div style={{ marginBottom: '3rem' }}>
                     <h2>الكاتب: {profile.username}</h2>
                 </div>
-                <div className='profile-details'>
-                    <div className='profile-cover'>
+                <div className="profile-details">
+                    <div className="profile-cover">
                         {profile.cover && profile.cover.data && (
-                            <img src={`${profile.cover.data.attributes.url}`} alt='Cover' />
+                            <img src={`${profile.cover.data.attributes.url}`} alt="Cover" />
                         )}
                     </div>
-                    <div className='profile-info'>
+                    <div className="profile-info">
                         <h1>{profile.username}</h1>
-                        <p className='profile-info-disc'>{profile.description}</p>
-                        <div className='profile-social'>
+                        <p className="profile-info-disc">{profile.description}</p>
+                        <div className="profile-social">
                             {profile.linkedin && (
-                                <a href={profile.linkedin} target='_blank' rel='noreferrer'>
+                                <a href={profile.linkedin} target="_blank" rel="noreferrer">
                                     <FaLinkedinIn />
                                 </a>
                             )}
                             {profile.facebook && (
-                                <a href={profile.facebook} target='_blank' rel='noreferrer'>
+                                <a href={profile.facebook} target="_blank" rel="noreferrer">
                                     <SlSocialFacebook />
                                 </a>
                             )}
                             {profile.x && (
-                                <a href={profile.x} target='_blank' rel='noreferrer'>
+                                <a href={profile.x} target="_blank" rel="noreferrer">
                                     <FaXTwitter />
                                 </a>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className='profile-posts'>
+                <div className="profile-posts">
                     <h2>مقالات <span>{profile.username}</span></h2>
                     <InfiniteScroll
                         dataLength={profile.posts.data.length}
                         next={fetchMoreData}
                         hasMore={loadingMore}
                     >
-                        <div className='profile-posts-list'>
+                        <div className="profile-posts-list">
                             {profile.posts && profile.posts.data && profile.posts.data.length > 0 ? (
                                 profile.posts.data.map((post) => (
-                                    <div key={post.id} className='profile-posts-info'>
+                                    <div key={post.id} className="profile-posts-info">
                                         {post.attributes.cover && (
                                             <Link href={`/${post.attributes.slug}`}>
-                                                <img src={`${post.attributes.cover.data.attributes.url}`} alt='Cover' />
+                                                <img src={`${post.attributes.cover.data.attributes.url}`} alt="Cover" />
                                             </Link>
                                         )}
                                         <Link href={`/${post.attributes.slug}`}>
-                                            <h3 className='title'>{post.attributes.title}</h3>
+                                            <h3 className="title">{post.attributes.title}</h3>
                                         </Link>
                                     </div>
                                 ))

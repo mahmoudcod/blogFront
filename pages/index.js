@@ -62,7 +62,7 @@ function Home({ logo }) {
 
   return (
     <Layout
-      title={logo.appName || 'صناع المال'}
+      title={`${logo.appName} - ${description}`}
       description={description}
       image="https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png"
       favicon={faviconUrl}

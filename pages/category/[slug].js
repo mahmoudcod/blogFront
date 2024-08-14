@@ -54,16 +54,33 @@ const GET_CAT_DETAILS = gql`
     }
 `;
 
+const GET_LOGO = gql`
+    query getLogo {
+        logo {
+            data {
+                id
+                attributes {
+                    appName
+                }
+            }
+        }
+    }
+`;
+
 export async function getServerSideProps(context) {
     const apolloClient = initializeApollo();
     const { slug } = context.params;
 
-    const { data } = await apolloClient.query({
+    const { data: categoryData } = await apolloClient.query({
         query: GET_CAT_DETAILS,
         variables: { slug, start: 0, limit: 12 },
     });
 
-    if (!data.categories.data.length) {
+    const { data: logoData } = await apolloClient.query({
+        query: GET_LOGO,
+    });
+
+    if (!categoryData.categories.data.length) {
         return {
             notFound: true,
         };
@@ -71,12 +88,13 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            category: data.categories.data[0],
+            category: categoryData.categories.data[0],
+            appName: logoData.logo.data.attributes.appName,
         },
     };
 }
 
-const CatDetails = ({ category: initialCategory }) => {
+const CatDetails = ({ category: initialCategory, appName }) => {
     const currentDataRef = useRef(null);
     const { data, fetchMore } = useQuery(GET_CAT_DETAILS, {
         variables: { slug: initialCategory.attributes.slug, start: 0, limit: 12 },
@@ -139,7 +157,7 @@ const CatDetails = ({ category: initialCategory }) => {
         }
     };
 
-    const pageTitle = category.attributes.name;
+    const pageTitle = `${category.attributes.name} - ${appName}`;
     const pageDescription = category.attributes.description;
     const pageImage = category.attributes.blogs.data[0]?.attributes.cover.data.attributes.url || '/default-image.jpg';
 

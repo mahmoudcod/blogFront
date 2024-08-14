@@ -1,7 +1,36 @@
-import Logo from './logo';
 import React from 'react';
 import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
+import Image from 'next/image';
+
+const GET_LOGO = gql`
+  query getLogo {
+    logo {
+      data {
+        id
+        attributes {
+          appName
+          description
+          footerLogo {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          favicon {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 const GET_FOOTER = gql`
   query getFooter {
@@ -25,12 +54,15 @@ const GET_FOOTER = gql`
 `;
 
 function Footer() {
-    const { loading, error, data } = useQuery(GET_FOOTER);
-    if (loading) return null;
-    if (error) return `Error! ${error}`;
+    const { loading: footerLoading, error: footerError, data: footerData } = useQuery(GET_FOOTER);
+    const { loading: logoLoading, error: logoError, data: logoData } = useQuery(GET_LOGO);
+
+    if (footerLoading || logoLoading) return null;
+    if (footerError) return `Error! ${footerError}`;
+    if (logoError) return `Error! ${logoError}`;
 
     // Flatten the categories and subcategories
-    const allItems = data.categories.data.reduce((acc, category) => {
+    const allItems = footerData.categories.data.reduce((acc, category) => {
         acc.push(category.attributes);
         acc.push(...category.attributes.sub_categories.data.map(sub => sub.attributes));
         return acc;
@@ -45,14 +77,24 @@ function Footer() {
         return chunkedArray;
     };
 
+    const currentYear = new Date().getFullYear();
+    const appName = logoData.logo.data.attributes.appName;
+    const footerLogoUrl = logoData.logo.data.attributes.footerLogo.data?.attributes.url;
+
     const lastItem = <li><Link href={`/contact`}> اتصل بنا</Link> </li>;
-    const anotherItem = <li><Link href={`/about`}> عن صناع المال</Link> </li>;
+    const anotherItem = <li><Link href={`/about`}> عن  {appName}</Link> </li>;
 
     return (
         <footer className='footer'>
             <div className='container'>
                 <div className='sectionOne'>
-                    <Logo />
+                    {footerLogoUrl ? (
+                        <div className="footer-logo">
+                            <Link href='/'>  <img src={footerLogoUrl} alt={appName} /></Link>
+                        </div>
+                    ) : (
+                        <h2>{appName}</h2>
+                    )}
                     {chunkArray(allItems, 4).map((chunk, index) => (
                         <div key={index}>
                             <ul>
@@ -81,13 +123,13 @@ function Footer() {
                             <Link href={`/usage`}> شروط الاستخدام</Link>
                         </li>
                         <li>
-                            <Link href={`/about`}> سياسة الخصوصية</Link>
+                            <Link href={`/privacy`}> سياسة الخصوصية</Link>
                         </li>
                     </ul>
                 </div>
                 <div className='sectionThree'>
-                    <p> 2024© جميع الحقوق محفوظة</p>
-                    <a href='https://adainc.co/' target='blank'>  <small className='footerSmall'>صمم بكل حب في ادا</small></a>
+                    <p> {currentYear}©  جميع الحقوق محفوظة لدي {appName} </p>
+                    <a href='https://adainc.co/' target='blank'> <small className='footerSmall'>صمم بكل حب في ادا</small></a>
                 </div>
             </div>
         </footer>

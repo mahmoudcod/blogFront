@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import Layout from '../../../src/component/layout';
 import Header from '../../../src/component/header';
@@ -10,7 +10,7 @@ import { initializeApollo } from '../../../src/lip/apolloClient';
 const GET_CAT_DETAILS = gql`
     query GetCatDetails($subSlug: String!, $limit: Int!, $start: Int!) {
         subCategories(filters: {slug:{eq:$subSlug}}) {
-             data{
+            data{
                 id
                 attributes {
                     subName
@@ -58,16 +58,33 @@ const GET_CAT_DETAILS = gql`
     }
 `;
 
+const GET_LOGO = gql`
+    query getLogo {
+        logo {
+            data {
+                id
+                attributes {
+                    appName
+                }
+            }
+        }
+    }
+`;
+
 export async function getServerSideProps(context) {
     const apolloClient = initializeApollo();
     const { subSlug } = context.params;
 
-    const { data } = await apolloClient.query({
+    const { data: subCategoryData } = await apolloClient.query({
         query: GET_CAT_DETAILS,
         variables: { subSlug, limit: 12, start: 0 },
     });
 
-    if (!data.subCategories.data.length) {
+    const { data: logoData } = await apolloClient.query({
+        query: GET_LOGO,
+    });
+
+    if (!subCategoryData.subCategories.data.length) {
         return {
             notFound: true,
         };
@@ -75,12 +92,13 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            subCategory: data.subCategories.data[0],
+            subCategory: subCategoryData.subCategories.data[0],
+            appName: logoData.logo.data.attributes.appName,
         },
     };
 }
 
-const SupCatDetails = ({ subCategory: initialSubCategory }) => {
+const SupCatDetails = ({ subCategory: initialSubCategory, appName }) => {
     const [hasMore, setHasMore] = useState(true);
     const { data, fetchMore } = useQuery(GET_CAT_DETAILS, {
         variables: { subSlug: initialSubCategory.attributes.slug, limit: 12, start: 0 },
@@ -125,7 +143,7 @@ const SupCatDetails = ({ subCategory: initialSubCategory }) => {
 
     const subCategory = data ? data.subCategories.data[0] : initialSubCategory;
 
-    const pageTitle = `${subCategory.attributes.subName}`;
+    const pageTitle = `${subCategory.attributes.subName} - ${appName}`;
     const pageDescription = subCategory.attributes.description;
     const pageImage = subCategory.attributes.posts.data[0]?.attributes.cover.data.attributes.url;
 
@@ -144,7 +162,13 @@ const SupCatDetails = ({ subCategory: initialSubCategory }) => {
                     <p className='cat-disc'>{subCategory.attributes.description}</p>
                     <div className='cat-links'>
                         {subCategory.attributes.category.data.attributes.sub_categories.data.map(sub => (
-                            <Link href={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}`} key={sub.id} className={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}` === `/category/${subCategory.attributes.category.data.attributes.slug}/${subCategory.attributes.slug}` ? 'active' : ''}>{sub.attributes.subName}</Link>
+                            <Link
+                                href={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}`}
+                                key={sub.id}
+                                className={`/category/${subCategory.attributes.category.data.attributes.slug}/${sub.attributes.slug}` === `/category/${subCategory.attributes.category.data.attributes.slug}/${subCategory.attributes.slug}` ? 'active' : ''}
+                            >
+                                {sub.attributes.subName}
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -163,7 +187,9 @@ const SupCatDetails = ({ subCategory: initialSubCategory }) => {
                                     </Link>
                                 </div>
                                 <div className='blog-content'>
-                                    <Link href={`/${blog.attributes.slug}`}><h3 className='title'>{blog.attributes.title}</h3></Link>
+                                    <Link href={`/${blog.attributes.slug}`}>
+                                        <h3 className='title'>{blog.attributes.title}</h3>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

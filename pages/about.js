@@ -1,6 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
 import Layout from '../src/component/layout';
-import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
 import Footer from '../src/component/footer';
 import Header from '../src/component/header';
@@ -19,37 +18,56 @@ const GET_ADVERTISING = gql`
   }
 `;
 
-const About = () => {
-  const router = useRouter(); // Get router object
-  const { loading, error, data } = useQuery(GET_ADVERTISING);
+const GET_LOGO = gql`
+  query getLogo {
+    logo {
+      data {
+        id
+        attributes {
+          appName
+        }
+      }
+    }
+  }
+`;
 
-  const title = 'عن موقع صناع المال';
-  const description = 'صناع المال هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد';
+const About = () => {
+  const { loading: advertisingLoading, error: advertisingError, data: advertisingData } = useQuery(GET_ADVERTISING);
+  const { loading: logoLoading, error: logoError, data: logoData } = useQuery(GET_LOGO);
+
+  if (advertisingLoading || logoLoading) return <p></p>;
+  if (advertisingError) return <p>خطأ: {advertisingError.message}</p>;
+  if (logoError) return <p>خطأ: {logoError.message}</p>;
+
+  const appName = logoData.logo.data.attributes.appName;
+  const title = `عن  ${appName}`;
+  const description = `تعرف على المزيد حول موقع ${appName} وكيف يقدم نصائح للمال ومعلومات عن الاقتصاد.`;
   const image = 'https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png';
 
-
   return (
-
     <Layout
       title={title}
       description={description}
       image={image}
     >
-
       <Header />
-      {loading && <p></p>}
-      {error && <p>خطأ: {error.message}</p>}
-      {data && (
+      {advertisingLoading && <p>Loading...</p>}
+      {advertisingError && <p>خطأ: {advertisingError.message}</p>}
+      {advertisingData && (
         <div className='container'>
           <div className='police-details'>
-            <h2>عن موقع صناع المال </h2>
-            <p className='police-dic'>قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
+            <h2>{title}</h2>
+            <p className='police-dic'>
+              قسم أفكار المشاريع هو الجزء في المنصة الذي يوفر للمستخدمين مجموعة من الافكار والاقتراحات لتطوير مشاريع جديدة. يهدف هذا القسم إلى توفير مصادر إلهام وإشارات لمن يبحثون عن فرص استثمارية أو مشاريع جديدة لتطويرها. يمكن أن يشمل القسم تحليلًا للاتجاهات الصاعدة في السوق، وفحصاً للحاجات الاستهلاكية أو الفجوات في الصناعة.
             </p>
           </div>
           <div className='police'>
-            <ReactMarkdown key={data.police.data.id}>{data.police.data.attributes.about}</ReactMarkdown>
+            <ReactMarkdown key={advertisingData.police.data.id}>
+              {advertisingData.police.data.attributes.about}
+            </ReactMarkdown>
           </div>
-        </div>)};
+        </div>
+      )}
       <Footer />
     </Layout>
   );

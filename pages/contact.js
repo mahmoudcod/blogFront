@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import Layout from '../src/component/layout';
 import Header from '../src/component/header';
 import Footer from '../src/component/footer';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 
 const contactQuery = gql`
   mutation createContactUs($data: ContactUsInput!) {
     createContactUs(data: $data) {
       data {
         id
+      }
+    }
+  }
+`;
+
+const GET_LOGO = gql`
+  query getLogo {
+    logo {
+      data {
+        id
+        attributes {
+          appName
+        }
       }
     }
   }
@@ -32,6 +45,8 @@ function Contact() {
         },
     });
 
+    const { loading, error, data } = useQuery(GET_LOGO);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         createContactUs({
@@ -46,30 +61,34 @@ function Contact() {
         });
     };
 
+    if (loading) return <p></p>;
+    if (error) return <p>Error: {error.message}</p>;
+
+    const appName = data.logo.data.attributes.appName;
+
     return (
         <>
             <Layout
-                title={' اتصل بنا | صناع المال'}
-                description={'صناع المال هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد'}
+                title={`اتصل بنا - ${appName}`}
+                description={`${appName} هو محتوي يقدم نصايح للمال ومعلومات عن الاقتصاد`}
                 image={`https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png`}
             >
-
                 <Header />
                 <div className="container">
                     <div className="contactUs">
                         <h2>اتصل بنا</h2>
                         <p>
-                            استخدم نموذج الاتصال بنا للتواصل مع موقع اقتصاد، وتقديم مقترحاتك
+                            استخدم نموذج الاتصال بنا للتواصل مع موقع {appName}، وتقديم مقترحاتك
                             لتطوير خدماتنا
                         </p>
-
                         <h3 className='contacth3'>اتصل بنا في اي وقت</h3>
                     </div>
 
                     <div className="contactForm">
                         {successMessageVisible ? (
-                            <div className="successMessage">إستقبل فريق صناع المال بياناتك بنجاح، انتظر اتصالنا في أقرب وقت. نقدر ثقتكم بنا.</div>
+                            <div className="successMessage">إستقبل فريق {appName} بياناتك بنجاح، انتظر اتصالنا في أقرب وقت. نقدر ثقتكم بنا.</div>
                         ) : <form onSubmit={handleSubmit}>
+                            {/* Form inputs remain the same */}
                             <label>الاسم بالكامل *</label>
                             <input
                                 type="text"

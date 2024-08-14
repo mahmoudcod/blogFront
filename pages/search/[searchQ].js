@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { useLazyQuery, gql } from "@apollo/client";
+import { useLazyQuery, useQuery, gql } from "@apollo/client";
 import Link from 'next/link';
 import Header from '../../src/component/header';
 import Footer from '../../src/component/footer';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useRouter } from 'next/router';
-
+import Layout from '../../src/component/layout';
 
 const SEARCH_BLOGS = gql`
     query SearchBlogs($searchQ: String!, $start: Int!, $limit: Int!) {
@@ -37,10 +37,24 @@ const SEARCH_BLOGS = gql`
     }
 `;
 
+const GET_LOGO = gql`
+    query getLogo {
+        logo {
+            data {
+                id
+                attributes {
+                    appName
+                }
+            }
+        }
+    }
+`;
 
 const Search = () => {
     const router = useRouter(); // Get router object from useRouter
     const { searchQ } = router.query; // Access query parameters
+    const { data: logoData } = useQuery(GET_LOGO); // Fetch appName
+    const appName = logoData?.logo?.data?.attributes?.appName || 'AppName'; // Fallback to a default name
     const [searchBlogs, { loading, error, data, fetchMore }] = useLazyQuery(SEARCH_BLOGS, {
         variables: { searchQ, start: 0, limit: 12 },
     });
@@ -73,16 +87,21 @@ const Search = () => {
             },
         });
     };
+
     React.useEffect(() => {
         searchBlogs();
     }, [searchBlogs]);
 
-    return (
-        <>
+    const pageTitle = searchQ ? `Search results for "${searchQ}" - ${appName}` : `Search - ${appName}`;
+    const pageDescription = `Search results for "${searchQ}" on ${appName}. Discover blogs, articles, and more related to your query.`;
 
+    return (
+        <Layout
+            title={pageTitle}
+            description={pageDescription}
+        >
             <Header />
             <div className='container'>
-
                 <h3 className='search-title'> نتيجة بحث "{searchQ}"</h3>
                 <div className='other-blogs'>
                     <InfiniteScroll
@@ -95,8 +114,6 @@ const Search = () => {
                             </p>
                         }
                     >
-
-
                         {loading && null}
                         {error && <p>Error....</p>}
                         {data && data.blogs.data.length === 0 && (
@@ -111,7 +128,6 @@ const Search = () => {
                                         </Link>
                                     )}
                                 </div>
-
                                 <div className='blog-content'>
                                     <Link href={`/${recent.attributes.slug}`}>
                                         <h3 className='title'>{recent.attributes.title}</h3>
@@ -119,13 +135,11 @@ const Search = () => {
                                 </div>
                             </div>
                         ))}
-
                     </InfiniteScroll>
                 </div>
-
             </div>
             <Footer />
-        </>
+        </Layout>
     );
 }
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../src/component/layout';
 import Link from 'next/link';
 import Header from '../src/component/header';
-import CommentSection from '../src/component/comments';
 import { gql } from '@apollo/client';
 import MostPopular from '../src/component/mostPopular';
 import Footer from '../src/component/footer';
@@ -279,9 +278,9 @@ const DetailsPage = ({ blog, appName }) => {
                                         </div>
                                     </div>
                                 )}
-                                <div className='comments'>
+                                {/* <div className='comments'>
                                     <CommentSection />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="leftColumn">
