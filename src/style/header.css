@@ -179,7 +179,8 @@ ul {
 
 @media (max-width: 768px) {
     .header {
-        width: 85%;
+        width: 100%;
+        padding: 0 40px;
     }
 
     .menu-icon {

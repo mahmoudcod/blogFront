@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
-import Image from 'next/image';
 
 const GET_LOGO = gql`
   query getLogo {
@@ -54,8 +53,25 @@ const GET_FOOTER = gql`
 `;
 
 function Footer() {
+  const [windowWidth, setWindowWidth] = useState(0);
+
   const { loading: footerLoading, error: footerError, data: footerData } = useQuery(GET_FOOTER);
   const { loading: logoLoading, error: logoError, data: logoData } = useQuery(GET_LOGO);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial window width
+    setWindowWidth(window.innerWidth);
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (footerLoading || logoLoading) return null;
   if (footerError) return `Error! ${footerError}`;
@@ -92,7 +108,7 @@ function Footer() {
           ) : (
             <h2>{appName}</h2>
           )}
-          {chunkArray(allItems, 4).map((chunk, index) => (
+          {windowWidth > 668 && chunkArray(allItems, 4).map((chunk, index) => (
             <div key={index}>
               <ul>
                 {chunk.map((item, itemIndex) => (
@@ -129,7 +145,7 @@ function Footer() {
           </ul>
         </div>
         <div className='sectionThree'>
-          <p> {currentYear}©  جميع الحقوق محفوظة لدي {appName} </p>
+          <p> {currentYear}©  جميع الحقوق محفوظة لـ {appName} </p>
         </div>
       </div>
     </footer>

@@ -1,11 +1,10 @@
 /* footer.css */
 
 .footer {
-    background-color: #0280CD;
+    background-color: black;
     color: #fff;
     padding: 20px 0;
 }
-
 
 
 
@@ -34,7 +33,7 @@
 }
 
 .sectionOne ul li a:hover {
-    color: black;
+    color: rgb(22, 135, 206);
 }
 
 .sectionTwo ul {

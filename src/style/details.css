@@ -21,6 +21,11 @@
 
 .socialI {
     padding: 10px 0;
+    cursor: pointer;
+}
+
+.socialI:hover {
+    color: #0280CD;
 }
 
 /* tags */
@@ -257,7 +262,7 @@
     width: 75%;
     font-style: normal;
     font-weight: 800;
-    line-height: 34px;
+    line-height: 45px;
     /* 130.769% */
 }
 

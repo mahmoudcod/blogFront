@@ -176,6 +176,14 @@ const DetailsPage = ({ blog, appName }) => {
         }
     };
 
+    const CustomLink = ({ href, children }) => {
+        return (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+                {children}
+            </a>
+        );
+    };
+
     const pageTitle = blog?.attributes?.title ? `${blog.attributes.title} - ${appName}` : appName;
     const pageDescription = blog?.attributes?.description;
     const pageImage = blog?.attributes?.cover?.data?.attributes?.url;
@@ -248,7 +256,11 @@ const DetailsPage = ({ blog, appName }) => {
                                             </ol>
                                         </div>
                                         <div id='rendered-html' className='blog'>
-                                            <ReactMarkdown>
+                                            <ReactMarkdown
+                                                components={{
+                                                    a: CustomLink, // Use the custom link component here
+                                                }}
+                                            >
                                                 {blog.attributes.blog}
                                             </ReactMarkdown>
                                         </div>
@@ -261,7 +273,11 @@ const DetailsPage = ({ blog, appName }) => {
                                     </div>
                                     {showSources && (
                                         <div className='sourceInfo'>
-                                            <ReactMarkdown>{blog.attributes.sources}</ReactMarkdown>
+                                            <ReactMarkdown
+                                                components={{
+                                                    a: CustomLink, // Use the custom link component here
+                                                }}
+                                            >{blog.attributes.sources}</ReactMarkdown>
                                         </div>
                                     )}
                                 </div>

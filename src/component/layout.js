@@ -12,14 +12,10 @@ const Layout = ({ children, title, description, image, favicon }) => (
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content={image} />
-
-            {/* Twitter Meta Tags */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={image} />
-            <meta name="twitter:site" content="@money.ektesad.com" /> {/* Replace with your Twitter handle */}
-
             {/* Favicon */}
             <link rel="icon" href={favicon} />
         </Head>
