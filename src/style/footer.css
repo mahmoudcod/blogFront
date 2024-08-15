@@ -52,10 +52,6 @@
     font-size: 14px;
 }
 
-.sectionTwo ul li:hover {
-    color: black;
-}
-
 .sectionTwo ul li a {
     display: inline;
     color: white;
@@ -64,7 +60,8 @@
 
 
 .sectionTwo ul li a:hover {
-    color: black;
+    color: rgb(22, 135, 206);
+    ;
 }
 
 .sectionOne h2 {
