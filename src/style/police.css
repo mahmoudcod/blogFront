@@ -23,3 +23,13 @@
     line-height: 1.5;
     width: 80%;
 }
+
+
+.about-footer small {
+    color: black !important;
+    margin-top: 15px;
+}
+
+.about-footer small:hover {
+    color: #0280CD !important;
+}

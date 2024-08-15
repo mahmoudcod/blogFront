@@ -130,7 +130,6 @@ function Footer() {
         </div>
         <div className='sectionThree'>
           <p> {currentYear}©  جميع الحقوق محفوظة لدي {appName} </p>
-          {/* <a href='https://adainc.co/' target='blank'> <small className='footerSmall'>صمم بكل حب في ادا</small></a> */}
         </div>
       </div>
     </footer>

@@ -40,7 +40,7 @@ const About = () => {
   if (logoError) return <p>خطأ: {logoError.message}</p>;
 
   const appName = logoData.logo.data.attributes.appName;
-  const title = `عن  ${appName}`;
+  const title = `عن  ${appName} - ${appName}`;
   const description = `تعرف على المزيد حول موقع ${appName} وكيف يقدم نصائح للمال ومعلومات عن الاقتصاد.`;
   const image = 'https://res.cloudinary.com/datnay9zk/image/upload/v1710429087/Untitled_0ca8759c27.png';
 
@@ -66,6 +66,8 @@ const About = () => {
               {advertisingData.police.data.attributes.about}
             </ReactMarkdown>
           </div>
+          <a className='about-footer' href='https://adainc.co/' target='blank'> <small className='footerSmall'>صمم بكل حب في ادا</small></a>
+
         </div>
       )}
       <Footer />

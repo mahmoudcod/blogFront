@@ -150,6 +150,32 @@ const DetailsPage = ({ blog, appName }) => {
         setShowSources(!showSources);
     };
 
+    const sharePost = (platform) => {
+        const url = typeof window !== 'undefined' ? encodeURIComponent(window.location.href) : '';
+        const title = blog?.attributes?.title ? encodeURIComponent(blog.attributes.title) : '';
+        let shareUrl;
+
+        switch (platform) {
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                break;
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`;
+                break;
+            case 'instagram':
+                // Instagram doesn't have a direct share URL, so we'll copy the link to clipboard
+                navigator.clipboard.writeText(decodeURIComponent(url));
+                alert('Link copied to clipboard. You can now paste it on Instagram.');
+                return;
+            default:
+                return;
+        }
+
+        if (shareUrl) {
+            window.open(shareUrl, '_blank');
+        }
+    };
+
     const pageTitle = blog?.attributes?.title ? `${blog.attributes.title} - ${appName}` : appName;
     const pageDescription = blog?.attributes?.description;
     const pageImage = blog?.attributes?.cover?.data?.attributes?.url;
@@ -199,13 +225,13 @@ const DetailsPage = ({ blog, appName }) => {
                                 </div>
                                 <div className='holder'>
                                     <div className='social'>
-                                        <div className='socialI'>
+                                        <div className='socialI' onClick={() => sharePost('twitter')}>
                                             <SlSocialTwitter />
                                         </div>
-                                        <div className='socialI'>
+                                        <div className='socialI' onClick={() => sharePost('facebook')}>
                                             <SlSocialFacebook />
                                         </div>
-                                        <div className='socialI'>
+                                        <div className='socialI' onClick={() => sharePost('instagram')}>
                                             <SlSocialInstagram />
                                         </div>
                                     </div>
