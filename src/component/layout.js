@@ -18,6 +18,7 @@ const Layout = ({ children, title, description, image, favicon }) => (
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={image} />
+            <meta name="twitter:site" content="@money.ektesad.com" /> {/* Replace with your Twitter handle */}
 
             {/* Favicon */}
             <link rel="icon" href={favicon} />

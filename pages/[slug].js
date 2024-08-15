@@ -190,6 +190,7 @@ const DetailsPage = ({ blog, appName }) => {
             title={pageTitle}
             description={pageDescription}
             image={pageImage}
+
         >
             <Header />
             <div className='container'>
